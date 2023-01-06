@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebGame;
+using WebGame.Services.Shop;
+using WebGame.Services.Shop.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,9 @@ string? connectionString = builder.Configuration.GetConnectionString("DefaultCon
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IShopService, ShopService>();
+
 builder.Services.AddDbContext<DbGameContext>(options =>
 options.UseSqlServer(connectionString)
 );

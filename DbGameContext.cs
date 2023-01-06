@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.Reflection.Emit;
 using WebGame.Entities;
 using WebGame.Entities.Enemies;
 using WebGame.Entities.Items;
@@ -21,6 +23,12 @@ namespace WebGame
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            var converter = new EnumToStringConverter<ItemType>();
+
+            builder
+                .Entity<BodyArmor>()
+                .Property(e => e.ItemType)
+                .HasConversion(converter);
         }
     }
 }
