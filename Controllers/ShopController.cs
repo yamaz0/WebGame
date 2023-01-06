@@ -19,20 +19,21 @@ namespace WebGame.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<BodyArmor> armors = _shopService.GetAllBodyArmors();
-            return View(armors);
+            return View();
         }
+
         [HttpGet("armors")]
         public IActionResult Armors()
         {
             IEnumerable<BodyArmor> armors = _shopService.GetAllBodyArmors();
             return View(armors);
         }
+
         [HttpGet("weapons")]
         public IActionResult Weapons()
         {
-            IEnumerable<BodyArmor> armors = _shopService.GetAllBodyArmors();
-            return View(armors);
+            IEnumerable<Weapon> weapons = _shopService.GetAllWeapons();
+            return View(weapons);
         }
     }
 }
