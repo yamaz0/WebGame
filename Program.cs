@@ -1,5 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using WebGame;
+using WebGame.Services.Arena;
+using WebGame.Services.Arena.Interface;
+using WebGame.Services.Job;
+using WebGame.Services.Job.Interface;
+using WebGame.Services.Mission;
+using WebGame.Services.Mission.Interface;
+using WebGame.Services.Player;
+using WebGame.Services.Player.Interface;
 using WebGame.Services.Shop;
 using WebGame.Services.Shop.Interfaces;
 
@@ -11,6 +19,10 @@ string? connectionString = builder.Configuration.GetConnectionString("DefaultCon
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IShopService, ShopService>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IJobService, JobService>();
+builder.Services.AddScoped<IMissionService, MissionService>();
+builder.Services.AddScoped<IArenaService, ArenaService>();
 
 builder.Services.AddDbContext<DbGameContext>(options =>
 options.UseSqlServer(connectionString)

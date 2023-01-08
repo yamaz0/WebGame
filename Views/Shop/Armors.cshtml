@@ -1,7 +1,13 @@
-﻿
+﻿@model List<WebGame.Entities.Items.BodyArmor>
 @{
     ViewData["Title"] = "Armors";
 }
 
 <h1>Armors</h1>
 
+<ul>
+    @foreach (var w in Model)
+    {
+        <li>@w.Name</li>
+    }
+</ul>
