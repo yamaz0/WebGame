@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using WebGame;
 using WebGame.Services.Arena;
 using WebGame.Services.Arena.Interface;
+using WebGame.Services.Duel;
+using WebGame.Services.Duel.Interface;
 using WebGame.Services.Job;
 using WebGame.Services.Job.Interface;
 using WebGame.Services.Mission;
@@ -23,6 +25,7 @@ builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IMissionService, MissionService>();
 builder.Services.AddScoped<IArenaService, ArenaService>();
+builder.Services.AddScoped<IDualService, DuelService>();
 
 builder.Services.AddDbContext<DbGameContext>(options =>
 options.UseSqlServer(connectionString)
