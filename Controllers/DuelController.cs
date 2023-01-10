@@ -15,11 +15,23 @@ namespace WebGame.Controllers
             _service = service;
         }
 
-        public IActionResult Duel(int enemyId)
+        public IActionResult DuelEnemy(int enemyId)
         {
-            var dueldata = _service.Duel(enemyId);
+            var dueldata = _service.DuelEnemy(enemyId);
 
-            return View(dueldata);
+            if (dueldata == null)
+                return NotFound();
+            else
+                return View(dueldata);
+        }
+        public IActionResult DuelPlayer(int enemyId)
+        {
+            var dueldata = _service.DuelPlayer(enemyId);
+
+            if (dueldata == null)
+                return NotFound();
+            else
+                return View(dueldata);
         }
     }
     public class DuelCharacter

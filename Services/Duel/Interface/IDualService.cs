@@ -4,6 +4,7 @@ namespace WebGame.Services.Duel.Interface
 {
     public interface IDualService
     {
-        public DuelData Duel(int enemyId);
+        public DuelData DuelEnemy(int enemyId);
+        public DuelData DuelPlayer(int playerId);
     }
 }
