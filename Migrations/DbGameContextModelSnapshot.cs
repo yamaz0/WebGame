@@ -231,6 +231,12 @@ namespace WebGame.Migrations
                     b.Property<int>("Attack")
                         .HasColumnType("int");
 
+                    b.Property<int>("CashReward")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ExpReward")
+                        .HasColumnType("int");
+
                     b.Property<int>("HealthPoint")
                         .HasColumnType("int");
 
