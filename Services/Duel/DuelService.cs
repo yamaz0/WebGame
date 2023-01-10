@@ -25,9 +25,22 @@ namespace WebGame.Services.Duel
 
             if (player == null || enemy == null) return null;
 
-            PlayerVsEnemyDuel fight = new PlayerVsEnemyDuel(player, enemy);
-            fight.Fight();
-            return fight.Details;
+            PlayerVsEnemyDuel duel = new PlayerVsEnemyDuel(player, enemy);
+            bool isPlayerWin = duel.Fight();
+
+            if (isPlayerWin == true)
+            {
+                Reward(player, enemy);
+            }
+
+            return duel.Details;
+        }
+
+        private void Reward(Entities.Player? player, Enemy? enemy)
+        {
+            player.Exp += enemy.ExpReward;
+            player.Cash += enemy.CashReward;
+            _context.SaveChanges();
         }
 
         public DuelData DuelPlayer(int playerId)
@@ -37,9 +50,15 @@ namespace WebGame.Services.Duel
 
             if (player == null || enemy == null) return null;
 
-            PlayerVsPlayerDuel fight = new PlayerVsPlayerDuel(player, enemy);
-            fight.Fight();
-            return fight.Details;
+            PlayerVsPlayerDuel duel = new PlayerVsPlayerDuel(player, enemy);
+            bool isPlayerWin = duel.Fight();
+
+            if (isPlayerWin == true)
+            {
+                player.Cash += 10;//testowe
+                _context.SaveChanges();
+            }
+            return duel.Details;
         }
 
         private Enemy? GetEnemy(int enemyId)

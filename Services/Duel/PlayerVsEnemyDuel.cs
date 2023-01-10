@@ -34,8 +34,6 @@ namespace WebGame.Services.Duel
                 if (dEnemy.IsAlive() == false)
                 {
                     Details.Result = $"{dPlayer.Name} win!";
-                    //Player.Exp += 10;//testowe
-                    //Player.Cash += 10;//testowe
                     return true;
                 }
                 damage = dEnemy.Attack(dPlayer);
@@ -51,5 +49,8 @@ namespace WebGame.Services.Duel
             Details.Result = $"DRAW";
             return false;
         }
+
     }
+
+
 }
