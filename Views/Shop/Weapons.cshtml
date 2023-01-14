@@ -8,6 +8,12 @@
 <ul>
     @foreach (var w in Model)
     {
-        <li>@w.Name</li>
+        <li>
+            Name:@w.Name
+            Attack:@w.Attack
+            AttackSpeed:@w.AttackSpeed
+            Value:@w.Value
+            <a asp-action="Weapons" asp-controller="Shop" asp-route-itemId=@w.Id>Buy</a>
+        </li>
     }
 </ul>

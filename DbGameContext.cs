@@ -22,13 +22,25 @@ namespace WebGame
         public DbGameContext(DbContextOptions options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
             var converter = new EnumToStringConverter<ItemType>();
 
-            builder
-                .Entity<BodyArmor>()
+            builder.Entity<BodyArmor>()
                 .Property(e => e.ItemType)
                 .HasConversion(converter);
+
+            builder.Entity<Player>(eb =>
+            {
+                eb.Property(x => x.Name).IsRequired();
+                eb.Property(x => x.Exp).HasDefaultValue(0);
+                eb.Property(x => x.Level).HasDefaultValue(1);
+                eb.Property(x => x.SkillPoints).HasDefaultValue(0);
+                eb.Property(x => x.Cash).HasDefaultValue(0);
+                eb.Property(x => x.Strenght).HasDefaultValue(10);
+                eb.Property(x => x.Dexterity).HasDefaultValue(10);
+                eb.Property(x => x.Endurance).HasDefaultValue(10);
+            });
+
+            base.OnModelCreating(builder);
         }
     }
 }

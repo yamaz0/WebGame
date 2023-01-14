@@ -1,5 +1,6 @@
 ﻿using WebGame.Services.Player.Interface;
 using WebGame.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebGame.Services.Player
 {
@@ -13,7 +14,12 @@ namespace WebGame.Services.Player
         }
         public Entities.Player GetPlayer()
         {
-            return _context.Players.ToList()[0];
+            return _context.Players
+                .Include( p => p.Helmet)
+                .Include( p => p.Armor)
+                .Include( p => p.Legs)
+                .Include( p => p.Boots)
+                .ToList()[0];
         }
     }
 }
