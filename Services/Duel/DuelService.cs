@@ -6,6 +6,8 @@ using WebGame.Models;
 using WebGame.Services.Duel.Interface;
 using System.Numerics;
 using System;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace WebGame.Services.Duel
 {
@@ -18,19 +20,19 @@ namespace WebGame.Services.Duel
             _context = context;
         }
 
-        public DuelData DuelEnemy(int enemyId)
+        public DuelData DuelEnemy(string userId, int enemyId)
         {
             Enemy? enemy = GetEnemy(enemyId);
-            Entities.Player? player = GetPlayer(0);
+            Entities.Player? userPlayer = GetPlayer(p => p.UserId.Equals(userId));
 
-            if (player == null || enemy == null) return null;
+            if (userPlayer == null || enemy == null) return null;
 
-            PlayerVsEnemyDuel duel = new PlayerVsEnemyDuel(player, enemy);
+            PlayerVsEnemyDuel duel = new PlayerVsEnemyDuel(userPlayer, enemy);
             bool isPlayerWin = duel.Fight();
 
             if (isPlayerWin == true)
             {
-                Reward(player, enemy);
+                Reward(userPlayer, enemy);
             }
 
             return duel.Details;
@@ -43,19 +45,19 @@ namespace WebGame.Services.Duel
             _context.SaveChanges();
         }
 
-        public DuelData DuelPlayer(int playerId)
+        public DuelData DuelPlayer(string userId, int playerId)
         {
-            Entities.Player? enemy = GetPlayer(playerId);
-            Entities.Player? player = GetPlayer(0);
+            Entities.Player? userPlayer = GetPlayer(p => p.UserId.Equals(userId));
+            Entities.Player? enemyPlayer = GetPlayer(p => p.Id.Equals(playerId));
 
-            if (player == null || enemy == null) return null;
+            if (userPlayer == null || enemyPlayer == null) return null;
 
-            PlayerVsPlayerDuel duel = new PlayerVsPlayerDuel(player, enemy);
+            PlayerVsPlayerDuel duel = new PlayerVsPlayerDuel(userPlayer, enemyPlayer);
             bool isPlayerWin = duel.Fight();
 
             if (isPlayerWin == true)
             {
-                player.Cash += 10;//testowe
+                userPlayer.Cash += 10;//testowe
                 _context.SaveChanges();
             }
             return duel.Details;
@@ -63,10 +65,10 @@ namespace WebGame.Services.Duel
 
         private Enemy? GetEnemy(int enemyId)
         {
-            return _context.Enemies.ToList().Find(e => e.Id == enemyId);
+            return _context.Enemies.ToList().Find(e => e.Id.Equals(enemyId));
         }
 
-        private Entities.Player? GetPlayer(int id)
+        private Entities.Player? GetPlayer(Predicate<Entities.Player> match)
         {
             return _context.Players
                 .Include(p => p.Boots)
@@ -74,7 +76,7 @@ namespace WebGame.Services.Duel
                 .Include(p => p.Helmet)
                 .Include(p => p.Legs)
                 .Include(p => p.Weapon)
-                .ToList().FirstOrDefault();
+                .ToList().Find(match);
         }
     }
 }

@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity;
 using WebGame;
+using WebGame.Entities;
 using WebGame.Services.Arena;
 using WebGame.Services.Arena.Interface;
 using WebGame.Services.Duel;
@@ -26,6 +29,15 @@ builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IMissionService, MissionService>();
 builder.Services.AddScoped<IArenaService, ArenaService>();
 builder.Services.AddScoped<IDualService, DuelService>();
+
+builder.Services.AddIdentityCore<UserEntity>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 2;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+}).AddEntityFrameworkStores<DbGameContext>();
 
 builder.Services.AddDbContext<DbGameContext>(options =>
 options.UseSqlServer(connectionString)

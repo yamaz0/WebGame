@@ -1,4 +1,5 @@
-﻿using WebGame.Entities.Items;
+﻿using Microsoft.EntityFrameworkCore;
+using WebGame.Entities.Items;
 using WebGame.Services.Player.Interface;
 using WebGame.Services.Shop.Interfaces;
 
@@ -15,12 +16,12 @@ namespace WebGame.Services.Shop
 
         public IEnumerable<BodyArmor> GetAllBodyArmors()
         {
-            return _context.BodyArmors.ToList();
+            return _context.BodyArmors.AsNoTracking().ToList();
         }
 
         public IEnumerable<Weapon> GetAllWeapons()
         {
-            return _context.Weapons.ToList();
+            return _context.Weapons.AsNoTracking().ToList();
         }
         public void BuyBodyArmorItem(int itemId)
         {

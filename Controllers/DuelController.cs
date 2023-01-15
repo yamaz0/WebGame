@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebGame.Entities;
 using WebGame.Entities.Enemies;
@@ -9,15 +10,18 @@ namespace WebGame.Controllers
     public class DuelController : Controller
     {
         private readonly IDualService _service;
+        private readonly UserManager<UserEntity> _userManager;
 
-        public DuelController(IDualService service)
+        public DuelController(IDualService service, UserManager<UserEntity> userManager)
         {
             _service = service;
+            _userManager = userManager;
         }
 
         public IActionResult DuelEnemy(int enemyId)
         {
-            var dueldata = _service.DuelEnemy(enemyId);
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var dueldata = _service.DuelEnemy(userId, enemyId);
 
             if (dueldata == null)
                 return NotFound();
@@ -26,7 +30,9 @@ namespace WebGame.Controllers
         }
         public IActionResult DuelPlayer(int enemyId)
         {
-            var dueldata = _service.DuelPlayer(enemyId);
+            var userId = _userManager.GetUserId(HttpContext.User);
+
+            var dueldata = _service.DuelPlayer(userId, enemyId);
 
             if (dueldata == null)
                 return NotFound();

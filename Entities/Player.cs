@@ -32,6 +32,10 @@ namespace WebGame.Entities
         public virtual BodyArmor? Boots { get; set; }
         public virtual Weapon? Weapon { get; set; }
         #endregion
+
+        #region User
+        public string UserId { get; set; }
+        #endregion
     }
 
 }
