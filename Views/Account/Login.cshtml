@@ -1,0 +1,15 @@
+﻿@model WebGame.Models.Account.LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+@Html.ValidationSummary()
+
+<form method="post" asp-action="Login" asp-controller="Account">
+    UserName: <input asp-for="UserName" />
+    Password: <input asp-for="Password" />
+    <button type="submit">Login!</button>
+</form>

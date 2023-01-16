@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity;
 using WebGame;
 using WebGame.Entities;
+using WebGame.Services.Account;
+using WebGame.Services.Account.Interface;
 using WebGame.Services.Arena;
 using WebGame.Services.Arena.Interface;
 using WebGame.Services.Duel;
@@ -29,8 +31,9 @@ builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<IMissionService, MissionService>();
 builder.Services.AddScoped<IArenaService, ArenaService>();
 builder.Services.AddScoped<IDualService, DuelService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
-builder.Services.AddIdentityCore<UserEntity>(options =>
+builder.Services.AddIdentity<UserEntity, IdentityRole>(options =>
 {
     options.Password.RequireDigit = false;
     options.Password.RequiredLength = 2;

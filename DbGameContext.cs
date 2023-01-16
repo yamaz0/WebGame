@@ -10,7 +10,7 @@ using WebGame.Entities.Missions;
 
 namespace WebGame
 {
-    public class DbGameContext : IdentityDbContext
+    public class DbGameContext : IdentityDbContext<UserEntity>
     {
         public DbSet<Player> Players { get; set; }
         public DbSet<Enemy> Enemies { get; set; }
