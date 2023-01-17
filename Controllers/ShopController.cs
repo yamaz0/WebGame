@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WebGame.Entities;
 using WebGame.Entities.Items;
 using WebGame.Services.Player.Interface;
 using WebGame.Services.Shop;
@@ -12,10 +14,12 @@ namespace WebGame.Controllers
     public class ShopController : Controller
     {
         private readonly IShopService _shopService;
+        private readonly UserManager<UserEntity> _userManager;
 
-        public ShopController(IShopService shopService)
+        public ShopController(IShopService shopService, UserManager<UserEntity> userManager)
         {
             _shopService = shopService;
+            _userManager = userManager;
         }
         [HttpGet]
         public IActionResult Index()
@@ -33,7 +37,8 @@ namespace WebGame.Controllers
         [HttpGet("armors/{itemId:int}")]
         public IActionResult Armors(int itemId)
         {
-            _shopService.BuyBodyArmorItem(itemId);
+            var userId = _userManager.GetUserId(HttpContext.User);
+            _shopService.BuyBodyArmorItem(userId, itemId);
             return RedirectToAction("Armors", new { itemId = (int?)null });
         }
 
@@ -46,7 +51,8 @@ namespace WebGame.Controllers
         [HttpGet("weapons/{itemId}")]
         public IActionResult Weapons(int itemId)
         {
-            _shopService.BuyWeaponItem(itemId);
+            var userId = _userManager.GetUserId(HttpContext.User);
+            _shopService.BuyWeaponItem(userId, itemId);
             return RedirectToAction("Weapons", new { itemId = (int?)null });
         }
     }

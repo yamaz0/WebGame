@@ -4,8 +4,8 @@ namespace WebGame.Services.Shop.Interfaces
 {
     public interface IShopService
     {
-        void BuyBodyArmorItem(int itemId);
-        void BuyWeaponItem(int itemId);
+        void BuyBodyArmorItem(string userId, int itemId);
+        void BuyWeaponItem(string userId, int itemId);
         IEnumerable<BodyArmor> GetAllBodyArmors();
         IEnumerable<Weapon> GetAllWeapons();
     }

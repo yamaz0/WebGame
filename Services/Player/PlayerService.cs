@@ -12,14 +12,14 @@ namespace WebGame.Services.Player
         {
             _context = context;
         }
-        public Entities.Player GetPlayer()
+        public Entities.Player GetPlayer(string userId)
         {
             return _context.Players
                 .Include( p => p.Helmet)
                 .Include( p => p.Armor)
                 .Include( p => p.Legs)
                 .Include( p => p.Boots)
-                .ToList()[0];
+                .ToList().Find(p=>p.UserId.Equals(userId));
         }
     }
 }

@@ -4,6 +4,6 @@ namespace WebGame.Services.Player.Interface
 {
     public interface IPlayerService
     {
-        Entities.Player GetPlayer();
+        Entities.Player GetPlayer(string userId);
     }
 }

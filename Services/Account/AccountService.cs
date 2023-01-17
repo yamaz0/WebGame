@@ -9,11 +9,13 @@ namespace WebGame.Services.Account
     {
         private readonly UserManager<UserEntity> _userManager;
         private readonly SignInManager<UserEntity> _signInManager;
+        private readonly DbGameContext _context;
 
-        public AccountService(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager)
+        public AccountService(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager, DbGameContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         public async Task<SignInResult> Login(LoginModel loginModel)
@@ -28,6 +30,16 @@ namespace WebGame.Services.Account
                 Email = registerModel.Email,
                 UserName = registerModel.UserName
             };
+
+            Entities.Player newPlayer = new()
+            {
+                Name = newUser.UserName,
+                UserId = newUser.Id
+            };
+
+            _context.Add(newPlayer);
+            _context.SaveChanges();
+
             return await _userManager.CreateAsync(newUser, registerModel.Password);
         }
         public async Task Logout()

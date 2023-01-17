@@ -23,10 +23,10 @@ namespace WebGame.Services.Shop
         {
             return _context.Weapons.AsNoTracking().ToList();
         }
-        public void BuyBodyArmorItem(int itemId)
+        public void BuyBodyArmorItem(string userId, int itemId)
         {
             var item = _context.BodyArmors.ToList().Find(i => i.Id.Equals(itemId));
-            var player = _context.Players.ToList().FirstOrDefault();
+            var player = _context.Players.ToList().Find(p => p.UserId.Equals(userId));
             switch (item.ItemType)
             {
                 case ItemType.HELMET:
@@ -46,10 +46,10 @@ namespace WebGame.Services.Shop
             }
             _context.SaveChanges();
         }
-        public void BuyWeaponItem(int itemId)
+        public void BuyWeaponItem(string userId, int itemId)
         {
             var item = _context.Weapons.ToList().Find(i => i.Id.Equals(itemId));
-            var player = _context.Players.ToList().FirstOrDefault();
+            var player = _context.Players.ToList().Find(p => p.UserId.Equals(userId));
             player.Weapon = item;
 
             _context.SaveChanges();
