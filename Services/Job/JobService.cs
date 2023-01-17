@@ -14,5 +14,15 @@ namespace WebGame.Services.Job
         {
             return _context.Jobs.ToList();
         }
+
+        public void Job(string userId, int jobId)
+        {
+            var player = _context.Players.ToList().Find(p => p.UserId.Equals(userId));
+            var job = _context.Jobs.ToList().Find(j => j.Id.Equals(jobId));
+
+            player.Cash += job.Reward;
+
+            _context.SaveChanges();
+        }
     }
 }

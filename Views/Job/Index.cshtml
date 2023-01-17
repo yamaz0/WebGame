@@ -8,6 +8,10 @@
 <ul>
     @foreach (var w in Model)
     {
-        <li>@w.Name</li>
+        <li>
+            @w.Name
+            @w.Reward
+            <a asp-action="Job" asp-controller="Job" asp-route-jobId=@w.Id>Work</a>
+        </li>
     }
 </ul>
