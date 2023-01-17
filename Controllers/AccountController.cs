@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebGame.Models.Account;
 using WebGame.Services.Account.Interface;
 
@@ -65,6 +66,7 @@ namespace WebGame.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Logout()
         {
             _service.Logout();

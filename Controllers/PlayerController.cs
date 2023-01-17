@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebGame.Services.Player.Interface;
 
 namespace WebGame.Controllers
 {
+    [Authorize]
     public class PlayerController : Controller
     {
         private readonly IPlayerService _playerService;

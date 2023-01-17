@@ -7,7 +7,7 @@ using WebGame.Services.Shop.Interfaces;
 
 namespace WebGame.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("shop")]
     public class ShopController : Controller
     {

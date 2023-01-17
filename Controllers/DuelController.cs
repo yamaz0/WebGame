@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebGame.Entities;
@@ -7,6 +8,7 @@ using WebGame.Services.Duel.Interface;
 
 namespace WebGame.Controllers
 {
+    [Authorize]
     public class DuelController : Controller
     {
         private readonly IDualService _service;

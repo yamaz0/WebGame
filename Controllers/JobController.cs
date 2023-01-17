@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebGame.Services.Job.Interface;
 
 namespace WebGame.Controllers
 {
+    [Authorize]
     public class JobController : Controller
     {
         private readonly IJobService _jobService;

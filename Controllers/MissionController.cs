@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebGame.Services.Mission.Interface;
 
 namespace WebGame.Controllers
 {
+    [Authorize]
     public class MissionController : Controller
     {
         private readonly IMissionService _missionService;
