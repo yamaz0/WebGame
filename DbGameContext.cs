@@ -38,6 +38,7 @@ namespace WebGame
                 eb.Property(x => x.Strenght).HasDefaultValue(10);
                 eb.Property(x => x.Dexterity).HasDefaultValue(10);
                 eb.Property(x => x.Endurance).HasDefaultValue(10);
+                eb.Property(x => x.JobId).HasDefaultValue(0);
             });
 
             base.OnModelCreating(builder);

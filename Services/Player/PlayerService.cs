@@ -7,7 +7,7 @@ namespace WebGame.Services.Player
     public class PlayerService : IPlayerService
     {
         private readonly DbGameContext _context;
-
+        
         public PlayerService(DbGameContext context)
         {
             _context = context;

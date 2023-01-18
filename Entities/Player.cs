@@ -36,6 +36,13 @@ namespace WebGame.Entities
         #region User
         public string UserId { get; set; }
         #endregion
+
+        #region Job
+
+        public int JobId { get; set; }
+        public DateTime EndJobTime { get; set; }
+        
+        #endregion
     }
 
 }
