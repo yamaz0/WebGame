@@ -29,46 +29,18 @@ Statistics:
 Armors:
 <br />
 <span>
-    Helmet: @if (Model.Helmet == null)
-    {
-        <b>"None"</b>
-    }
-    else
-    {
-        @Model.Helmet.Name
-    }
+    Helmet: @(Model.Helmet?.Name ?? "None")
 </span>
 <br />
 <span>
-    Armor: @if (Model.Armor == null)
-    {
-        <b>"None"</b>
-    }
-    else
-    {
-        @Model.Armor.Name
-    }
+    Armor: @(Model.Armor?.Name ?? "None")
 </span>
 <br />
 <span>
-    Legs: @if (Model.Legs == null)
-    {
-        <b>"None"</b>
-    }
-    else
-    {
-        @Model.Legs.Name
-    }
+    Legs: @(Model.Legs?.Name ?? "None")
 </span>
 <br />
 <span>
-    Boots: @if (Model.Boots == null)
-    {
-        <b>"None"</b>
-    }
-    else
-    {
-        @Model.Boots.Name
-    }
+    Boots: @(Model.Boots?.Name ?? "None")
 </span>
 <br />
