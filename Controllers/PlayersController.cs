@@ -7,12 +7,12 @@ using WebGame.Services.Player.Interface;
 namespace WebGame.Controllers
 {
     [Authorize]
-    public class PlayerController : Controller
+    public class PlayersController : Controller
     {
         private readonly IPlayerService _playerService;
         private readonly UserManager<UserEntity> _userManager;
 
-        public PlayerController(IPlayerService playerService, UserManager<UserEntity> userManager)
+        public PlayersController(IPlayerService playerService, UserManager<UserEntity> userManager)
         {
             _playerService = playerService;
             _userManager = userManager;

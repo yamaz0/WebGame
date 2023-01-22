@@ -5,11 +5,11 @@ using WebGame.Services.Mission.Interface;
 namespace WebGame.Controllers
 {
     [Authorize]
-    public class MissionController : Controller
+    public class MissionsController : Controller
     {
         private readonly IMissionService _missionService;
 
-        public MissionController(IMissionService missionService)
+        public MissionsController(IMissionService missionService)
         {
             _missionService = missionService;
         }

@@ -5,11 +5,11 @@ using WebGame.Services.Account.Interface;
 
 namespace WebGame.Controllers
 {
-    public class AccountController : Controller
+    public class AccountsController : Controller
     {
         private readonly IAccountService _service;
 
-        public AccountController(IAccountService service)
+        public AccountsController(IAccountService service)
         {
             _service = service;
         }

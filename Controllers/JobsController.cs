@@ -7,13 +7,13 @@ using WebGame.Services.Job.Interface;
 namespace WebGame.Controllers
 {
     [Authorize]
-    public class JobController : Controller
+    public class JobsController : Controller
     {
         private readonly IJobService _jobService;
 
         private readonly UserManager<UserEntity> _userManager;
 
-        public JobController(IJobService jobService, UserManager<UserEntity> userManager)
+        public JobsController(IJobService jobService, UserManager<UserEntity> userManager)
         {
             _jobService = jobService;
             _userManager = userManager;
