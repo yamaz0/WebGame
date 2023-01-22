@@ -43,6 +43,14 @@ namespace WebGame.Entities
         public DateTime EndJobTime { get; set; }
         
         #endregion
+
+        #region Mission
+
+        public int MissionId { get; set; }
+        public int Stamina { get; set; }
+        public DateTime EndMissionTime { get; set; }
+        
+        #endregion
     }
 
 }

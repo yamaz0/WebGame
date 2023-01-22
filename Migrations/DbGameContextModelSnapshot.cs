@@ -326,6 +326,9 @@ namespace WebGame.Migrations
                     b.Property<DateTime>("EndJobTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("EndMissionTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Endurance")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -352,6 +355,9 @@ namespace WebGame.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
+                    b.Property<int>("MissionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -360,6 +366,9 @@ namespace WebGame.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<int>("Stamina")
+                        .HasColumnType("int");
 
                     b.Property<int>("Strenght")
                         .ValueGeneratedOnAdd()
