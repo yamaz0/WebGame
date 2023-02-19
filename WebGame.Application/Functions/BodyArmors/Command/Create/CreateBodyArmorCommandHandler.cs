@@ -37,4 +37,3 @@ namespace WebGame.Application.Functions.BodyArmors.Command.Create
         }
     }
 }
-}

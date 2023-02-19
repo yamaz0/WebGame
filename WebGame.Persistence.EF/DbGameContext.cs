@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Reflection.Emit;
+using WebGame.Domain.Entities.Player;
+using WebGame.Domain.Entities.User;
 using WebGame.Entities;
 using WebGame.Entities.Enemies;
 using WebGame.Entities.Items;

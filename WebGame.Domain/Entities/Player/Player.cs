@@ -5,8 +5,9 @@ using WebGame.Entities.Items;
 
 namespace WebGame.Domain.Entities.Player
 {
-    public class Player : IDuelable
+    public class Player : AuditableEntity, IDuelable
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
         #region level

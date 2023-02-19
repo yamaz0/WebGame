@@ -13,11 +13,11 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WebGame.Domain\WebGame.Domain.csproj" />
-    <ProjectReference Include="..\WebGame\WebGame.csproj" />
   </ItemGroup>
 
   <ItemGroup>

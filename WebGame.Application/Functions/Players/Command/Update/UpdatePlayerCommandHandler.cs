@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using WebGame.Application.Interfaces.Persistence;
+using WebGame.Domain.Entities.Player;
 
 namespace WebGame.Application.Functions.Players.Command.Update
 {

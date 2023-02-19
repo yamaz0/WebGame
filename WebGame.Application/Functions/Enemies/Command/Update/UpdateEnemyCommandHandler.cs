@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using WebGame.Application.Interfaces.Persistence;
+using WebGame.Entities.Enemies;
 
 namespace WebGame.Application.Functions.Enemys.Command.Update
 {

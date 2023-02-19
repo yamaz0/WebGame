@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using WebGame.Application.Functions.Enemies.Query.GetBodyArmor;
 using WebGame.Application.Interfaces.Persistence;
 
 namespace WebGame.Application.Functions.Enemies.Query.GetEnemy
@@ -15,11 +16,13 @@ namespace WebGame.Application.Functions.Enemies.Query.GetEnemy
             _mapper = mapper;
         }
 
-        public async Task<GetBodyArmorViewModel> Handle(GetEnemyRequest request, CancellationToken cancellationToken)
+        public async Task<GetEnemyViewModel> Handle(GetEnemyRequest request, CancellationToken cancellationToken)
         {
             var enemy = await _enemyRepository.GetByIdAsync(request.EnemyId);
-            var mappedEnemy = _mapper.Map<GetBodyArmorViewModel>(enemy);
+            var mappedEnemy = _mapper.Map<GetEnemyViewModel>(enemy);
             return mappedEnemy;
+            
         }
+
     }
 }
