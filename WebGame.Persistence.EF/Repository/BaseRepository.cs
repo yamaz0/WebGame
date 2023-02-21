@@ -6,7 +6,7 @@ using WebGame.Domain.Common;
 
 namespace WebGame.Persistence.EF.Repository
 {
-    public class BaseRepository<T> : IAsyncRepository<T> where T : AuditableEntity
+    public class BaseRepository<T> : IAsyncRepository<T> where T : class
     {
         protected readonly DbGameContext _context;
 
@@ -48,13 +48,8 @@ namespace WebGame.Persistence.EF.Repository
 
         public async Task UpdateAsync(T entity)
         {
-            var e = _context.Set<T>().FindAsync(entity.Id);
-
-            if (e != null)
-            {
-                _context.Entry(entity).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-            }
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
     }
 }
