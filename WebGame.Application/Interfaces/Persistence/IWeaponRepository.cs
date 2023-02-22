@@ -5,5 +5,6 @@ namespace WebGame.Application.Interfaces.Persistence
 {
     public interface IWeaponRepository : IAsyncRepository<Weapon>
     {
+        Task<List<Weapon>> GetPagedWeaponsAsync(int page, int pageSize);
     }
 }
