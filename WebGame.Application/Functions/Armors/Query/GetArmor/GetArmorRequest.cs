@@ -8,8 +8,8 @@ using WebGame.Application.Functions.Jobs.Query.GetOne;
 
 namespace WebGame.Application.Functions.Enemies.Query.GetBodyArmor
 {
-    public class GetBodyArmorRequest : IRequest<GetBodyArmorViewModel>
+    public class GetArmorRequest : IRequest<GetArmorViewModel>
     {
-        public int BodyArmorId { get; set; }
+        public int ArmorId { get; set; }
     }
 }

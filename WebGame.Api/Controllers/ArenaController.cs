@@ -1,24 +1,26 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebGame.Services.Arena;
-using WebGame.Services.Arena.Interface;
+using WebGame.Application.Functions.Enemies.Query.GetAllEnemies;
 
 namespace WebGame.Controllers
 {
     [Authorize]
-    public class ArenaController : Controller
+    [Route("api/[controller]")]
+    public class ArenaController : ControllerBase
     {
-        private readonly IArenaService _arenaService;
+        private readonly IMediator _mediator;
 
-        public ArenaController(IArenaService arenaService)
+        public ArenaController(IMediator mediator)
         {
-            _arenaService = arenaService;
+            _mediator = mediator;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult<List<GetAllEnemiesViewModel>>>Index()
         {
-            var enemies = _arenaService.GetAllEnemies();
-            return View(enemies);
+            List<GetAllEnemiesViewModel> enemies = await _mediator.Send(new GetAllEnemiesRequest());
+            return Ok(enemies);
         }
     }
 }

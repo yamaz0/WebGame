@@ -1,14 +1,13 @@
-﻿using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.BodyArmors.Command.Create
+namespace WebGame.Application.Functions.BodyArmors.Query.GetAllBodyArmors
 {
-    public class CreateBodyArmorCommand : IRequest<CreateBodyArmorCommandResponse>
+    public class GetAllArmorsViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

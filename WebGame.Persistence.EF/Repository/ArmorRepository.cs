@@ -3,9 +3,9 @@ using WebGame.Entities.Items;
 
 namespace WebGame.Persistence.EF.Repository
 {
-    public class BodyArmorRepository : BaseRepository<BodyArmor>, IBodyArmorRepository
+    public class ArmorRepository : BaseRepository<Armor>, IArmorRepository
     {
-        public BodyArmorRepository(DbGameContext context) : base(context)
+        public ArmorRepository(DbGameContext context) : base(context)
         {
         }
     }

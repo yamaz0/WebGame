@@ -7,7 +7,6 @@ namespace WebGame.Domain.Entities.Player
 {
     public class Player : AuditableEntity, IDuelable
     {
-        public int Id { get; set; }
         public string Name { get; set; }
 
         #region level
@@ -31,10 +30,10 @@ namespace WebGame.Domain.Entities.Player
         #endregion
 
         #region Armors
-        public virtual BodyArmor? Helmet { get; set; }
-        public virtual BodyArmor? Armor { get; set; }
-        public virtual BodyArmor? Legs { get; set; }
-        public virtual BodyArmor? Boots { get; set; }
+        public virtual Armor? Helmet { get; set; }
+        public virtual Armor? Armor { get; set; }
+        public virtual Armor? Legs { get; set; }
+        public virtual Armor? Boots { get; set; }
         public virtual Weapon? Weapon { get; set; }
         #endregion
 

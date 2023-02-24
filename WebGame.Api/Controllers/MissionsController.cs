@@ -1,22 +1,23 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebGame.Services.Mission.Interface;
+using WebGame.Application.Functions.Missions.Query.GetAll;
 
 namespace WebGame.Controllers
 {
     [Authorize]
     public class MissionsController : Controller
     {
-        private readonly IMissionService _missionService;
+        private readonly IMediator _mediator;
 
-        public MissionsController(IMissionService missionService)
+        public MissionsController(IMediator mediator)
         {
-            _missionService = missionService;
+            _mediator = mediator;
         }
-        public IActionResult Index()
+        public async Task<ActionResult<List<GetAllMissionsViewModel>>> Index()
         {
-            var missions = _missionService.GetAllMissions();
-            return View(missions);
+            List<GetAllMissionsViewModel> missions = await _mediator.Send(new GetAllMissionsRequest());
+            return Ok(missions);
         }
     }
 }

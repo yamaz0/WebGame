@@ -1,82 +1,38 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebGame.Domain.Entities.Player;
-using WebGame.Domain.Entities.User;
-using WebGame.Entities.Enemies;
-using WebGame.Services.Duel.Interface;
+using WebGame.Application.Functions.Duel.Query;
 
 namespace WebGame.Controllers
 {
     [Authorize]
     public class DuelController : Controller
     {
-        private readonly IDualService _service;
-        private readonly UserManager<UserEntity> _userManager;
+        //private readonly UserManager<UserEntity> _userManager;
 
-        public DuelController(IDualService service, UserManager<UserEntity> userManager)
+        //public DuelController(UserManager<UserEntity> userManager)
+        //{
+        //    _userManager = userManager;
+        //}
+        private readonly IMediator _mediator;
+
+        public DuelController(IMediator mediator)
         {
-            _service = service;
-            _userManager = userManager;
+            _mediator = mediator;
         }
 
-        public IActionResult DuelEnemy(int enemyId)
+        [HttpGet("duel/{enemyId}")]
+        public async Task<ActionResult<DuelViewData>> DuelEnemy(int enemyId)
         {
-            var userId = _userManager.GetUserId(HttpContext.User);
-            var dueldata = _service.DuelEnemy(userId, enemyId);
+            //var userId = _userManager.GetUserId(HttpContext.User);
+            DuelViewData dueldata = await _mediator.Send(new DuelPlayerVsEnemyQuery() { EnemyId = 1, PlayerId = 1 });
 
             if (dueldata == null)
                 return NotFound();
             else
-                return View(dueldata);
-        }
-        public IActionResult DuelPlayer(int enemyId)
-        {
-            var userId = _userManager.GetUserId(HttpContext.User);
-
-            var dueldata = _service.DuelPlayer(userId, enemyId);
-
-            if (dueldata == null)
-                return NotFound();
-            else
-                return View(dueldata);
-        }
-    }
-    public class DuelCharacter
-    {
-        public string Name { get; set; }
-        public int HealthPoint { get; set; }
-        public int AttackPoint { get; set; }
-
-        public void Init(Player player)
-        {
-            Name = player.Name;
-            HealthPoint = player.Endurance * 10;
-            AttackPoint = player.Weapon == null ? 1 : player.Weapon.Attack;
-        }
-
-        public void Init(Enemy enemy)
-        {
-            Name = enemy.Name;
-            HealthPoint = enemy.HealthPoint;
-            AttackPoint = enemy.Attack;
-        }
-
-        public int Attack(DuelCharacter opponent)
-        {
-            opponent.TakeDamage(AttackPoint);
-            return AttackPoint;
-        }
-
-        public void TakeDamage(int value)
-        {
-            HealthPoint -= value;
-        }
-
-        public bool IsAlive()
-        {
-            return HealthPoint > 0;
+                return Ok(dueldata);
         }
     }
 }

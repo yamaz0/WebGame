@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.BodyArmors.Query.GetAllBodyArmors
+namespace WebGame.Application.Functions.BodyArmors.Command.Delete
 {
-    public class GetAllBodyArmorsRequest : IRequest<List<GetAllBodyArmorsViewModel>>
+    public class DeleteArmorCommand : IRequest
     {
-
+        public int bodyArmorId { get; set; }
     }
 }

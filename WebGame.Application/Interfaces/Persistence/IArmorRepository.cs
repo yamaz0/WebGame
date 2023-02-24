@@ -3,7 +3,7 @@ using WebGame.Entities.Items;
 
 namespace WebGame.Application.Interfaces.Persistence
 {
-    public interface IBodyArmorRepository : IAsyncRepository<BodyArmor>
+    public interface IArmorRepository : IAsyncRepository<Armor>
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace WebGame.Application.Functions.Enemies.Query.GetBodyArmor
 {
-    public class GetBodyArmorViewModel
+    public class GetArmorViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebGame.Application.Functions.Weapons.Query;
+using WebGame.Application.Functions.Weapons.Query.GetAllWeapons;
 
 namespace WebGame.Controllers
 {
@@ -20,9 +21,9 @@ namespace WebGame.Controllers
             _mediator = mediator;
         }
         [HttpGet]
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            return View();
+            return NoContent();
         }
 
         //[HttpGet("armors")]
@@ -41,11 +42,11 @@ namespace WebGame.Controllers
         //}
 
         [HttpGet("weapons")]
-        public async Task<IActionResult> Weapons()
+        public async Task<ActionResult<List<GetAllWeaponsViewModel>>> Weapons()
         {
             GetAllWeaponsRequest request = new GetAllWeaponsRequest();
-            List<Entities.Items.Weapon> weapons = await _mediator.Send(request);
-            return View(weapons);
+            List<GetAllWeaponsViewModel> weapons = await _mediator.Send(request);
+            return Ok(weapons);
         }
 
         ////[HttpPost("weapons")]

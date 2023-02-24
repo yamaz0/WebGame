@@ -4,9 +4,9 @@ using WebGame.Entities.Items;
 
 namespace WebGame.Application.Functions.BodyArmors.Command.Create
 {
-    public class CreateBodyArmorCommandValidate : AbstractValidator<CreateBodyArmorCommand>
+    public class CreateArmorCommandValidate : AbstractValidator<CreateArmorCommand>
     {
-        public CreateBodyArmorCommandValidate()
+        public CreateArmorCommandValidate()
         {
             RuleFor(x => x.Name).NotEmpty().MaximumLength(ConstantsItem.NAME_MAX_LENGHT);
             RuleFor(x => x.Description).NotEmpty().MaximumLength(ConstantsItem.DESC_MAX_LENGHT);

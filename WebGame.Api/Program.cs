@@ -1,5 +1,6 @@
 using MediatR;
 using System.Reflection;
+using WebGame;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.InstallDb();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

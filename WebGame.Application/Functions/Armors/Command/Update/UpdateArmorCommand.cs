@@ -8,7 +8,7 @@ using WebGame.Entities.Items;
 
 namespace WebGame.Application.Functions.BodyArmors.Command.Update
 {
-    public class UpdateBodyArmorCommand : IRequest
+    public class UpdateArmorCommand : IRequest
     {
         public int Id { get; set; }
         public string Name { get; set; }

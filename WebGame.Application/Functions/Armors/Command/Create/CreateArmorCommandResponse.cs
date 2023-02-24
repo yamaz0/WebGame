@@ -3,15 +3,15 @@ using WebGame.Application.Response;
 
 namespace WebGame.Application.Functions.BodyArmors.Command.Create
 {
-    public class CreateBodyArmorCommandResponse : BasicResponse
+    public class CreateArmorCommandResponse : BasicResponse
     {
         public int? bodyArmorId { get; set; }
 
-        public CreateBodyArmorCommandResponse(ValidationResult result) : base(result)
+        public CreateArmorCommandResponse(ValidationResult result) : base(result)
         {
         }
 
-        public CreateBodyArmorCommandResponse(int? BodyArmorId)
+        public CreateArmorCommandResponse(int? BodyArmorId)
         {
             BodyArmorId = BodyArmorId;
         }
