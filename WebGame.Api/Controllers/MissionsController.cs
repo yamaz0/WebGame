@@ -5,8 +5,9 @@ using WebGame.Application.Functions.Missions.Query.GetAll;
 
 namespace WebGame.Controllers
 {
-    [Authorize]
-    public class MissionsController : Controller
+    //[Authorize]
+    [Route("api/[controller]")]
+    public class MissionsController : ControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -14,6 +15,7 @@ namespace WebGame.Controllers
         {
             _mediator = mediator;
         }
+        [HttpGet]
         public async Task<ActionResult<List<GetAllMissionsViewModel>>> Index()
         {
             List<GetAllMissionsViewModel> missions = await _mediator.Send(new GetAllMissionsRequest());

@@ -5,7 +5,7 @@ using WebGame.Application.Functions.Enemies.Query.GetAllEnemies;
 
 namespace WebGame.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class ArenaController : ControllerBase
     {

@@ -12,7 +12,8 @@ using WebGame.Entities.Jobs;
 
 namespace WebGame.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [Route("api/[controller]")]
     public class JobsController : ControllerBase
     {
         private readonly IMediator _mediator;

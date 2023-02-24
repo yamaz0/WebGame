@@ -7,8 +7,9 @@ using WebGame.Domain.Entities.User;
 
 namespace WebGame.Controllers
 {
-    [Authorize]
-    public class PlayersController : Controller
+    //[Authorize]
+    [Route("api/[controller]")]
+    public class PlayersController : ControllerBase
     {
         //private readonly UserManager<UserEntity> _userManager;
         private readonly IMediator _mediator;
@@ -17,10 +18,11 @@ namespace WebGame.Controllers
         {
             _mediator = mediator;
         }
+        [HttpGet]
         public async Task<ActionResult<GetPlayerViewModel>> Index()
         {
             //var userId = _userManager.GetUserId(HttpContext.User);
-            GetPlayerViewModel player = await _mediator.Send(new GetPlayerRequest() { PlayerId = 0 });
+            GetPlayerViewModel player = await _mediator.Send(new GetPlayerRequest() { PlayerId = 1 });
             return Ok(player);
         }
     }

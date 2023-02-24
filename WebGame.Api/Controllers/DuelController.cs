@@ -7,8 +7,9 @@ using WebGame.Application.Functions.Duel.Query;
 
 namespace WebGame.Controllers
 {
-    [Authorize]
-    public class DuelController : Controller
+    //[Authorize]
+    [Route("api/[controller]")]
+    public class DuelController : ControllerBase
     {
         //private readonly UserManager<UserEntity> _userManager;
 

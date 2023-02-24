@@ -7,9 +7,9 @@ using WebGame.Application.Functions.Weapons.Query.GetAllWeapons;
 
 namespace WebGame.Controllers
 {
-    [Authorize]
-    [Route("shop")]
-    public class ShopController : Controller
+    //[Authorize]
+    [Route("api/[controller]")]
+    public class ShopController : ControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -20,6 +20,7 @@ namespace WebGame.Controllers
         {
             _mediator = mediator;
         }
+
         [HttpGet]
         public ActionResult Index()
         {
