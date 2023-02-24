@@ -12,6 +12,7 @@ using WebGame.Entities.Items;
 using WebGame.Entities.Jobs;
 using WebGame.Entities.Missions;
 using WebGame.Persistence.EF.DummyData;
+using WebGame.Persistence.EF.ModelCreating;
 
 namespace WebGame
 {
@@ -55,36 +56,19 @@ namespace WebGame
         {
             builder.ApplyConfigurationsFromAssembly(typeof(DbGameContext).Assembly);
 
-            var converter = new EnumToStringConverter<ItemType>();
 
-            builder.Entity<Armor>()
-                .Property(e => e.ItemType)
-                .HasConversion(converter);
 
-            builder.Entity<Player>(eb =>
-            {
-                eb.Property(x => x.Name).IsRequired();
-                eb.Property(x => x.Exp).HasDefaultValue(ConstantsPlayer.DEFAULT_EXP);
-                eb.Property(x => x.Level).HasDefaultValue(ConstantsPlayer.DEFAULT_LEVEL);
-                eb.Property(x => x.SkillPoints).HasDefaultValue(ConstantsPlayer.DEFAULT_SKILL_POINTS);
-                eb.Property(x => x.Cash).HasDefaultValue(ConstantsPlayer.DEFAULT_CASH);
-                eb.Property(x => x.Strenght).HasDefaultValue(ConstantsPlayer.DEFAULT_STRENGHT);
-                eb.Property(x => x.Dexterity).HasDefaultValue(ConstantsPlayer.DEFAULT_DEXTERITY);
-                eb.Property(x => x.Endurance).HasDefaultValue(ConstantsPlayer.DEFAULT_ENDURANCE);
-                eb.Property(x => x.JobId).HasDefaultValue(0);
-            });
-
-            builder.Entity<AuditableEntity>(ae =>
-            {
-                ae.Property(x => x.CreatedDate).HasDefaultValueSql("getutcdate()");
-                ae.Property(x => x.CreatedBy).HasDefaultValue("saba");
-                ae.Property(x => x.LastModifiedBy).HasDefaultValue("saba");
-                ae.Property(x => x.LastModifiedDate).ValueGeneratedOnAddOrUpdate();
-            });
+            PlayerModelCreating.Configure(builder);
+            EnemyModelCreating.Configure(builder);
+            JobModelCreating.Configure(builder);
+            MissionModelCreating.Configure(builder);
+            WeaponModelCreating.Configure(builder);
+            ArmorModelCreating.Configure(builder);
 
             FillDummyData(builder);
             base.OnModelCreating(builder);
         }
+
 
         private void FillDummyData(ModelBuilder builder)
         {
