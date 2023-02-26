@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{0A039CB5-9B27-4596-8279-D34E85B6824F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGame.Application.UnitTest", "test\WebGame.Application.UnitTest\WebGame.Application.UnitTest.csproj", "{8579F439-1185-40FE-A6B3-739406B2F4E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGame.Application.UnitTest", "test\WebGame.Application.UnitTest\WebGame.Application.UnitTest.csproj", "{8579F439-1185-40FE-A6B3-739406B2F4E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{3F4D010D-F184-456E-919C-534B02AC80E2}"
 EndProject
