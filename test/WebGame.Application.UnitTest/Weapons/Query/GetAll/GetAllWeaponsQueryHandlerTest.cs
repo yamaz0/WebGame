@@ -7,14 +7,14 @@ using WebGame.Application.Functions.Weapons.Query.GetAllWeapons;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.UnitTest.Mocks.Repository;
 
-namespace WebGame.Application.UnitTest.Weapons.Query
+namespace WebGame.Application.UnitTest.Weapons.Query.GetAll
 {
-    public class GetAllWeaponsHandlerQueryTest
+    public class GetAllWeaponsQueryHandlerTest
     {
         private readonly IMapper _mapper;
         private readonly Mock<IWeaponRepository> _mockWeaponRepository;
 
-        public GetAllWeaponsHandlerQueryTest()
+        public GetAllWeaponsQueryHandlerTest()
         {
             _mockWeaponRepository = WeaponRepositoryMocks.GetWeaponRepository();
             var configureProvider = new MapperConfiguration(cfg => cfg.AddProfile<MapperProfile>());
