@@ -2,7 +2,7 @@
 using MediatR;
 using WebGame.Application.Interfaces.Persistence;
 
-namespace WebGame.Application.Functions.Missions.Query.GetAll
+namespace WebGame.Application.Functions.Missions.Query.GetAllMissions
 {
     public class GetAllMissionsRequestHandler : IRequestHandler<GetAllMissionsRequest, List<GetAllMissionsViewModel>>
     {

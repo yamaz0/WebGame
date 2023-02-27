@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Application.Interfaces.Persistence;
 
-namespace WebGame.Application.Functions.Missions.Query.GetOne
+namespace WebGame.Application.Functions.Missions.Query.GetMission
 {
     public class GetMissionRequest : IRequest<GetMissionViewModel>
     {

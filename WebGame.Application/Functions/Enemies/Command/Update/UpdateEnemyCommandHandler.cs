@@ -3,7 +3,7 @@ using MediatR;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Entities.Enemies;
 
-namespace WebGame.Application.Functions.Enemys.Command.Update
+namespace WebGame.Application.Functions.Enemies.Command.Update
 {
     public class UpdateEnemyCommandHandler : IRequestHandler<UpdateEnemyCommand>
     {

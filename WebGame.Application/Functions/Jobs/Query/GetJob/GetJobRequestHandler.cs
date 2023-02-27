@@ -2,7 +2,7 @@
 using MediatR;
 using WebGame.Application.Interfaces.Persistence;
 
-namespace WebGame.Application.Functions.Jobs.Query.GetOne
+namespace WebGame.Application.Functions.Jobs.Query.GetJob
 {
     public class GetJobRequestHandler : IRequestHandler<GetJobRequest, GetJobViewModel>
     {

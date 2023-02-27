@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using WebGame.Application.Interfaces.Persistence;
 
-namespace WebGame.Application.Functions.Enemys.Command.Delete
+namespace WebGame.Application.Functions.Enemies.Command.Delete
 {
     public class DeleteEnemyCommandHandler : IRequestHandler<DeleteEnemyCommand>
     {

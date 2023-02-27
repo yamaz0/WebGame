@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.Enemys.Command.Delete
+namespace WebGame.Application.Functions.Enemies.Command.Delete
 {
     public class DeleteEnemyCommand : IRequest
     {

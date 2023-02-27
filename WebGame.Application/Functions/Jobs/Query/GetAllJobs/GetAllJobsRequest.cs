@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.Jobs.Query.GetAll
+namespace WebGame.Application.Functions.Jobs.Query.GetAllJobs
 {
     public class GetAllJobsRequest : IRequest<List<GetAllJobsViewModel>>
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebGame.Application.Functions.Missions.Query.GetAll
+namespace WebGame.Application.Functions.Missions.Query.GetMission
 {
-    public class GetAllMissionsViewModel
+    public class GetMissionViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }

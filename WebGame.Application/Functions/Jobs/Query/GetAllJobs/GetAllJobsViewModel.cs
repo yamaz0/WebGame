@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebGame.Application.Functions.Jobs.Query.GetAll
+namespace WebGame.Application.Functions.Jobs.Query.GetAllJobs
 {
     public class GetAllJobsViewModel
     {

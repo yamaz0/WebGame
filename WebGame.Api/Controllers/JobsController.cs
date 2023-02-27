@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using WebGame.Application.Functions.Jobs.Command.Create;
 using WebGame.Application.Functions.Jobs.Command.Delete;
 using WebGame.Application.Functions.Jobs.Command.Update;
-using WebGame.Application.Functions.Jobs.Query.GetAll;
-using WebGame.Application.Functions.Jobs.Query.GetOne;
+using WebGame.Application.Functions.Jobs.Query.GetAllJobs;
+using WebGame.Application.Functions.Jobs.Query.GetJob;
 using WebGame.Domain.Entities.User;
 using WebGame.Entities.Jobs;
 

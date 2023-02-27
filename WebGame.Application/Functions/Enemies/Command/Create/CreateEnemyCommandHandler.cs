@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using WebGame.Application.Functions.Enemys.Command;
+using WebGame.Application.Functions.Enemies.Command;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Entities.Enemies;
 

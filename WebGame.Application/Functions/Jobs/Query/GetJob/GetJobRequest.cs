@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebGame.Application.Functions.Jobs.Query.GetOne
+namespace WebGame.Application.Functions.Jobs.Query.GetJob
 {
     public class GetJobRequest : IRequest<GetJobViewModel>
     {

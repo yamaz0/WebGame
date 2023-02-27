@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebGame.Application.Functions.Missions.Query.GetAll;
+using WebGame.Application.Functions.Missions.Query.GetAllMissions;
 
 namespace WebGame.Controllers
 {
