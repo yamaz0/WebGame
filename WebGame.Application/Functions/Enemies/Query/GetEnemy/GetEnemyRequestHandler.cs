@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using WebGame.Application.Functions.Enemies.Query.GetBodyArmor;
+using WebGame.Application.Functions.Enemies.Query.GetArmor;
 using WebGame.Application.Interfaces.Persistence;
 
 namespace WebGame.Application.Functions.Enemies.Query.GetEnemy

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Application.Functions.Jobs.Query.GetOne;
 
-namespace WebGame.Application.Functions.Enemies.Query.GetBodyArmor
+namespace WebGame.Application.Functions.Enemies.Query.GetArmor
 {
     public class GetArmorRequest : IRequest<GetArmorViewModel>
     {

@@ -1,6 +1,6 @@
 ﻿using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.Enemies.Query.GetBodyArmor
+namespace WebGame.Application.Functions.Enemies.Query.GetArmor
 {
     public class GetArmorViewModel
     {
