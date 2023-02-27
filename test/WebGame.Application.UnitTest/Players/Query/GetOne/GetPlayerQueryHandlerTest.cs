@@ -30,7 +30,7 @@ namespace WebGame.Application.UnitTest.Players.Query.GetOne
         public async void GetPlayerTest()
         {
             var handler = new GetPlayerRequestHandler(_mockPlayerRepository.Object, _mapper);
-            var result = await handler.Handle(new GetPlayerRequest(), CancellationToken.None);
+            var result = await handler.Handle(new GetPlayerRequest() { PlayerId = 1 }, CancellationToken.None);
             result.ShouldBeOfType(typeof(GetPlayerViewModel));
         }
     }
