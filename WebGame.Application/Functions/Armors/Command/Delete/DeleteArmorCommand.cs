@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.BodyArmors.Command.Delete
+namespace WebGame.Application.Functions.Armors.Command.Delete
 {
     public class DeleteArmorCommand : IRequest
     {

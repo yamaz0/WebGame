@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using WebGame.Application.Interfaces.Persistence;
 
-namespace WebGame.Application.Functions.BodyArmors.Command.Delete
+namespace WebGame.Application.Functions.Armors.Command.Delete
 {
     public class DeleteArmorCommandHandler : IRequestHandler<DeleteArmorCommand>
     {

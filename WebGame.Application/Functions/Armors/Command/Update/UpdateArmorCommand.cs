@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.BodyArmors.Command.Update
+namespace WebGame.Application.Functions.Armors.Command.Update
 {
     public class UpdateArmorCommand : IRequest
     {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.BodyArmors.Query.GetAllBodyArmors
+namespace WebGame.Application.Functions.Armors.Query.GetAllBodyArmors
 {
     public class GetAllArmorsRequest : IRequest<List<GetAllArmorsViewModel>>
     {

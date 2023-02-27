@@ -2,7 +2,7 @@
 using MediatR;
 using WebGame.Application.Interfaces.Persistence;
 
-namespace WebGame.Application.Functions.BodyArmors.Query.GetAllBodyArmors
+namespace WebGame.Application.Functions.Armors.Query.GetAllBodyArmors
 {
     public class GetAllArmorsRequestHandler : IRequestHandler<GetAllArmorsRequest, List<GetAllArmorsViewModel>>
     {

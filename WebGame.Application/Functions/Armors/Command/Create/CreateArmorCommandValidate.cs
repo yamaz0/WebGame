@@ -2,7 +2,7 @@
 using WebGame.Application.Constants;
 using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.BodyArmors.Command.Create
+namespace WebGame.Application.Functions.Armors.Command.Create
 {
     public class CreateArmorCommandValidate : AbstractValidator<CreateArmorCommand>
     {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.BodyArmors.Command.Create
+namespace WebGame.Application.Functions.Armors.Command.Create
 {
     public class CreateArmorCommand : IRequest<CreateArmorCommandResponse>
     {

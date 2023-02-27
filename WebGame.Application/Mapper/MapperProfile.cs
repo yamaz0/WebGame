@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebGame.Application.Functions.BodyArmors.Query.GetAllBodyArmors;
+using WebGame.Application.Functions.Armors.Query.GetAllBodyArmors;
 using WebGame.Application.Functions.Enemies.Query.GetAllEnemies;
 using WebGame.Application.Functions.Enemies.Query.GetBodyArmor;
 using WebGame.Application.Functions.Enemies.Query.GetEnemy;

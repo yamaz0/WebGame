@@ -3,7 +3,7 @@ using MediatR;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Entities.Items;
 
-namespace WebGame.Application.Functions.BodyArmors.Command.Update
+namespace WebGame.Application.Functions.Armors.Command.Update
 {
     public class UpdateArmorCommandHandler : IRequestHandler<UpdateArmorCommand>
     {
