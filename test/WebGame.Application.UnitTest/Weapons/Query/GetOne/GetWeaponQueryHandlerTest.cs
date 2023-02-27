@@ -30,7 +30,7 @@ namespace WebGame.Application.UnitTest.Weapons.Query.GetOne
         public async void GetWeaponTest()
         {
             var handler = new GetWeaponRequestHandler(_mockWeaponRepository.Object, _mapper);
-            var result = handler.Handle(new GetWeaponRequest(), CancellationToken.None);
+            var result = await handler.Handle(new GetWeaponRequest(), CancellationToken.None);
             result.ShouldBeOfType(typeof(GetWeaponViewModel));
         }
     }

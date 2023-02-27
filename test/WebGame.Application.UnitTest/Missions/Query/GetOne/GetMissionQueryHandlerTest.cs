@@ -30,7 +30,7 @@ namespace WebGame.Application.UnitTest.Missions.Query.GetOne
         public async void GetMissionTest()
         {
             var handler = new GetMissionRequestHandler(_mockMissionRepository.Object, _mapper);
-            var result = handler.Handle(new GetMissionRequest(), CancellationToken.None);
+            var result = await handler.Handle(new GetMissionRequest() { MissionId = 1}, CancellationToken.None);
             result.ShouldBeOfType(typeof(GetMissionViewModel));
         }
     }

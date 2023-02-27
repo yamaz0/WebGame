@@ -2,7 +2,7 @@ using AutoMapper;
 using Moq;
 using Shouldly;
 using WebGame.Application.Automapper;
-using WebGame.Application.Functions.Jobs.Query.GetAllBodyJobs;
+using WebGame.Application.Functions.Jobs.Query.GetAllJobs;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.UnitTest.Mocks.Repository;
 

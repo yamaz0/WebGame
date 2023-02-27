@@ -29,7 +29,7 @@ namespace WebGame.Application.UnitTest.Armors.Query.GetOne
         public async void GetArmorTest()
         {
             var handler = new GetArmorRequestHandler(_mockArmorRepository.Object, _mapper);
-            var result = handler.Handle(new GetArmorRequest(), CancellationToken.None);
+            var result = await handler.Handle(new GetArmorRequest(), CancellationToken.None);
             result.ShouldBeOfType(typeof(GetArmorViewModel));
         }
     }

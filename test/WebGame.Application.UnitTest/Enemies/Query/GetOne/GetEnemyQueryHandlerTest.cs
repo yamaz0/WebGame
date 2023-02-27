@@ -30,7 +30,7 @@ namespace WebGame.Application.UnitTest.Enemys.Query.GetOne
         public async void GetEnemyTest()
         {
             var handler = new GetEnemyRequestHandler(_mockEnemyRepository.Object, _mapper);
-            var result = handler.Handle(new GetEnemyRequest(), CancellationToken.None);
+            var result = await handler.Handle(new GetEnemyRequest(), CancellationToken.None);
             result.ShouldBeOfType(typeof(GetEnemyViewModel));
         }
     }
