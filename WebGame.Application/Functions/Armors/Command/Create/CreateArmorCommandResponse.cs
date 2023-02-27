@@ -5,7 +5,7 @@ namespace WebGame.Application.Functions.Armors.Command.Create
 {
     public class CreateArmorCommandResponse : BasicResponse
     {
-        public int? bodyArmorId { get; set; }
+        public int? armorId { get; set; }
 
         public CreateArmorCommandResponse(ValidationResult result) : base(result)
         {
