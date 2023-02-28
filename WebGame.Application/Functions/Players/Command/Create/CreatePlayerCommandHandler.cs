@@ -19,7 +19,7 @@ namespace WebGame.Application.Functions.Players.Command.Create
             var validator = new CreatePlayerCommandValidate();
             var validatorResult = await validator.ValidateAsync(request);
 
-            if (validatorResult.IsValid)
+            if (!validatorResult.IsValid)
             {
                 return new CreatePlayerCommandResponse(validatorResult);
             }

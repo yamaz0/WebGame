@@ -27,11 +27,20 @@ namespace WebGame.Application.UnitTest.Jobs.Command.Delete
 
         [Fact]
         public async void DeleteJobTest()
-        {            
+        {
             var handler = new DeleteJobCommandHandler(_mockJobRepository.Object);
-            var result = await handler.Handle(new DeleteJobCommand(), CancellationToken.None);
+            int jobsCountBefore = (await _mockJobRepository.Object.GetAllAsync()).Count;
+            var request = new DeleteJobCommand()
+            {
+                JobId = 1
+            };
 
-            result.ShouldBeOfType(typeof(MediatR.Unit));
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            int jobsCountAfter = (await _mockJobRepository.Object.GetAllAsync()).Count;
+
+            jobsCountAfter.ShouldBe(jobsCountBefore - 1);
+            response.ShouldBeOfType(typeof(MediatR.Unit));
         }
     }
 }

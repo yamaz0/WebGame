@@ -11,7 +11,7 @@ using WebGame.Application.Functions.Enemies.Command.Delete;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.UnitTest.Mocks.Repository;
 
-namespace WebGame.Application.UnitTest.Enemys.Command.Delete
+namespace WebGame.Application.UnitTest.Enemies.Command.Delete
 {
     public class DeleteEnemyCommandHandlerTest
     {
@@ -27,11 +27,20 @@ namespace WebGame.Application.UnitTest.Enemys.Command.Delete
 
         [Fact]
         public async void DeleteEnemyTest()
-        {            
+        {
             var handler = new DeleteEnemyCommandHandler(_mockEnemyRepository.Object);
-            var result = await handler.Handle(new DeleteEnemyCommand(), CancellationToken.None);
+            int enemiesCountBefore = (await _mockEnemyRepository.Object.GetAllAsync()).Count;
+            var request = new DeleteEnemyCommand()
+            {
+                EnemyId = 1
+            };
 
-            result.ShouldBeOfType(typeof(MediatR.Unit));
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            int enemiesCountAfter = (await _mockEnemyRepository.Object.GetAllAsync()).Count;
+
+            enemiesCountAfter.ShouldBe(enemiesCountBefore - 1);
+            response.ShouldBeOfType(typeof(MediatR.Unit));
         }
     }
 }

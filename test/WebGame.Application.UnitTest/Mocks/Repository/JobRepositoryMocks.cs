@@ -35,9 +35,19 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                 }
                 );
 
-            mockRepository.Setup(r => r.UpdateAsync(It.IsAny<Job>()));
+            mockRepository.Setup(r => r.UpdateAsync(It.IsAny<Job>()))
+                .Callback((Job job) =>
+                {
+                    int searchIndex = jobs.FindIndex(w => w.Id == job.Id);
+                    jobs[searchIndex] = job;
+                });
 
-            mockRepository.Setup(r => r.RemoveAsync(It.IsAny<Job>()));
+            mockRepository.Setup(r => r.RemoveAsync(It.IsAny<Job>()))
+                .Callback((Job job) =>
+                {
+                    int searchIndex = jobs.FindIndex(w => w.Id == job.Id);
+                    jobs.RemoveAt(searchIndex);
+                });
 
             return mockRepository;
         }

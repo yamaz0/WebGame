@@ -18,7 +18,7 @@ namespace WebGame.Application.Functions.Weapons.Command.Create
             var validator = new CreateWeaponCommandValidate();
             var validatorResult = await validator.ValidateAsync(request);
 
-            if (validatorResult.IsValid)
+            if (!validatorResult.IsValid)
             {
                 return new CreateWeaponCommandResponse(validatorResult);
             }

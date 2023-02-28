@@ -29,9 +29,18 @@ namespace WebGame.Application.UnitTest.Players.Command.Delete
         public async void DeletePlayerTest()
         {            
             var handler = new DeletePlayerCommandHandler(_mockPlayerRepository.Object);
-            var result = await handler.Handle(new DeletePlayerCommand(), CancellationToken.None);
+            int playersCountBefore = (await _mockPlayerRepository.Object.GetAllAsync()).Count;
+            var request = new DeletePlayerCommand()
+            {
+                PlayerId = 1
+            };
 
-            result.ShouldBeOfType(typeof(MediatR.Unit));
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            int playersCountAfter = (await _mockPlayerRepository.Object.GetAllAsync()).Count;
+
+            playersCountAfter.ShouldBe(playersCountBefore - 1);
+            response.ShouldBeOfType(typeof(MediatR.Unit));
         }
     }
 }

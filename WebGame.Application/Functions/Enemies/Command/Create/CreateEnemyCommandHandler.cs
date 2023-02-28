@@ -19,7 +19,7 @@ namespace WebGame.Application.Functions.Enemies.Command.Create
             var validator = new CreateEnemyCommandValidate();
             var validatorResult = await validator.ValidateAsync(request);
 
-            if (validatorResult.IsValid)
+            if (!validatorResult.IsValid)
             {
                 return new CreateEnemyCommandResponse(validatorResult);
             }

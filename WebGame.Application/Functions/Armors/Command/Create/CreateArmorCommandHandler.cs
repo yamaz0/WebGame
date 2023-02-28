@@ -18,7 +18,7 @@ namespace WebGame.Application.Functions.Armors.Command.Create
             var validator = new CreateArmorCommandValidate();
             var validatorResult = await validator.ValidateAsync(request);
 
-            if (validatorResult.IsValid)
+            if (!validatorResult.IsValid)
             {
                 return new CreateArmorCommandResponse(validatorResult);
             }

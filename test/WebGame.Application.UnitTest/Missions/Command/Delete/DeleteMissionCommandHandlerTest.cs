@@ -29,9 +29,18 @@ namespace WebGame.Application.UnitTest.Missions.Command.Delete
         public async void DeleteMissionTest()
         {            
             var handler = new DeleteMissionCommandHandler(_mockMissionRepository.Object);
-            var result = await handler.Handle(new DeleteMissionCommand(), CancellationToken.None);
+            int missionsCountBefore = (await _mockMissionRepository.Object.GetAllAsync()).Count;
+            var request = new DeleteMissionCommand()
+            {
+                MissionId = 1
+            };
 
-            result.ShouldBeOfType(typeof(MediatR.Unit));
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            int missionsCountAfter = (await _mockMissionRepository.Object.GetAllAsync()).Count;
+
+            missionsCountAfter.ShouldBe(missionsCountBefore - 1);
+            response.ShouldBeOfType(typeof(MediatR.Unit));
         }
     }
 }

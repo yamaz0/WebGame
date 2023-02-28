@@ -15,6 +15,7 @@ namespace WebGame.Application.UnitTest.Players.Command.Update
 {
     public class UpdatePlayerCommandHandlerTest
     {
+        private const int ID = 1;
         private readonly IMapper _mapper;
         private readonly Mock<IPlayerRepository> _mockPlayerRepository;
 
@@ -29,9 +30,27 @@ namespace WebGame.Application.UnitTest.Players.Command.Update
         public async void UpdatePlayerTest()
         {
             var handler = new UpdatePlayerCommandHandler(_mockPlayerRepository.Object, _mapper);
-            var result = await handler.Handle(new UpdatePlayerCommand(), CancellationToken.None);
+            var player = await _mockPlayerRepository.Object.GetByIdAsync(ID);
+            player.Name = "before";
+            var response = await handler.Handle(new UpdatePlayerCommand()
+            {
+                Id = ID,
+                Name = "after",
+                Cash = player.Cash,
+                Dexterity = player.Dexterity,
+                Endurance = player.Endurance,
+                Exp = player.Exp,
+                JobId = player.JobId,
+                Level = player.Level,
+                MissionId = player.MissionId,
+                SkillPoints = player.SkillPoints,
+                Stamina = player.Stamina,
+                Strenght = player.Strenght
+            }, CancellationToken.None);
 
-            result.ShouldBeOfType(typeof(MediatR.Unit));
+            var updatedPlayer = await _mockPlayerRepository.Object.GetByIdAsync(ID);
+            updatedPlayer.Name.ShouldBe("after");
+            response.ShouldBeOfType(typeof(MediatR.Unit));
         }
     }
 }

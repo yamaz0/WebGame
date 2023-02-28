@@ -15,6 +15,7 @@ namespace WebGame.Application.UnitTest.Missions.Command.Update
 {
     public class UpdateMissionCommandHandlerTest
     {
+        private const int ID = 1;
         private readonly IMapper _mapper;
         private readonly Mock<IMissionRepository> _mockMissionRepository;
 
@@ -29,9 +30,20 @@ namespace WebGame.Application.UnitTest.Missions.Command.Update
         public async void UpdateMissionTest()
         {
             var handler = new UpdateMissionCommandHandler(_mockMissionRepository.Object, _mapper);
-            var result = await handler.Handle(new UpdateMissionCommand(), CancellationToken.None);
+            var mission = await _mockMissionRepository.Object.GetByIdAsync(ID);
+            mission.Name = "before";
+            var response = await handler.Handle(new UpdateMissionCommand()
+            {
+                Id = ID,
+                Name = "after",
+                Description = mission.Description,
+                Duration = mission.Duration,
+                Reward = mission.Reward
+            }, CancellationToken.None);
 
-            result.ShouldBeOfType(typeof(MediatR.Unit));
+            var updatedMission = await _mockMissionRepository.Object.GetByIdAsync(ID);
+            updatedMission.Name.ShouldBe("after");
+            response.ShouldBeOfType(typeof(MediatR.Unit));
         }
     }
 }

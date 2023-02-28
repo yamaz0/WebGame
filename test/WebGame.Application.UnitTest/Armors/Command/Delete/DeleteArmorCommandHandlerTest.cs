@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Application.Automapper;
 using WebGame.Application.Functions.Armors.Command.Delete;
+using WebGame.Application.Functions.Armors.Command.Delete;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.UnitTest.Mocks.Repository;
 
@@ -29,9 +30,18 @@ namespace WebGame.Application.UnitTest.Armors.Command.Delete
         public async void DeleteArmorTest()
         {            
             var handler = new DeleteArmorCommandHandler(_mockArmorRepository.Object);
-            var result = await handler.Handle(new DeleteArmorCommand(), CancellationToken.None);
+            int armorsCountBefore = (await _mockArmorRepository.Object.GetAllAsync()).Count;
+            var request = new DeleteArmorCommand()
+            {
+                ArmorId = 1
+            };
 
-            result.ShouldBeOfType(typeof(MediatR.Unit));
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            int armorsCountAfter = (await _mockArmorRepository.Object.GetAllAsync()).Count;
+
+            armorsCountAfter.ShouldBe(armorsCountBefore - 1);
+            response.ShouldBeOfType(typeof(MediatR.Unit));
         }
     }
 }

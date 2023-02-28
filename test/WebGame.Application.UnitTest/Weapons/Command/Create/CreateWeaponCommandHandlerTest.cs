@@ -29,9 +29,25 @@ namespace WebGame.Application.UnitTest.Weapons.Command.Create
         public async void CreateWeaponTest()
         {
             var handler = new CreateWeaponCommandHandler(_mockWeaponRepository.Object);
-            var result = await handler.Handle(new CreateWeaponCommand(), CancellationToken.None);
+            int weaponsCountBefore = (await _mockWeaponRepository.Object.GetAllAsync()).Count;
+            CreateWeaponCommand request = new CreateWeaponCommand()
+            {
+                Name = "A",
+                Description = "B",
+                Attack = 1,
+                AttackSpeed = 1,
+                Value = 1,
+            };
 
-            result.ShouldBeOfType(typeof(CreateWeaponCommandResponse));
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            int weaponsCountAfter = (await _mockWeaponRepository.Object.GetAllAsync()).Count;
+
+            weaponsCountAfter.ShouldBe(weaponsCountBefore + 1);
+            response.ShouldBeOfType(typeof(CreateWeaponCommandResponse));
+            response.Success.ShouldBe(true);
+            response.Errors.Count.ShouldBe(0);
+            response.WeaponId.ShouldNotBeNull();
         }
     }
 }

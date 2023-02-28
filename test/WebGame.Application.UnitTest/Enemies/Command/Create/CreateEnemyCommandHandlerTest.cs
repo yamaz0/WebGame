@@ -29,9 +29,25 @@ namespace WebGame.Application.UnitTest.Enemys.Command.Create
         public async void CreateEnemyTest()
         {
             var handler = new CreateEnemyCommandHandler(_mockEnemyRepository.Object);
-            var result = await handler.Handle(new CreateEnemyCommand(), CancellationToken.None);
+            int enemiesCountBefore = (await _mockEnemyRepository.Object.GetAllAsync()).Count;
+            CreateEnemyCommand request = new CreateEnemyCommand()
+            {
+                Name = "A",
+                Attack = 1,
+                CashReward = 1,
+                ExpReward = 1,
+                HealthPoint = 1
+            };
 
-            result.ShouldBeOfType(typeof(CreateEnemyCommandResponse));
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            int enemiesCountAfter = (await _mockEnemyRepository.Object.GetAllAsync()).Count;
+
+            enemiesCountAfter.ShouldBe(enemiesCountBefore + 1);
+            response.ShouldBeOfType(typeof(CreateEnemyCommandResponse));
+            response.Success.ShouldBe(true);
+            response.Errors.Count.ShouldBe(0);
+            response.EnemyId.ShouldNotBeNull();
         }
     }
 }

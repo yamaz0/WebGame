@@ -18,7 +18,7 @@ namespace WebGame.Application.Functions.Jobs.Command.Create
             var validator = new CreateJobCommandValidate();
             var validatorResult = await validator.ValidateAsync(request);
 
-            if (validatorResult.IsValid)
+            if (!validatorResult.IsValid)
             {
                 return new CreateJobCommandResponse(validatorResult);
             }

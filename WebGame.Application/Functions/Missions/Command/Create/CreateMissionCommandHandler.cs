@@ -19,7 +19,7 @@ namespace WebGame.Application.Functions.Missions.Command.Create
             var validator = new CreateMissionCommandValidate();
             var validatorResult = await validator.ValidateAsync(request);
 
-            if (validatorResult.IsValid)
+            if (!validatorResult.IsValid)
             {
                 return new CreateMissionCommandResponse(validatorResult);
             }

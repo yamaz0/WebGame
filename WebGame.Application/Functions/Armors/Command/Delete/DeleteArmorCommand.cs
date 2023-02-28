@@ -10,6 +10,6 @@ namespace WebGame.Application.Functions.Armors.Command.Delete
 {
     public class DeleteArmorCommand : IRequest
     {
-        public int bodyArmorId { get; set; }
+        public int ArmorId { get; set; }
     }
 }

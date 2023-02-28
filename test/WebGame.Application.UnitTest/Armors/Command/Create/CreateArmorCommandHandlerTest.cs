@@ -29,9 +29,26 @@ namespace WebGame.Application.UnitTest.Armors.Command.Create
         public async void CreateArmorTest()
         {
             var handler = new CreateArmorCommandHandler(_mockArmorRepository.Object);
-            var result = await handler.Handle(new CreateArmorCommand(), CancellationToken.None);
 
-            result.ShouldBeOfType(typeof(CreateArmorCommandResponse));
+            int armorsCountBefore = (await _mockArmorRepository.Object.GetAllAsync()).Count;
+            CreateArmorCommand request = new CreateArmorCommand()
+            {
+                Name = "A",
+                Description = "B",
+                Defense = 1,
+                Value = 1,
+                ItemType = 0
+            };
+
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            int armorsCountAfter = (await _mockArmorRepository.Object.GetAllAsync()).Count;
+
+            armorsCountAfter.ShouldBe(armorsCountBefore + 1);
+            response.ShouldBeOfType(typeof(CreateArmorCommandResponse));
+            response.Success.ShouldBe(true);
+            response.Errors.Count.ShouldBe(0);
+            response.ArmorId.ShouldNotBeNull();
         }
     }
 }

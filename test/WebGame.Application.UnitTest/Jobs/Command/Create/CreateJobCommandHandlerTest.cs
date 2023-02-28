@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Application.Automapper;
 using WebGame.Application.Functions.Jobs.Command.Create;
+using WebGame.Application.Functions.Jobs.Command.Create;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.UnitTest.Mocks.Repository;
 
@@ -29,9 +30,24 @@ namespace WebGame.Application.UnitTest.Jobs.Command.Create
         public async void CreateJobTest()
         {
             var handler = new CreateJobCommandHandler(_mockJobRepository.Object);
-            var result = await handler.Handle(new CreateJobCommand(), CancellationToken.None);
+            int jobsCountBefore = (await _mockJobRepository.Object.GetAllAsync()).Count;
+            CreateJobCommand request = new CreateJobCommand()
+            {
+                Name = "A",
+                Description = "B",
+                Duration = 1,
+                Reward = 1
+            };
 
-            result.ShouldBeOfType(typeof(CreateJobCommandResponse));
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            int jobsCountAfter = (await _mockJobRepository.Object.GetAllAsync()).Count;
+
+            jobsCountAfter.ShouldBe(jobsCountBefore + 1);
+            response.ShouldBeOfType(typeof(CreateJobCommandResponse));
+            response.Success.ShouldBe(true);
+            response.Errors.Count.ShouldBe(0);
+            response.JobId.ShouldNotBeNull();
         }
     }
 }

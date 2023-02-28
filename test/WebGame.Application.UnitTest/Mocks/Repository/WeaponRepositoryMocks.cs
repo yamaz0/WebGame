@@ -34,9 +34,19 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                 }
                 );
 
-            mockRepository.Setup(r => r.UpdateAsync(It.IsAny<Weapon>()));
+            mockRepository.Setup(r => r.UpdateAsync(It.IsAny<Weapon>()))
+                .Callback((Weapon weapon) =>
+            {
+                int searchIndex = weapons.FindIndex(w => w.Id == weapon.Id);
+                weapons[searchIndex] = weapon;
+            });
 
-            mockRepository.Setup(r => r.RemoveAsync(It.IsAny<Weapon>()));
+            mockRepository.Setup(r => r.RemoveAsync(It.IsAny<Weapon>()))
+                .Callback((Weapon weapon) =>
+            {
+                int searchIndex = weapons.FindIndex(w => w.Id == weapon.Id);
+                weapons.RemoveAt(searchIndex);
+            });
 
             mockRepository.Setup(r => r.GetPagedWeaponsAsync(It.IsIn<int>(), It.IsIn<int>())).ReturnsAsync(
                 (int page, int pageSize) =>

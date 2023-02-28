@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Application.Automapper;
 using WebGame.Application.Functions.Missions.Command.Create;
+using WebGame.Application.Functions.Missions.Command.Create;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.UnitTest.Mocks.Repository;
 
@@ -29,9 +30,24 @@ namespace WebGame.Application.UnitTest.Missions.Command.Create
         public async void CreateMissionTest()
         {
             var handler = new CreateMissionCommandHandler(_mockMissionRepository.Object);
-            var result = await handler.Handle(new CreateMissionCommand(), CancellationToken.None);
+            int missionsCountBefore = (await _mockMissionRepository.Object.GetAllAsync()).Count;
+            CreateMissionCommand request = new CreateMissionCommand()
+            {
+                Name = "A",
+                Description = "B",
+                Reward = 1,
+                Duration = 1
+            };
 
-            result.ShouldBeOfType(typeof(CreateMissionCommandResponse));
+            var response = await handler.Handle(request, CancellationToken.None);
+
+            int missionsCountAfter = (await _mockMissionRepository.Object.GetAllAsync()).Count;
+
+            missionsCountAfter.ShouldBe(missionsCountBefore + 1);
+            response.ShouldBeOfType(typeof(CreateMissionCommandResponse));
+            response.Success.ShouldBe(true);
+            response.Errors.Count.ShouldBe(0);
+            response.MissionId.ShouldNotBeNull();
         }
     }
 }

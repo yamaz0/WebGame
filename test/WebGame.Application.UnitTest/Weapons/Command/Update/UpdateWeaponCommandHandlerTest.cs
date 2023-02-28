@@ -15,6 +15,7 @@ namespace WebGame.Application.UnitTest.Weapons.Command.Update
 {
     public class UpdateWeaponCommandHandlerTest
     {
+        private const int ID = 1;
         private readonly IMapper _mapper;
         private readonly Mock<IWeaponRepository> _mockWeaponRepository;
 
@@ -29,9 +30,22 @@ namespace WebGame.Application.UnitTest.Weapons.Command.Update
         public async void UpdateWeaponTest()
         {
             var handler = new UpdateWeaponCommandHandler(_mockWeaponRepository.Object, _mapper);
-            var result = await handler.Handle(new UpdateWeaponCommand(), CancellationToken.None);
 
-            result.ShouldBeOfType(typeof(MediatR.Unit));
+            var weapon = await _mockWeaponRepository.Object.GetByIdAsync(ID);
+            weapon.Name = "before";
+            var response = await handler.Handle(new UpdateWeaponCommand()
+            {
+                Id = ID,
+                Name = "after",
+                Attack= weapon.Attack,
+                AttackSpeed= weapon.AttackSpeed,
+                Description= weapon.Description,
+                Value = weapon.Value
+            }, CancellationToken.None);
+
+            var updatedWeapon = await _mockWeaponRepository.Object.GetByIdAsync(ID);
+            updatedWeapon.Name.ShouldBe("after");
+            response.ShouldBeOfType(typeof(MediatR.Unit));
         }
     }
 }
