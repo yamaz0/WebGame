@@ -2,6 +2,7 @@
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Domain.Entities.Player;
 using WebGame.Entities.Enemies;
+using WebGame.Application.Interfaces.Duel;
 
 namespace WebGame.Application.Functions.Duel.Query
 {
@@ -9,11 +10,13 @@ namespace WebGame.Application.Functions.Duel.Query
     {
         public readonly IPlayerRepository _playerRepository;
         public readonly IEnemyRepository _enemyRepository;
+        public readonly IDuel _duel;
 
-        public DuelPlayerVsEnemyQueryHandler(IPlayerRepository playerRepository, IEnemyRepository enemyRepository)
+        public DuelPlayerVsEnemyQueryHandler(IPlayerRepository playerRepository, IEnemyRepository enemyRepository, IDuel duel)
         {
             _playerRepository = playerRepository;
             _enemyRepository = enemyRepository;
+            _duel = duel;
         }
 
         public async Task<DuelViewData> Handle(DuelPlayerVsEnemyQuery request, CancellationToken cancellationToken)
@@ -26,43 +29,25 @@ namespace WebGame.Application.Functions.Duel.Query
 
         private DuelViewData Duel(Player player, Enemy enemy)
         {
-            Duelist dPlayer = new Duelist(player);
-            Duelist dEnemy = new Duelist(enemy);
+            DuelData duelData = _duel.StartDuel(player, enemy);
 
-            List<string> duelHistory = new List<string>();
-            string message = "Draw!";
-            bool isPlayerWon = false;
-            int rewardCash = enemy.CashReward;
-            int rewardExp = enemy.ExpReward;
+            int rewardCash = 0;
+            int rewardExp = 0;
 
-            for (int i = 0; i < 50; i++)
+            if (duelData.HasPlayerWon)
             {
-                int damage = dPlayer.AttackOpponent(dEnemy);
-                duelHistory.Add($"{player.Name} deal {damage} damage to {enemy.Name} ");
-                if (dEnemy.IsAlive() == false)
-                {
-                    message = $"{player.Name} win!";
-                    isPlayerWon = true;
-                    break;
-                }
-
-                damage = dEnemy.AttackOpponent(dPlayer);
-                duelHistory.Add($"{enemy.Name} deal {damage} damage to {player.Name} ");
-                if (dPlayer.IsAlive() == false)
-                {
-                    message = $"{player.Name} lose!";
-                    break;
-                }
+                rewardCash = enemy.CashReward;
+                rewardExp = enemy.ExpReward;
             }
 
             return new DuelViewData()
             {
                 Player = player,
-                PlayerWin = isPlayerWon,
+                PlayerWin = duelData.HasPlayerWon,
                 RewardCash = rewardCash,
                 RewardExp = rewardExp,
-                DuelHistory = duelHistory,
-                Message = message
+                DuelHistory = duelData.DuelHistory,
+                Message = duelData.Message
             };
         }
     }

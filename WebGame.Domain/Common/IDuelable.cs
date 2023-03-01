@@ -8,6 +8,7 @@ namespace WebGame.Domain.Common
 {
     public interface IDuelable
     {
+        public string Name{ get; set; }
         public int HealthPoint { get; set; }
         public int Defense { get; set; }
         public int Attack { get; set; }

@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\WebGame.Application\WebGame.Application.csproj" />
+    <ProjectReference Include="..\..\WebGame.Duel\WebGame.Duel.csproj" />
   </ItemGroup>
 
 </Project>

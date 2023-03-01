@@ -1,9 +1,10 @@
 ﻿using WebGame.Domain.Common;
 
-namespace WebGame.Application.Functions.Duel.Query
+namespace WebGame.Duel.Common
 {
-    public class Duelist: IDuelable
+    public class Duelist : IDuelable
     {
+        public string Name { get; set; }
         public int HealthPoint { get; set; }
         public int Defense { get; set; }
         public int Attack { get; set; }
@@ -11,6 +12,7 @@ namespace WebGame.Application.Functions.Duel.Query
 
         public Duelist(IDuelable duelableEntity)
         {
+            Name = duelableEntity.Name;
             HealthPoint = duelableEntity.HealthPoint;
             Defense = duelableEntity.Defense;
             Attack = duelableEntity.Attack;

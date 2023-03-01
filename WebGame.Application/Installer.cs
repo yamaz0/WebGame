@@ -7,6 +7,8 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using WebGame.Application.Functions.Duel.Query;
+using WebGame.Application.Interfaces.Duel;
 
 namespace WebGame.Application
 {
