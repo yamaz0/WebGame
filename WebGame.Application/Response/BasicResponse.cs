@@ -17,6 +17,19 @@ namespace WebGame.Application.Response
             Init(succes);
         }
 
+        public BasicResponse(List<string> errors) : this(false)
+        {
+            foreach (var error in errors)
+            {
+                Errors.Add(error);
+            }
+        }
+
+        public BasicResponse(string error) : this(false)
+        {
+            Errors.Add(error);
+        }
+
         public BasicResponse(ValidationResult result)
         {
             bool isSuccesful = CheckResult(result);
