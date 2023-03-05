@@ -13,12 +13,12 @@ using WebGame.Application.UnitTest.Mocks.Repository;
 
 namespace WebGame.Application.UnitTest.Duels.Query
 {
-    public class DuelPlayerVsEnemyTest
+    public class DuelPlayerVsEnemyQueryHandlerTest
     {
         private readonly Mock<IPlayerRepository> _playerRepository;
         private readonly Mock<IEnemyRepository> _enemyRepository;
 
-        public DuelPlayerVsEnemyTest()
+        public DuelPlayerVsEnemyQueryHandlerTest()
         {
             _playerRepository = PlayerRepositoryMocks.GetPlayerRepository();
             _enemyRepository = EnemyRepositoryMocks.GetEnemyRepository();

@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Constants\Entities\" />
     <Folder Include="Functions\Duel\Command\" />
+    <Folder Include="Functions\Shop\Command\" />
   </ItemGroup>
 
 </Project>
