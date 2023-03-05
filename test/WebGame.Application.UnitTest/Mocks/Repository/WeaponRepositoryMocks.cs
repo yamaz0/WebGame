@@ -75,7 +75,7 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Id=2,
                     Name = "lepszy mieczyk",
                     Description = "mieczyk na potem",
-                    Value = 2,
+                    Value = 2222,
                     Attack = 2,
                     AttackSpeed = 2
                 }

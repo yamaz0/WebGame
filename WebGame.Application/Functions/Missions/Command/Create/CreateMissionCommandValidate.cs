@@ -7,8 +7,8 @@ namespace WebGame.Application.Functions.Missions.Command.Create
     {
         public CreateMissionCommandValidate()
         {
-            RuleFor(x => x.Name).NotEmpty().MaximumLength(ConstantsMission.NAME_MAX_LENGHT);
-            RuleFor(x => x.Description).NotEmpty().MaximumLength(ConstantsMission.DESC_MAX_LENGHT);
+            RuleFor(x => x.Name).NotEmpty().MaximumLength(ConstantsEntity.Mission.NAME_MAX_LENGHT);
+            RuleFor(x => x.Description).NotEmpty().MaximumLength(ConstantsEntity.Mission.DESC_MAX_LENGHT);
         }
     }
 }

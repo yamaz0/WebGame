@@ -17,13 +17,13 @@ namespace WebGame.Persistence.EF.ModelCreating
             {
                 eb.HasKey(x => x.Id);
                 eb.Property(x => x.Name).IsRequired();
-                eb.Property(x => x.Exp).HasDefaultValue(ConstantsPlayer.DEFAULT_EXP);
-                eb.Property(x => x.Level).HasDefaultValue(ConstantsPlayer.DEFAULT_LEVEL);
-                eb.Property(x => x.SkillPoints).HasDefaultValue(ConstantsPlayer.DEFAULT_SKILL_POINTS);
-                eb.Property(x => x.Cash).HasDefaultValue(ConstantsPlayer.DEFAULT_CASH);
-                eb.Property(x => x.Strenght).HasDefaultValue(ConstantsPlayer.DEFAULT_STRENGHT);
-                eb.Property(x => x.Dexterity).HasDefaultValue(ConstantsPlayer.DEFAULT_DEXTERITY);
-                eb.Property(x => x.Endurance).HasDefaultValue(ConstantsPlayer.DEFAULT_ENDURANCE);
+                eb.Property(x => x.Exp).HasDefaultValue(ConstantsEntity.Player.DEFAULT_EXP);
+                eb.Property(x => x.Level).HasDefaultValue(ConstantsEntity.Player.DEFAULT_LEVEL);
+                eb.Property(x => x.SkillPoints).HasDefaultValue(ConstantsEntity.Player.DEFAULT_SKILL_POINTS);
+                eb.Property(x => x.Cash).HasDefaultValue(ConstantsEntity.Player.DEFAULT_CASH);
+                eb.Property(x => x.Strenght).HasDefaultValue(ConstantsEntity.Player.DEFAULT_STRENGHT);
+                eb.Property(x => x.Dexterity).HasDefaultValue(ConstantsEntity.Player.DEFAULT_DEXTERITY);
+                eb.Property(x => x.Endurance).HasDefaultValue(ConstantsEntity.Player.DEFAULT_ENDURANCE);
                 eb.Property(x => x.JobId).HasDefaultValue(0);
                 eb.Property(x => x.CreatedDate).HasDefaultValueSql("getutcdate()");
                 eb.Property(x => x.CreatedBy).HasDefaultValue("saba");

@@ -8,10 +8,10 @@ namespace WebGame.Application.Functions.Armors.Command.Create
     {
         public CreateArmorCommandValidate()
         {
-            RuleFor(x => x.Name).NotEmpty().MaximumLength(ConstantsItem.NAME_MAX_LENGHT);
-            RuleFor(x => x.Description).NotEmpty().MaximumLength(ConstantsItem.DESC_MAX_LENGHT);
-            RuleFor(x => x.Value).GreaterThanOrEqualTo(ConstantsItem.VALUE_MIN);
-            RuleFor(x => x.Defense).GreaterThanOrEqualTo(ConstantsItem.ATTACK_MIN);
+            RuleFor(x => x.Name).NotEmpty().MaximumLength(ConstantsEntity.Item.NAME_MAX_LENGHT);
+            RuleFor(x => x.Description).NotEmpty().MaximumLength(ConstantsEntity.Item.DESC_MAX_LENGHT);
+            RuleFor(x => x.Value).GreaterThanOrEqualTo(ConstantsEntity.Item.VALUE_MIN);
+            RuleFor(x => x.Defense).GreaterThanOrEqualTo(ConstantsEntity.Item.ATTACK_MIN);
             RuleFor(x => x.ItemType).IsInEnum().NotNull();
         }
     }

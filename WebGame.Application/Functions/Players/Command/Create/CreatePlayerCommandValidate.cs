@@ -8,7 +8,7 @@ namespace WebGame.Application.Functions.Players.Command.Create
     {
         public CreatePlayerCommandValidate()
         {
-            RuleFor(x => x.Name).NotEmpty().MaximumLength(ConstantsPlayer.NAME_MAX_LENGHT);
+            RuleFor(x => x.Name).NotEmpty().MaximumLength(ConstantsEntity.Player.NAME_MAX_LENGHT);
         }
     }
 }
