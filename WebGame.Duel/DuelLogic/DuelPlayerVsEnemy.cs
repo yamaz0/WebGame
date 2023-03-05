@@ -17,6 +17,13 @@ namespace WebGame.Duel
         public string Message { get; private set; }
         public bool HasPlayerWon { get; private set; }
 
+        public DuelPlayerVsEnemy()
+        {
+            DuelHistory = new List<string>();
+            Message = "Draw.";
+        }
+
+
         public DuelData StartDuel(IDuelable player, IDuelable enemy)
         {
             Duelist dPlayer = new Duelist(player);
@@ -27,6 +34,8 @@ namespace WebGame.Duel
             {
                 isDuelOver = DoTurn(dPlayer, dEnemy) || DoTurn(dEnemy, dPlayer);
             }
+
+            HasPlayerWon = dPlayer.IsAlive() && !dEnemy.IsAlive();
 
             return new DuelData(HasPlayerWon, Message, DuelHistory);
         }
