@@ -22,6 +22,9 @@
 
   <ItemGroup>
     <Folder Include="Constants\Entities\" />
+    <Folder Include="Functions\Accounts\Command\Delete\" />
+    <Folder Include="Functions\Accounts\Command\Update\" />
+    <Folder Include="Functions\Accounts\Query\" />
     <Folder Include="Functions\Duel\Query\" />
     <Folder Include="Functions\Shop\Query\" />
   </ItemGroup>

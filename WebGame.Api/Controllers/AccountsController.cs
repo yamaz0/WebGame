@@ -1,17 +1,20 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using WebGame.Application.Functions.Accounts.Command.Create;
+using WebGame.Application.Functions.Players.Query.GetPlayer;
 
 namespace WebGame.Controllers
 {
-    public class AccountsController : Controller
+    [Route("api/[controller]")]
+    public class AccountsController : ControllerBase
     {
-        //private readonly IAccountService _service;
+        private readonly IMediator _mediator;
 
-        //public AccountsController(IAccountService service)
-        //{
-        //    _service = service;
-        //}
+        public AccountsController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         //[HttpGet]
         //public IActionResult Login()
@@ -44,25 +47,22 @@ namespace WebGame.Controllers
         //    return View();
         //}
 
-        //[HttpPost]
-        //public IActionResult Register(RegisterModel registerModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var result = _service.Register(registerModel);
+        [HttpPost]
+        public async Task<ActionResult<CreateUserCommandResponse>> Register(CreateUserCommand request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _mediator.Send(request);
 
-        //        if (result.Result.Succeeded)
-        //        {
-        //            return RedirectToAction("Index", "Home");
-        //        }
+            if (result.Success)
+            {
+                return Ok(result);
+            }
 
-        //        foreach (var error in result.Result.Errors)
-        //        {
-        //            ModelState.AddModelError(String.Empty, error.Description);
-        //        }
-        //    }
-        //    return View(registerModel);
-        //}
+            return BadRequest(result);
+        }
 
         //[HttpGet]
         //[Authorize]

@@ -1,7 +1,9 @@
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 using WebGame;
 using WebGame.Application;
+using WebGame.Domain.Entities.User;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.InstallApplication();
 builder.Services.InstallDb();
-
+builder.Services.AddIdentity<UserEntity, IdentityRole>().AddEntityFrameworkStores<DbGameContext>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +27,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

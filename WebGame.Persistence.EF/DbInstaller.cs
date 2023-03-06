@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WebGame.Application.Interfaces.Duel;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Duel;
+using WebGame.Persistence.EF.Account;
 using WebGame.Persistence.EF.Repository;
 
 namespace WebGame
@@ -19,6 +20,7 @@ namespace WebGame
             services.AddScoped<IMissionRepository, MissionRepository>();
             services.AddScoped<IArmorRepository, ArmorRepository>();
             services.AddScoped<IWeaponRepository, WeaponRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IDuel, DuelPlayerVsEnemy>();
 
