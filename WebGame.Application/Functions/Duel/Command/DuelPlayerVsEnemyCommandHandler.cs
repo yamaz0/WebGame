@@ -4,32 +4,32 @@ using WebGame.Domain.Entities.Player;
 using WebGame.Entities.Enemies;
 using WebGame.Application.Interfaces.Duel;
 
-namespace WebGame.Application.Functions.Duel.Query
+namespace WebGame.Application.Functions.Duel.Command
 {
-    public class DuelPlayerVsEnemyQueryHandler : IRequestHandler<DuelPlayerVsEnemyQuery, DuelViewData>
+    public class DuelPlayerVsEnemyCommandHandler : IRequestHandler<DuelPlayerVsEnemyCommand, DuelPlayerVsEnemyResponse>
     {
         public readonly IPlayerRepository _playerRepository;
         public readonly IEnemyRepository _enemyRepository;
         public readonly IDuel _duel;
 
-        public DuelPlayerVsEnemyQueryHandler(IPlayerRepository playerRepository, IEnemyRepository enemyRepository, IDuel duel)
+        public DuelPlayerVsEnemyCommandHandler(IPlayerRepository playerRepository, IEnemyRepository enemyRepository, IDuel duel)
         {
             _playerRepository = playerRepository;
             _enemyRepository = enemyRepository;
             _duel = duel;
         }
 
-        public async Task<DuelViewData> Handle(DuelPlayerVsEnemyQuery request, CancellationToken cancellationToken)
+        public async Task<DuelPlayerVsEnemyResponse> Handle(DuelPlayerVsEnemyCommand request, CancellationToken cancellationToken)
         {
             var player = await _playerRepository.GetByIdAsync(request.PlayerId);
             var enemy = await _enemyRepository.GetByIdAsync(request.EnemyId);
 
-            return Duel(player, enemy);
+            return await Duel(player, enemy);
         }
 
-        private DuelViewData Duel(Player player, Enemy enemy)
+        private async Task<DuelPlayerVsEnemyResponse> Duel(Player player, Enemy enemy)
         {
-            DuelData duelData = _duel.StartDuel(player, enemy);
+            DuelData duelData = await _duel.StartDuel(player, enemy);
 
             int rewardCash = 0;
             int rewardExp = 0;
@@ -40,7 +40,12 @@ namespace WebGame.Application.Functions.Duel.Query
                 rewardExp = enemy.ExpReward;
             }
 
-            return new DuelViewData()
+            player.Exp += rewardExp;
+            player.Cash += rewardCash;
+
+            await _playerRepository.UpdateAsync(player);
+
+            var duelViewData = new DuelViewData()
             {
                 Player = player,
                 PlayerWin = duelData.HasPlayerWon,
@@ -49,6 +54,8 @@ namespace WebGame.Application.Functions.Duel.Query
                 DuelHistory = duelData.DuelHistory,
                 Message = duelData.Message
             };
+
+            return new DuelPlayerVsEnemyResponse(duelViewData);
         }
     }
 }

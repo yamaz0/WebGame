@@ -8,7 +8,6 @@ namespace WebGame.Duel.Common
         public int HealthPoint { get; set; }
         public int Defense { get; set; }
         public int Attack { get; set; }
-        public int AttackSpeed { get; set; }
 
         public Duelist(IDuelable duelableEntity)
         {
@@ -16,7 +15,6 @@ namespace WebGame.Duel.Common
             HealthPoint = duelableEntity.HealthPoint;
             Defense = duelableEntity.Defense;
             Attack = duelableEntity.Attack;
-            AttackSpeed = duelableEntity.AttackSpeed;
         }
 
         public int AttackOpponent(Duelist opponent)
@@ -26,7 +24,7 @@ namespace WebGame.Duel.Common
 
         public int TakeDamage(int value)
         {
-            int damage = value - Defense;
+            int damage = Math.Clamp(value - Defense, 1, int.MaxValue);
             HealthPoint -= damage;
             return damage;
         }

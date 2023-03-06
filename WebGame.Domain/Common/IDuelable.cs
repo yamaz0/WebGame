@@ -12,6 +12,5 @@ namespace WebGame.Domain.Common
         public int HealthPoint { get; set; }
         public int Defense { get; set; }
         public int Attack { get; set; }
-        public int AttackSpeed { get; set; }
     }
 }

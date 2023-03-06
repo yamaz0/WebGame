@@ -11,9 +11,9 @@ namespace WebGame.Application.Functions.Players.Command.Create
         {
         }
 
-        public CreatePlayerCommandResponse(int? PlayerId)
+        public CreatePlayerCommandResponse(int? playerId)
         {
-            PlayerId = PlayerId;
+            PlayerId = playerId;
         }
     }
 }

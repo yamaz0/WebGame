@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebGame.Application.Functions.Duel.Query;
+using WebGame.Application.Functions.Duel.Command;
 
 namespace WebGame.Controllers
 {
@@ -25,15 +25,16 @@ namespace WebGame.Controllers
         }
 
         [HttpGet("duel/{enemyId}")]
-        public async Task<ActionResult<DuelViewData>> DuelEnemy(int enemyId)
+        public async Task<ActionResult<DuelPlayerVsEnemyResponse>> DuelEnemy(int enemyId)
         {
+            //TODO pobieranie idków
             //var userId = _userManager.GetUserId(HttpContext.User);
-            DuelViewData dueldata = await _mediator.Send(new DuelPlayerVsEnemyQuery() { EnemyId = 1, PlayerId = 1 });
+            DuelPlayerVsEnemyResponse response = await _mediator.Send(new DuelPlayerVsEnemyCommand() { EnemyId = 1, PlayerId = 1 });
 
-            if (dueldata == null)
+            if (response == null)
                 return NotFound();
             else
-                return Ok(dueldata);
+                return Ok(response);
         }
     }
 }

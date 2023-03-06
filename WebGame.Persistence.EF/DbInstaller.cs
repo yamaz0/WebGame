@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using WebGame.Application.Functions.Duel.Query;
 using WebGame.Application.Interfaces.Duel;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Duel;

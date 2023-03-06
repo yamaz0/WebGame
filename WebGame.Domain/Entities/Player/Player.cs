@@ -26,7 +26,6 @@ namespace WebGame.Domain.Entities.Player
         public int HealthPoint { get; set; }
         public int Defense { get; set; }
         public int Attack { get; set; }
-        public int AttackSpeed { get; set; }
         #endregion
 
         #region Armors
@@ -58,7 +57,12 @@ namespace WebGame.Domain.Entities.Player
 
         public void SetDefense()
         {
-            HealthPoint = Helmet.Defense + Armor.Defense + Legs.Defense + Boots.Defense;
+            int helmetDefense = Helmet is not null ? Helmet.Defense : 0;
+            int armorDefense = Armor is not null ? Armor.Defense : 0;
+            int legsDefense = Legs is not null ? Legs.Defense : 0;
+            int bootsDefense = Boots is not null ? Boots.Defense : 0;
+
+            HealthPoint = helmetDefense + armorDefense + legsDefense + bootsDefense;
         }
 
         public void SetHealthPoint()
@@ -69,11 +73,5 @@ namespace WebGame.Domain.Entities.Player
         {
             Attack = Weapon.Attack * Strenght;
         }
-
-        public void SetAttackSpeed()
-        {
-            AttackSpeed = Weapon.AttackSpeed * Dexterity;
-        }
     }
-
 }

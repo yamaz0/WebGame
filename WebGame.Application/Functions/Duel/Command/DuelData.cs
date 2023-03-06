@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebGame.Application.Functions.Duel.Query
+namespace WebGame.Application.Functions.Duel.Command
 {
     public class DuelData
     {

@@ -10,54 +10,54 @@ using Shouldly;
 using WebGame.Application.Response;
 using WebGame.Domain.Entities.Player;
 using WebGame.Entities.Items;
-using WebGame.Application.Functions.Shop.Command.BuyWeapon;
+using WebGame.Application.Functions.Shop.Command.BuyArmor;
 
 namespace WebGame.Application.UnitTest.Shop
 {
-    public class BuyWeaponShopCommandTest
+    public class BuyArmorShopCommandTest
     {
         private const int PLAYER_ID = 1;
         private const int WEAPON_ID = 1;
-        private const int WEAPON_ID_WITH_HIGH_STATS = 2;
+        private const int ARMOR_ID_WITH_HIGH_STATS = 5;
         private readonly Mock<IPlayerRepository> _mockPlayerRepository;
-        private readonly Mock<IWeaponRepository> _mockWeaponRepository;
+        private readonly Mock<IArmorRepository> _mockArmorRepository;
 
-        public BuyWeaponShopCommandTest()
+        public BuyArmorShopCommandTest()
         {
             _mockPlayerRepository = PlayerRepositoryMocks.GetPlayerRepository();
-            _mockWeaponRepository = WeaponRepositoryMocks.GetWeaponRepository();
+            _mockArmorRepository = ArmorRepositoryMocks.GetArmorRepository();
         }
 
         [Fact]
         public async void Transaction_Should_Succesfull_Complete()
         {
-            var command = new BuyWeaponShopCommand() { PlayerId = PLAYER_ID, WeaponId = WEAPON_ID };
-            var handler = new BuyWeaponShopCommandHandler(_mockPlayerRepository.Object, _mockWeaponRepository.Object);
+            var command = new BuyArmorShopCommand() { PlayerId = PLAYER_ID, ArmorId = WEAPON_ID };
+            var handler = new BuyArmorShopCommandHandler(_mockPlayerRepository.Object, _mockArmorRepository.Object);
 
             Player playerBefore = await _mockPlayerRepository.Object.GetByIdAsync(PLAYER_ID);
-            Weapon weapon = await _mockWeaponRepository.Object.GetByIdAsync(WEAPON_ID);
+            Armor armor = await _mockArmorRepository.Object.GetByIdAsync(WEAPON_ID);
 
             var cashBefore = playerBefore.Cash;
-            var weaponValue = weapon.Value;
+            var armorValue = armor.Value;
 
             var response = await handler.Handle(command, CancellationToken.None);
 
             Player playerAfter = (await _mockPlayerRepository.Object.GetByIdAsync(PLAYER_ID));
             var cashAfter = playerAfter.Cash;
-            var weaponAfter = playerAfter.Weapon;
+            var armorAfter = playerAfter.Armor;
 
-            cashAfter.ShouldBe(cashBefore - weaponValue);
-            weaponAfter.Id.ShouldBe(weapon.Id);
+            cashAfter.ShouldBe(cashBefore - armorValue);
+            armorAfter.Id.ShouldBe(armor.Id);
             response.Success.ShouldBeTrue();
             response.Errors.Count.ShouldBe(0);
             response.ShouldBeOfType(typeof(BasicResponse));
         }
 
         [Fact]
-        public async void Transaction_Should_Not_Found_Player_And_Weapon()
+        public async void Transaction_Should_Not_Found_Player_And_Armor()
         {
-            var command = new BuyWeaponShopCommand() { };
-            var handler = new BuyWeaponShopCommandHandler(_mockPlayerRepository.Object, _mockWeaponRepository.Object);
+            var command = new BuyArmorShopCommand() { };
+            var handler = new BuyArmorShopCommandHandler(_mockPlayerRepository.Object, _mockArmorRepository.Object);
 
             var response = await handler.Handle(command, CancellationToken.None);
 
@@ -69,8 +69,8 @@ namespace WebGame.Application.UnitTest.Shop
         [Fact]
         public async void Player_Should_Not_Have_Enough_Money()
         {
-            var command = new BuyWeaponShopCommand() { PlayerId = PLAYER_ID, WeaponId = WEAPON_ID_WITH_HIGH_STATS };
-            var handler = new BuyWeaponShopCommandHandler(_mockPlayerRepository.Object, _mockWeaponRepository.Object);
+            var command = new BuyArmorShopCommand() { PlayerId = PLAYER_ID, ArmorId = ARMOR_ID_WITH_HIGH_STATS };
+            var handler = new BuyArmorShopCommandHandler(_mockPlayerRepository.Object, _mockArmorRepository.Object);
 
             var response = await handler.Handle(command, CancellationToken.None);
 

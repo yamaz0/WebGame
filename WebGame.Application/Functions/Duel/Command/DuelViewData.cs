@@ -1,6 +1,6 @@
 ﻿using WebGame.Domain.Entities.Player;
 
-namespace WebGame.Application.Functions.Duel.Query
+namespace WebGame.Application.Functions.Duel.Command
 {
     public class DuelViewData
     {

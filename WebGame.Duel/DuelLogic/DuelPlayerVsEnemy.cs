@@ -5,7 +5,7 @@ using WebGame.Domain.Entities.Player;
 using WebGame.Entities.Enemies;
 using WebGame.Domain.Common;
 using WebGame.Duel.Common;
-using WebGame.Application.Functions.Duel.Query;
+using WebGame.Application.Functions.Duel.Command;
 
 namespace WebGame.Duel
 {
@@ -24,20 +24,26 @@ namespace WebGame.Duel
         }
 
 
-        public DuelData StartDuel(IDuelable player, IDuelable enemy)
+        public async Task<DuelData> StartDuel(IDuelable player, IDuelable enemy)
         {
             Duelist dPlayer = new Duelist(player);
             Duelist dEnemy = new Duelist(enemy);
-            bool isDuelOver = false;
 
-            for (int i = 0; i < MAX_ROUND || !isDuelOver; i++)
-            {
-                isDuelOver = DoTurn(dPlayer, dEnemy) || DoTurn(dEnemy, dPlayer);
-            }
+            await Task.Run(()=>Duel(dPlayer, dEnemy)).ConfigureAwait(false);
 
             HasPlayerWon = dPlayer.IsAlive() && !dEnemy.IsAlive();
 
             return new DuelData(HasPlayerWon, Message, DuelHistory);
+        }
+
+        private void Duel(Duelist dPlayer, Duelist dEnemy)
+        {
+            bool isDuelOver = false;
+
+            for (int i = 0; i < MAX_ROUND && !isDuelOver; i++)
+            {
+                isDuelOver = DoTurn(dPlayer, dEnemy) || DoTurn(dEnemy, dPlayer);
+            }
         }
 
         private bool DoTurn(Duelist attacker, Duelist defender)

@@ -54,6 +54,8 @@ namespace WebGame.Application.Constants
             public const int DEFAULT_STRENGHT = 10;
             public const int DEFAULT_DEXTERITY = 10;
             public const int DEFAULT_ENDURANCE = 10;
+            public const int DEFAULT_HEALTH_POINTS = 100;
+            public const int DEFAULT_ATTACK = 1;
         }
     }
 }

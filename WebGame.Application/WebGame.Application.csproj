@@ -22,8 +22,8 @@
 
   <ItemGroup>
     <Folder Include="Constants\Entities\" />
-    <Folder Include="Functions\Duel\Command\" />
-    <Folder Include="Functions\Shop\Command\" />
+    <Folder Include="Functions\Duel\Query\" />
+    <Folder Include="Functions\Shop\Query\" />
   </ItemGroup>
 
 </Project>

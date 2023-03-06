@@ -24,6 +24,8 @@ namespace WebGame.Persistence.EF.ModelCreating
                 eb.Property(x => x.Strenght).HasDefaultValue(ConstantsEntity.Player.DEFAULT_STRENGHT);
                 eb.Property(x => x.Dexterity).HasDefaultValue(ConstantsEntity.Player.DEFAULT_DEXTERITY);
                 eb.Property(x => x.Endurance).HasDefaultValue(ConstantsEntity.Player.DEFAULT_ENDURANCE);
+                eb.Property(x => x.HealthPoint).HasDefaultValue(ConstantsEntity.Player.DEFAULT_HEALTH_POINTS);
+                eb.Property(x => x.Attack).HasDefaultValue(ConstantsEntity.Player.DEFAULT_ATTACK);
                 eb.Property(x => x.JobId).HasDefaultValue(0);
                 eb.Property(x => x.CreatedDate).HasDefaultValueSql("getutcdate()");
                 eb.Property(x => x.CreatedBy).HasDefaultValue("saba");

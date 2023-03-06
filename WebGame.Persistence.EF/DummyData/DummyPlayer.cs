@@ -19,6 +19,9 @@ namespace WebGame.Persistence.EF.DummyData
                     Strenght = 10,
                     Dexterity = 10,
                     Endurance= 10,
+                    HealthPoint=100,
+                    Attack = 1,
+                    Defense= 0,
                     UserId = "user1"
                 },
                 new Player()
@@ -32,6 +35,9 @@ namespace WebGame.Persistence.EF.DummyData
                     Strenght = 10,
                     Dexterity = 10,
                     Endurance= 10,
+                    HealthPoint=100,
+                    Attack = 1,
+                    Defense= 0,
                     UserId = "user2"
                 }
             };

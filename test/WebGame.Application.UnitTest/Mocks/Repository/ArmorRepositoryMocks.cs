@@ -90,6 +90,15 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Value = 1,
                     Defense = 1,
                     ItemType = ItemType.BOOTS
+                },
+                new Armor()
+                {
+                    Id=5,
+                    Name = "Expensive Armor",
+                    Description = "drogi oj drogi armor",
+                    Value = 99999,
+                    Defense = 1,
+                    ItemType = ItemType.ARMOR
                 }
             };
         }

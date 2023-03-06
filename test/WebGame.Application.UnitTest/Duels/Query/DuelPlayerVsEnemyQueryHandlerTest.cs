@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebGame.Application.Functions.Duel.Query;
+using WebGame.Application.Functions.Duel.Command;
 using WebGame.Application.Interfaces.Duel;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.UnitTest.Mocks.Duel;
@@ -27,11 +27,20 @@ namespace WebGame.Application.UnitTest.Duels.Query
         [Fact]
         public async void PlayerVsEnemyDuel_Should_Win()
         {
-            var request = new DuelPlayerVsEnemyQuery() { EnemyId = 1, PlayerId = 1 };
-            var handler = new DuelPlayerVsEnemyQueryHandler(_playerRepository.Object, _enemyRepository.Object, DuelPlayerVsEnemyMocks.GetWinDuelMocks().Object);
+            var request = new DuelPlayerVsEnemyCommand() { EnemyId = 1, PlayerId = 1 };
+            var handler = new DuelPlayerVsEnemyCommandHandler(_playerRepository.Object, _enemyRepository.Object, DuelPlayerVsEnemyMocks.GetWinDuelMocks().Object);
+
+            var playerBefore = await _playerRepository.Object.GetByIdAsync(1);
+            var playerExpBefore = playerBefore.Exp;
+            var enemy = await _enemyRepository.Object.GetByIdAsync(1);
+
             var result = await handler.Handle(request, CancellationToken.None);
-            result.PlayerWin.ShouldBeTrue();
-            result.Message.ShouldBe(DuelPlayerVsEnemyMocks.MESSAGE_PLAYER_WIN);
+
+            var playerAfter = await _playerRepository.Object.GetByIdAsync(1);
+            playerAfter.Exp.ShouldBe(playerExpBefore + enemy.ExpReward);
+            result.DuelViewData.ShouldNotBeNull();
+            result.DuelViewData.PlayerWin.ShouldBeTrue();
+            result.DuelViewData.Message.ShouldBe(DuelPlayerVsEnemyMocks.MESSAGE_PLAYER_WIN);
         }
     }
 }
