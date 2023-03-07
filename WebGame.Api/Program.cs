@@ -16,6 +16,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.InstallApplication();
 builder.Services.InstallDb();
 builder.Services.AddIdentity<UserEntity, IdentityRole>().AddEntityFrameworkStores<DbGameContext>();
+//builder.Services.AddAuthentication()
+//    .AddCookie(options =>
+//    {
+//        options.LoginPath = "/Account/Unauthorized/";
+//        options.AccessDeniedPath = "/Account/Forbidden/";
+//    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
