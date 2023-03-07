@@ -17,7 +17,7 @@ namespace WebGame.Application.UnitTest.Shop
     public class BuyArmorShopCommandTest
     {
         private const int PLAYER_ID = 1;
-        private const int WEAPON_ID = 1;
+        private const int ARMOR_ID = 1;
         private const int ARMOR_ID_WITH_HIGH_STATS = 5;
         private readonly Mock<IPlayerRepository> _mockPlayerRepository;
         private readonly Mock<IArmorRepository> _mockArmorRepository;
@@ -31,11 +31,11 @@ namespace WebGame.Application.UnitTest.Shop
         [Fact]
         public async void Transaction_Should_Succesfull_Complete()
         {
-            var command = new BuyArmorShopCommand() { PlayerId = PLAYER_ID, ArmorId = WEAPON_ID };
+            var command = new BuyArmorShopCommand() { PlayerId = PLAYER_ID, ArmorId = ARMOR_ID };
             var handler = new BuyArmorShopCommandHandler(_mockPlayerRepository.Object, _mockArmorRepository.Object);
 
             Player playerBefore = await _mockPlayerRepository.Object.GetByIdAsync(PLAYER_ID);
-            Armor armor = await _mockArmorRepository.Object.GetByIdAsync(WEAPON_ID);
+            Armor armor = await _mockArmorRepository.Object.GetByIdAsync(ARMOR_ID);
 
             var cashBefore = playerBefore.Cash;
             var armorValue = armor.Value;

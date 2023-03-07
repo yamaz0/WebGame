@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.Response;
+using WebGame.Entities.Items;
 
 namespace WebGame.Application.Functions.Shop.Command.BuyArmor
 {
@@ -38,7 +39,21 @@ namespace WebGame.Application.Functions.Shop.Command.BuyArmor
             }
 
             player.Cash -= armorValue;
-            player.Armor = armor;
+            switch (armor.ItemType)
+            {
+                case ItemType.HELMET:
+                    player.Helmet = armor;
+                    break;
+                case ItemType.ARMOR:
+                    player.Armor = armor;
+                    break;
+                case ItemType.LEGS:
+                    player.Legs = armor;
+                    break;
+                case ItemType.BOOTS:
+                    player.Boots = armor;
+                    break;
+            };
 
             await _playerRepository.UpdateAsync(player);
 
