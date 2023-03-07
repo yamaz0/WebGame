@@ -18,11 +18,11 @@ namespace WebGame.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet]
-        public async Task<ActionResult<GetPlayerViewModel>> Index()
+        [HttpGet("player/{id}")]
+        public async Task<ActionResult<GetPlayerViewModel>> GetPlayer(int id)
         {
             //var userId = _userManager.GetUserId(HttpContext.User);
-            GetPlayerViewModel player = await _mediator.Send(new GetPlayerRequest() { PlayerId = 1 });
+            GetPlayerViewModel player = await _mediator.Send(new GetPlayerRequest() { PlayerId = id });
             return Ok(player);
         }
     }

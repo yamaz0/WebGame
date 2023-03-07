@@ -23,59 +23,13 @@ namespace WebGame.Controllers
             _mediator = mediator;
         }
 
-
-        //private readonly UserManager<UserEntity> _userManager;
-
-        //public JobsController(IJobService jobService, UserManager<UserEntity> userManager)
-        //{
-        //    _jobService = jobService;
-        //    _userManager = userManager;
-        //}
-
-        //public IActionResult Index()
-        //{
-        //    var userId = _userManager.GetUserId(HttpContext.User);
-        //    bool isPlayerWorking = _jobService.HasWork(userId);
-
-        //    if (isPlayerWorking)
-        //    {
-        //        return RedirectToAction("JobDetail");
-        //    }
-
-        //    var jobs = _jobService.GetAllJobs();
-        //    return View(jobs);
-        //}
-
-        //public IActionResult JobDetail()
-        //{
-        //    var userId = _userManager.GetUserId(HttpContext.User);
-        //    bool isPlayerWorking = _jobService.HasWork(userId);
-
-        //    if (!isPlayerWorking)
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    var message = _jobService.TryReward(userId);
-
-        //    TempData["Message"] = message;
-        //    return View();
-        //}
-
-        //public IActionResult Job(int jobId)
-        //{
-        //    var userId = _userManager.GetUserId(HttpContext.User);
-        //    _jobService.Job(userId, jobId);
-        //    return RedirectToAction("JobDetail");
-        //}
-
         // GET: api/<ValuesController>
         [HttpGet]
         public async Task<ActionResult<List<GetAllJobsViewModel>>> Get()
         {
             GetAllJobsRequest getAllJobsRequest = new GetAllJobsRequest();
             List<GetAllJobsViewModel> allJobs = await _mediator.Send(getAllJobsRequest);
-            return allJobs;
+            return Ok(allJobs);
         }
 
         // GET api/<ValuesController>/5
@@ -84,12 +38,12 @@ namespace WebGame.Controllers
         {
             GetJobRequest getJobRequest = new GetJobRequest() { JobId = id };
             GetJobViewModel job = await _mediator.Send(getJobRequest);
-            return job;
+            return Ok(job);
         }
 
         // POST api/<ValuesController>
         [HttpPost]
-        [Authorize("Administrator")]
+        //[Authorize("Administrator")]
         public async Task<ActionResult<int>> Post([FromBody] CreateJobCommand createJobCommand)
         {
             var result = await _mediator.Send(createJobCommand);
@@ -98,9 +52,9 @@ namespace WebGame.Controllers
         }
 
         // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        [Authorize("Administrator")]
-        public async Task<ActionResult> Put(int id, [FromBody] UpdateJobCommand updateJobCommand)
+        [HttpPut("UpdateJob")]
+        //[Authorize("Administrator")]
+        public async Task<ActionResult> Put([FromBody] UpdateJobCommand updateJobCommand)
         {
             await _mediator.Send(updateJobCommand);
             return NoContent();
@@ -108,7 +62,7 @@ namespace WebGame.Controllers
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
-        [Authorize("Administrator")]
+        //[Authorize("Administrator")]
         public async Task<ActionResult> Delete(int id)
         {
             DeleteJobCommand deleteRequest = new DeleteJobCommand() { JobId = id };
