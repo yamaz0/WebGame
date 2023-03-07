@@ -1,7 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 using WebGame;
+using WebGame.Api;
 using WebGame.Application;
 using WebGame.Domain.Entities.User;
 
@@ -10,9 +12,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Open", config => config.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.ConfigureSwagger();
+
 builder.Services.InstallApplication();
 builder.Services.InstallDb();
 builder.Services.AddIdentity<UserEntity, IdentityRole>().AddEntityFrameworkStores<DbGameContext>();
