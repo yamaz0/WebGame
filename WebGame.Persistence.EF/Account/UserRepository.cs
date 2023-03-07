@@ -22,9 +22,13 @@ namespace WebGame.Persistence.EF.Account
 
         public async Task<CreateUserCommandResponse> AddAsync(UserEntity entity, string password)
         {
-
             var result = await _userManager.CreateAsync(entity, password);
             return new CreateUserCommandResponse(result, entity.Id);
+        }
+
+        public async Task<bool> CheckPassword(UserEntity entity, string password)
+        {
+            return await _userManager.CheckPasswordAsync(entity, password);
         }
 
         public async Task<IReadOnlyList<UserEntity>> GetAllAsync()
@@ -34,7 +38,12 @@ namespace WebGame.Persistence.EF.Account
 
         public async Task<UserEntity> GetByIdAsync(string id)
         {
-            return await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return await _userManager.FindByIdAsync(id);
+        }
+
+        public async Task<UserEntity> GetByNameAsync(string name)
+        {
+            return await _userManager.FindByNameAsync(name);
         }
 
         public async Task RemoveAsync(UserEntity entity)

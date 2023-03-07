@@ -15,9 +15,11 @@ namespace WebGame.Application.Interfaces.Persistence
     public interface IUserRepository
     {
         Task<UserEntity> GetByIdAsync(string id);
+        Task<UserEntity> GetByNameAsync(string name);
         Task<IReadOnlyList<UserEntity>> GetAllAsync();
         Task<CreateUserCommandResponse> AddAsync(UserEntity entity, string password);
         Task UpdateAsync(UserEntity entity);
         Task RemoveAsync(UserEntity entity);
+        Task<bool> CheckPassword(UserEntity entity, string password);
     }
 }
