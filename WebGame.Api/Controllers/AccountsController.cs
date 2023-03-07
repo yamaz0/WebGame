@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebGame.Application.Functions.Account.Command;
 using WebGame.Application.Functions.Accounts.Command.Create;
 using WebGame.Application.Functions.Players.Query.GetPlayer;
 
@@ -47,8 +48,15 @@ namespace WebGame.Controllers
         //    return View();
         //}
 
-        [HttpPost]
-        public async Task<ActionResult<CreateUserCommandResponse>> Register(CreateUserCommand request)
+        [HttpPost("Login")]
+        public async Task<ActionResult<LoginCommandResponse>> Login([FromBody] LoginCommand request)
+        {
+            var result = await _mediator.Send(request);
+            return Ok(result);
+        }
+
+        [HttpPost("Register")]
+        public async Task<ActionResult<CreateUserCommandResponse>> Register([FromBody] CreateUserCommand request)
         {
             if (!ModelState.IsValid)
             {

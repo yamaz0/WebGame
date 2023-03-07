@@ -14,10 +14,12 @@ namespace WebGame.Persistence.EF.Account
     public class UserRepository : IUserRepository
     {
         private readonly UserManager<UserEntity> _userManager;
+        private readonly SignInManager<UserEntity> _signInManager;
 
-        public UserRepository(UserManager<UserEntity> userManager)
+        public UserRepository(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<CreateUserCommandResponse> AddAsync(UserEntity entity, string password)
@@ -49,6 +51,11 @@ namespace WebGame.Persistence.EF.Account
         public async Task RemoveAsync(UserEntity entity)
         {
             await _userManager.DeleteAsync(entity);
+        }
+
+        public async Task SingIn(UserEntity entity)
+        {
+            await _signInManager.SignInAsync(entity, true);
         }
 
         public async Task UpdateAsync(UserEntity entity)

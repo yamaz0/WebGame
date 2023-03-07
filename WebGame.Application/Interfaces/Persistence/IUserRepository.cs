@@ -21,5 +21,6 @@ namespace WebGame.Application.Interfaces.Persistence
         Task UpdateAsync(UserEntity entity);
         Task RemoveAsync(UserEntity entity);
         Task<bool> CheckPassword(UserEntity entity, string password);
+        Task SingIn(UserEntity entity);
     }
 }

@@ -34,7 +34,7 @@ namespace WebGame.Application.Functions.Account.Command
 
                 if (isPasswordCorrect)
                 {
-
+                    await _userRepository.SingIn(user);
                     return new LoginCommandResponse();
                 }
             }
