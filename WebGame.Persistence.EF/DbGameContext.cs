@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Reflection.Emit;
@@ -56,8 +57,6 @@ namespace WebGame
         {
             builder.ApplyConfigurationsFromAssembly(typeof(DbGameContext).Assembly);
 
-
-
             PlayerModelCreating.Configure(builder);
             EnemyModelCreating.Configure(builder);
             JobModelCreating.Configure(builder);
@@ -72,6 +71,10 @@ namespace WebGame
 
         private void FillDummyData(ModelBuilder builder)
         {
+            foreach (var item in DummyRoles.Get())
+            {
+                builder.Entity<IdentityRole>().HasData(item);
+            }
             foreach (var item in DummyEnemies.Get())
             {
                 builder.Entity<Enemy>().HasData(item);

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.Response;
+using WebGame.Application.Security.Contracts;
 
 namespace WebGame.Application.Functions.Account.Command
 {
@@ -18,6 +19,7 @@ namespace WebGame.Application.Functions.Account.Command
     public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginCommandResponse>
     {
         private readonly IUserRepository _userRepository;
+        private readonly IAuthenticationService _authorization;
 
         public LoginCommandHandler(IUserRepository userRepository)
         {
@@ -34,7 +36,7 @@ namespace WebGame.Application.Functions.Account.Command
 
                 if (isPasswordCorrect)
                 {
-                    await _userRepository.SingIn(user);
+                    await _authorization.SingIn(user);
                     return new LoginCommandResponse();
                 }
             }

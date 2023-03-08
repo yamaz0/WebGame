@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WebGame.Application.Secure\WebGame.Application.Security.csproj" />
     <ProjectReference Include="..\WebGame.Domain\WebGame.Domain.csproj" />
   </ItemGroup>
 

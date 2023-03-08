@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebGame.Security.Models
 {
-    public class JsonWebTokenSettings
+    public class JSONWebTokensSettings
     {
+        public const string CONFIG_NAME = nameof(JSONWebTokensSettings);
+
         public string Key { get; set; }
         public string Issuer { get; set; }
         public string Audience { get; set; }
