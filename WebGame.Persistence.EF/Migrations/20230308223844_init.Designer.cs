@@ -12,7 +12,7 @@ using WebGame;
 namespace WebGame.Persistence.EF.Migrations
 {
     [DbContext(typeof(DbGameContext))]
-    [Migration("20230224194040_init")]
+    [Migration("20230308223844_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -50,6 +50,22 @@ namespace WebGame.Persistence.EF.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "playerRoleId",
+                            ConcurrencyStamp = "Player",
+                            Name = "Player",
+                            NormalizedName = "Player"
+                        },
+                        new
+                        {
+                            Id = "adminRoleId",
+                            ConcurrencyStamp = "Administrator",
+                            Name = "Administrator",
+                            NormalizedName = "Administrator"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -170,10 +186,9 @@ namespace WebGame.Persistence.EF.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Attack")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AttackSpeed")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.Property<int?>("BootsId")
                         .HasColumnType("int");
@@ -219,7 +234,9 @@ namespace WebGame.Persistence.EF.Migrations
                         .HasDefaultValue(0);
 
                     b.Property<int>("HealthPoint")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(100);
 
                     b.Property<int?>("HelmetId")
                         .HasColumnType("int");
@@ -292,8 +309,7 @@ namespace WebGame.Persistence.EF.Migrations
                         new
                         {
                             Id = 1,
-                            Attack = 0,
-                            AttackSpeed = 0,
+                            Attack = 1,
                             Cash = 100,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Defense = 0,
@@ -302,7 +318,7 @@ namespace WebGame.Persistence.EF.Migrations
                             EndMissionTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Endurance = 10,
                             Exp = 1000,
-                            HealthPoint = 0,
+                            HealthPoint = 100,
                             JobId = 0,
                             Level = 10,
                             MissionId = 0,
@@ -315,8 +331,7 @@ namespace WebGame.Persistence.EF.Migrations
                         new
                         {
                             Id = 2,
-                            Attack = 0,
-                            AttackSpeed = 0,
+                            Attack = 1,
                             Cash = 100,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Defense = 0,
@@ -325,7 +340,7 @@ namespace WebGame.Persistence.EF.Migrations
                             EndMissionTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Endurance = 10,
                             Exp = 1000,
-                            HealthPoint = 0,
+                            HealthPoint = 100,
                             JobId = 0,
                             Level = 10,
                             MissionId = 0,

@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace WebGame.Application.Constants
 {
+    public static class ConstantsAuthorization
+    {
+        public static class Roles
+        {
+            public const string PLAYER = "Player";
+            public const string ADMINISTRATOR = "Administrator";
+        }
+    }
+
     public static class ConstantsEntity
     {
         public static class Item

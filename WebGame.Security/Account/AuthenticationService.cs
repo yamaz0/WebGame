@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.Response;
 using WebGame.Application.Security.Contracts;
 using WebGame.Application.Security.Models;
@@ -20,11 +21,11 @@ namespace WebGame.Security.Account
 {
     public class AuthenticationService : IAuthenticationService
     {
+        private readonly IUserRepository _userRepository;
         private readonly SignInManager<UserEntity> _signInManager;
-        private readonly UserRepository _userRepository;
         private readonly IOptions<JSONWebTokensSettings> _jwtSettings;
 
-        public AuthenticationService(SignInManager<UserEntity> signInManager, IOptions<JSONWebTokensSettings> jwtSettings, UserRepository userRepository)
+        public AuthenticationService(SignInManager<UserEntity> signInManager, IOptions<JSONWebTokensSettings> jwtSettings, IUserRepository userRepository)
         {
             _signInManager = signInManager;
             _jwtSettings = jwtSettings;

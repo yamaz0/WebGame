@@ -47,6 +47,22 @@ namespace WebGame.Persistence.EF.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "playerRoleId",
+                            ConcurrencyStamp = "Player",
+                            Name = "Player",
+                            NormalizedName = "Player"
+                        },
+                        new
+                        {
+                            Id = "adminRoleId",
+                            ConcurrencyStamp = "Administrator",
+                            Name = "Administrator",
+                            NormalizedName = "Administrator"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

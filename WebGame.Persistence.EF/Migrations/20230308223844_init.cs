@@ -277,10 +277,9 @@ namespace WebGame.Persistence.EF.Migrations
                     Strenght = table.Column<int>(type: "int", nullable: false, defaultValue: 10),
                     Dexterity = table.Column<int>(type: "int", nullable: false, defaultValue: 10),
                     Endurance = table.Column<int>(type: "int", nullable: false, defaultValue: 10),
-                    HealthPoint = table.Column<int>(type: "int", nullable: false),
+                    HealthPoint = table.Column<int>(type: "int", nullable: false, defaultValue: 100),
                     Defense = table.Column<int>(type: "int", nullable: false),
-                    Attack = table.Column<int>(type: "int", nullable: false),
-                    AttackSpeed = table.Column<int>(type: "int", nullable: false),
+                    Attack = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
                     HelmetId = table.Column<int>(type: "int", nullable: true),
                     ArmorId = table.Column<int>(type: "int", nullable: true),
                     LegsId = table.Column<int>(type: "int", nullable: true),
@@ -339,6 +338,15 @@ namespace WebGame.Persistence.EF.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "adminRoleId", "Administrator", "Administrator", "Administrator" },
+                    { "playerRoleId", "Player", "Player", "Player" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Enemies",
                 columns: new[] { "Id", "Attack", "AttackSpeed", "CashReward", "Defense", "ExpReward", "HealthPoint", "Name" },
                 values: new object[,]
@@ -367,11 +375,11 @@ namespace WebGame.Persistence.EF.Migrations
 
             migrationBuilder.InsertData(
                 table: "Players",
-                columns: new[] { "Id", "ArmorId", "Attack", "AttackSpeed", "BootsId", "Cash", "Defense", "Dexterity", "EndJobTime", "EndMissionTime", "Endurance", "Exp", "HealthPoint", "HelmetId", "LegsId", "Level", "MissionId", "Name", "SkillPoints", "Stamina", "Strenght", "UserId", "WeaponId" },
+                columns: new[] { "Id", "ArmorId", "Attack", "BootsId", "Cash", "Defense", "Dexterity", "EndJobTime", "EndMissionTime", "Endurance", "Exp", "HealthPoint", "HelmetId", "LegsId", "Level", "MissionId", "Name", "SkillPoints", "Stamina", "Strenght", "UserId", "WeaponId" },
                 values: new object[,]
                 {
-                    { 1, null, 0, 0, null, 100, 0, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 0, null, null, 10, 0, "Graczek", 10, 0, 10, "user1", null },
-                    { 2, null, 0, 0, null, 100, 0, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 0, null, null, 10, 0, "asdasdasdas", 10, 0, 10, "user2", null }
+                    { 1, null, 1, null, 100, 0, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 100, null, null, 10, 0, "Graczek", 10, 0, 10, "user1", null },
+                    { 2, null, 1, null, 100, 0, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 100, null, null, 10, 0, "asdasdasdas", 10, 0, 10, "user2", null }
                 });
 
             migrationBuilder.InsertData(

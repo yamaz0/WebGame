@@ -21,9 +21,10 @@ namespace WebGame.Application.Functions.Account.Command
         private readonly IUserRepository _userRepository;
         private readonly IAuthenticationService _authorization;
 
-        public LoginCommandHandler(IUserRepository userRepository)
+        public LoginCommandHandler(IUserRepository userRepository, IAuthenticationService authorization)
         {
             _userRepository = userRepository;
+            _authorization = authorization;
         }
 
         public async Task<LoginCommandResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
