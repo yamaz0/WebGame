@@ -39,21 +39,7 @@ namespace WebGame.Application.Functions.Shop.Command.BuyArmor
             }
 
             player.Cash -= armorValue;
-            switch (armor.ItemType)
-            {
-                case ItemType.HELMET:
-                    player.Helmet = armor;
-                    break;
-                case ItemType.ARMOR:
-                    player.Armor = armor;
-                    break;
-                case ItemType.LEGS:
-                    player.Legs = armor;
-                    break;
-                case ItemType.BOOTS:
-                    player.Boots = armor;
-                    break;
-            };
+            player.SetArmor(armor);
 
             await _playerRepository.UpdateAsync(player);
 
