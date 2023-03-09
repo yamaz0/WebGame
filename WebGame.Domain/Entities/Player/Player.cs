@@ -55,23 +55,63 @@ namespace WebGame.Domain.Entities.Player
 
         #endregion
 
-        public void SetDefense()
+        public void AddStrenght()
+        {
+            Strenght++;
+            UpdateAttack();
+        }
+
+        public void AddEndurance()
+        {
+            Endurance++;
+            UpdateHealthPoint();
+        }
+
+        public void UpdateDefense()
         {
             int helmetDefense = Helmet is not null ? Helmet.Defense : 0;
             int armorDefense = Armor is not null ? Armor.Defense : 0;
             int legsDefense = Legs is not null ? Legs.Defense : 0;
             int bootsDefense = Boots is not null ? Boots.Defense : 0;
 
-            HealthPoint = helmetDefense + armorDefense + legsDefense + bootsDefense;
+            Defense = helmetDefense + armorDefense + legsDefense + bootsDefense;
         }
 
-        public void SetHealthPoint()
+        public void UpdateHealthPoint()
         {
-            Defense = Endurance * 10;
+            HealthPoint = Endurance * 10;
         }
-        public void SetAttack()
+
+        public void UpdateAttack()
         {
-            Attack = Weapon.Attack * Strenght;
+            int weaponAttack = Weapon is not null ? Weapon.Attack : 1;
+            Attack = weaponAttack * Strenght;
+        }
+
+        public void SetArmor(Armor armor)
+        {
+            switch (armor.ItemType)
+            {
+                case ItemType.HELMET:
+                    Helmet = armor;
+                    break;
+                case ItemType.ARMOR:
+                    Armor = armor;
+                    break;
+                case ItemType.LEGS:
+                    Legs = armor;
+                    break;
+                case ItemType.BOOTS:
+                    Boots = armor;
+                    break;
+            };
+            UpdateDefense();
+        }
+
+        public void SetWeapon(Weapon weapon)
+        {
+            Weapon = weapon;
+            UpdateAttack();
         }
     }
 }
