@@ -44,6 +44,11 @@ namespace WebGame.Security.Account
             };
         }
 
+        public async Task SingOut()
+        {
+            await _signInManager.SignOutAsync();
+        }
+
         private async Task<string> GenerateBearerToken(UserEntity user)
         {
             var expiry = DateTimeOffset.Now.AddMinutes(_jwtSettings.Value.DurationInMinutes);

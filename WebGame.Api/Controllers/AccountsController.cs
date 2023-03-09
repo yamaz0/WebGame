@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebGame.Application.Functions.Account.Command;
+using WebGame.Application.Functions.Account.Command.Login;
+using WebGame.Application.Functions.Account.Command.Logout;
 using WebGame.Application.Functions.Accounts.Command.Create;
 using WebGame.Application.Functions.Players.Query.GetPlayer;
 
@@ -53,6 +54,14 @@ namespace WebGame.Controllers
         {
             var result = await _mediator.Send(request);
             return Ok(result);
+        }
+
+        [HttpPost("Logout")]
+        [Authorize]
+        public async Task<ActionResult> Logout()
+        {
+            var result = await _mediator.Send(new LogoutCommand());
+            return Ok();
         }
 
         [HttpPost("Register")]
