@@ -29,9 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{3F4D010D-F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGame.Duel", "WebGame.Duel\WebGame.Duel.csproj", "{FE8659E5-3E99-4363-8906-C0E2163AADF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGame.Security", "WebGame.Security\WebGame.Security.csproj", "{015D336C-9588-4C72-9689-6C85DA204BFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGame.Security", "WebGame.Security\WebGame.Security.csproj", "{015D336C-9588-4C72-9689-6C85DA204BFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGame.Application.Security", "WebGame.Application.Secure\WebGame.Application.Security.csproj", "{2B4E30CD-EBDB-4903-85EB-4CBFBE858E75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGame.Application.Security", "WebGame.Application.Secure\WebGame.Application.Security.csproj", "{2B4E30CD-EBDB-4903-85EB-4CBFBE858E75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
