@@ -1,21 +1,9 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebGame.Application.Interfaces.Persistence;
-using WebGame.Application.Response;
 using WebGame.Application.Security.Contracts;
 
-namespace WebGame.Application.Functions.Account.Command
+namespace WebGame.Application.Functions.Account.Command.Login
 {
-    public class LoginCommand : IRequest<LoginCommandResponse>
-    {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-    }
-
     public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginCommandResponse>
     {
         private readonly IUserRepository _userRepository;
@@ -37,27 +25,12 @@ namespace WebGame.Application.Functions.Account.Command
 
                 if (isPasswordCorrect)
                 {
-                    await _authorization.SingIn(user);
-                    return new LoginCommandResponse();
+                    var response = await _authorization.SingIn(user);
+                    return new LoginCommandResponse(response);
                 }
             }
 
             return new LoginCommandResponse("Wrong username or password!");
-        }
-    }
-
-    public class LoginCommandResponse : BasicResponse
-    {
-        //tutaj bedzie Json token coś tam
-
-        public LoginCommandResponse() : base(true)
-        {
-
-        }
-
-        public LoginCommandResponse(string error) : base(error)
-        {
-
         }
     }
 }
