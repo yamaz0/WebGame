@@ -38,7 +38,7 @@ namespace WebGame.Application.Functions.Shop.Command.BuyWeapon
             }
 
             player.Cash -= weaponValue;
-            player.Weapon = weapon;
+            player.SetWeapon(weapon);
 
             await _playerRepository.UpdateAsync(player);
 
