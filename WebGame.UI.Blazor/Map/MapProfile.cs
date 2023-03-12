@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using WebGame.UI.Blazor.Services;
+using WebGame.UI.Blazor.ViewModels.Armors;
+using WebGame.UI.Blazor.ViewModels.Weapons;
 
 namespace WebGame.UI.Blazor.Map
 {
@@ -6,7 +9,8 @@ namespace WebGame.UI.Blazor.Map
     {
         public MapProfile()
         {
-        
+            CreateMap<GetAllArmorsViewModel, ArmorsListBlazorVM>().ReverseMap();
+            CreateMap<GetAllWeaponsViewModel, WeaponsListBlazorVM>().ReverseMap();
         }
     }
 }

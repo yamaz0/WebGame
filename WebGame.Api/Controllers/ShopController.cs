@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using WebGame.Application.Constants;
 using WebGame.Application.Functions.Armors.Query.GetAllArmors;
 using WebGame.Application.Functions.Weapons.Query;
@@ -9,7 +10,7 @@ using WebGame.Application.Functions.Weapons.Query.GetAllWeapons;
 
 namespace WebGame.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ShopController : ControllerBase
@@ -28,7 +29,9 @@ namespace WebGame.Controllers
         }
 
         [HttpGet("armors")]
-        [Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        //[Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
         public async Task<ActionResult<List<GetAllArmorsViewModel>>> Armors()
         {
             GetAllArmorsRequest request = new GetAllArmorsRequest();
@@ -37,7 +40,9 @@ namespace WebGame.Controllers
         }
 
         [HttpGet("weapons")]
-        [Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        //[Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
         public async Task<ActionResult<List<GetAllWeaponsViewModel>>> Weapons()
         {
             GetAllWeaponsRequest request = new GetAllWeaponsRequest();
@@ -45,7 +50,7 @@ namespace WebGame.Controllers
             return Ok(weapons);
         }
         [HttpGet("weaponsAdmin")]
-        [Authorize(Roles = ConstantsAuthorization.Roles.ADMINISTRATOR)]
+        //[Authorize(Roles = ConstantsAuthorization.Roles.ADMINISTRATOR)]
         public async Task<ActionResult<List<GetAllWeaponsViewModel>>> WeaponsAdmin()
         {
             GetAllWeaponsRequest request = new GetAllWeaponsRequest();

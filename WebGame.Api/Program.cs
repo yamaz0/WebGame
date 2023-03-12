@@ -48,6 +48,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("Open");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
