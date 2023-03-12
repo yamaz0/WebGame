@@ -27,11 +27,9 @@
     <Folder Include="Interfaces\Enemies\" />
     <Folder Include="Interfaces\Jobs\" />
     <Folder Include="Interfaces\Missions\" />
-    <Folder Include="Interfaces\Players\" />
     <Folder Include="Services\Enemies\" />
     <Folder Include="Services\Jobs\" />
     <Folder Include="Services\Missions\" />
-    <Folder Include="Services\Players\" />
     <Folder Include="ViewModels\Enemies\" />
     <Folder Include="ViewModels\Missions\" />
     <Folder Include="ViewModels\Jobs\" />

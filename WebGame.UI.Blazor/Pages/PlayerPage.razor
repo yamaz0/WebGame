@@ -1,0 +1,21 @@
+﻿@page "/player"
+<h3>PlayerPage</h3>
+
+@if (Player == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @*<span>Id:          @Player.Id</span> *@
+    <span>Name:        @Player.Name</span>
+    <span>Level:       @Player.Level</span>
+    <span>Exp:         @Player.Exp</span>
+    <span>Cash:        @Player.Cash</span>
+    <span>SkillPoints: @Player.SkillPoints</span>
+    <span>Strenght:    @Player.Strenght</span>
+    <span>Dexterity:   @Player.Dexterity</span>
+    <span>Endurance:   @Player.Endurance</span>
+    <span>Stamina:     @Player.Stamina</span>
+
+}
