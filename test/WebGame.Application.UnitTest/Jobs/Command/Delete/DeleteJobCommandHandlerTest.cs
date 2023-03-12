@@ -30,10 +30,7 @@ namespace WebGame.Application.UnitTest.Jobs.Command.Delete
         {
             var handler = new DeleteJobCommandHandler(_mockJobRepository.Object);
             int jobsCountBefore = (await _mockJobRepository.Object.GetAllAsync()).Count;
-            var request = new DeleteJobCommand()
-            {
-                JobId = 1
-            };
+            var request = new DeleteJobCommand(1);
 
             var response = await handler.Handle(request, CancellationToken.None);
 

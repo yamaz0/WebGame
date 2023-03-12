@@ -10,6 +10,11 @@ namespace WebGame.Application.Functions.Enemies.Query.GetEnemy
 {
     public class GetEnemyRequest : IRequest<GetEnemyViewModel>
     {
+        public GetEnemyRequest(int id)
+        {
+            EnemyId = id;
+        }
+
         public int EnemyId { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace WebGame.Application.UnitTest.Jobs.Query.GetOne
         public async void GetJobTest()
         {
             var handler = new GetJobRequestHandler(_mockJobRepository.Object, _mapper);
-            var result = await handler.Handle(new GetJobRequest() { JobId = 1 }, CancellationToken.None);
+            var result = await handler.Handle(new GetJobRequest(1), CancellationToken.None);
             result.ShouldBeOfType(typeof(GetJobViewModel));
         }
     }

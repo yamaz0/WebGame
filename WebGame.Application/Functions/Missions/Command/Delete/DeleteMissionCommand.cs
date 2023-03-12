@@ -10,6 +10,11 @@ namespace WebGame.Application.Functions.Missions.Command.Delete
 {
     public class DeleteMissionCommand : IRequest
     {
+        public DeleteMissionCommand(int id)
+        {
+            MissionId= id;
+        }
+
         public int MissionId { get; set; }
     }
 }

@@ -7,6 +7,9 @@ using WebGame.Application.Functions.Jobs.Command.Delete;
 using WebGame.Application.Functions.Jobs.Command.Update;
 using WebGame.Application.Functions.Jobs.Query.GetAllJobs;
 using WebGame.Application.Functions.Jobs.Query.GetJob;
+using WebGame.Application.Functions.Jobs.Command.Delete;
+using WebGame.Application.Functions.Jobs.Query.GetAllJobs;
+using WebGame.Application.Functions.Jobs.Query.GetJob;
 using WebGame.Domain.Entities.User;
 using WebGame.Entities.Jobs;
 
@@ -23,50 +26,65 @@ namespace WebGame.Controllers
             _mediator = mediator;
         }
 
-        // GET: api/<ValuesController>
-        [HttpGet]
-        public async Task<ActionResult<List<GetAllJobsViewModel>>> Get()
+        [HttpGet("jobs")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<List<GetAllJobsViewModel>>> Jobs()
         {
-            GetAllJobsRequest getAllJobsRequest = new GetAllJobsRequest();
-            List<GetAllJobsViewModel> allJobs = await _mediator.Send(getAllJobsRequest);
-            return Ok(allJobs);
+            List<GetAllJobsViewModel> jobs = await _mediator.Send(new GetAllJobsRequest());
+            return Ok(jobs);
         }
 
-        // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GetJobViewModel>> Get(int id)
+        [HttpGet("jobs")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<GetJobViewModel>> Jobs(int id)
         {
-            GetJobRequest getJobRequest = new GetJobRequest() { JobId = id };
+            GetJobRequest getJobRequest = new GetJobRequest(id);
             GetJobViewModel job = await _mediator.Send(getJobRequest);
+
+            if (job == null)
+                return NotFound();
             return Ok(job);
         }
 
-        // POST api/<ValuesController>
-        [HttpPost]
+        [HttpPost("jobs")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         //[Authorize("Administrator")]
-        public async Task<ActionResult<int>> Post([FromBody] CreateJobCommand createJobCommand)
+        public async Task<ActionResult<int>> Create([FromBody] CreateJobCommand createJobCommand)
         {
             var result = await _mediator.Send(createJobCommand);
-            return Ok(result.JobId);
+            if (result.Success)
+                return Ok(result.JobId);
+            else
+                return BadRequest(result.Errors);
 
         }
 
-        // PUT api/<ValuesController>/5
-        [HttpPut("UpdateJob")]
+        [HttpPut("jobs")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
         //[Authorize("Administrator")]
-        public async Task<ActionResult> Put([FromBody] UpdateJobCommand updateJobCommand)
+        public async Task<ActionResult> Update([FromBody] UpdateJobCommand updateJobCommand)
         {
             await _mediator.Send(updateJobCommand);
             return NoContent();
         }
 
         // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
+        [HttpDelete("jobs/{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
         //[Authorize("Administrator")]
         public async Task<ActionResult> Delete(int id)
         {
-            DeleteJobCommand deleteRequest = new DeleteJobCommand() { JobId = id };
-            var result = await _mediator.Send(deleteRequest);
+            DeleteJobCommand deleteRequest = new DeleteJobCommand(id);
+            await _mediator.Send(deleteRequest);
             return NoContent();
         }
     }

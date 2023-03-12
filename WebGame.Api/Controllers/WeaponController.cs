@@ -4,39 +4,21 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using WebGame.Application.Constants;
-using WebGame.Application.Functions.Armors.Query.GetAllArmors;
 using WebGame.Application.Functions.Weapons.Query;
 using WebGame.Application.Functions.Weapons.Query.GetAllWeapons;
+using WebGame.Application.Functions.Weapons.Query.GetWeapon;
 
 namespace WebGame.Controllers
 {
-    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class ShopController : ControllerBase
+    public class WeaponController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public ShopController(IMediator mediator)
+        public WeaponController(IMediator mediator)
         {
             _mediator = mediator;
-        }
-
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return NoContent();
-        }
-
-        [HttpGet("armors")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesDefaultResponseType]
-        //[Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
-        public async Task<ActionResult<List<GetAllArmorsViewModel>>> Armors()
-        {
-            GetAllArmorsRequest request = new GetAllArmorsRequest();
-            List<GetAllArmorsViewModel> armors = await _mediator.Send(request);
-            return Ok(armors);
         }
 
         [HttpGet("weapons")]
@@ -49,7 +31,25 @@ namespace WebGame.Controllers
             List<GetAllWeaponsViewModel> weapons = await _mediator.Send(request);
             return Ok(weapons);
         }
+
+        [HttpGet("weapons/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        //[Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
+        public async Task<ActionResult<List<GetWeaponViewModel>>> Weapons(int id)
+        {
+            GetWeaponRequest request = new GetWeaponRequest(id);
+            GetWeaponViewModel weapon = await _mediator.Send(request);
+
+            if (weapon == null)
+                return NotFound();
+            return Ok(weapon);
+        }
+
         [HttpGet("weaponsAdmin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
         //[Authorize(Roles = ConstantsAuthorization.Roles.ADMINISTRATOR)]
         public async Task<ActionResult<List<GetAllWeaponsViewModel>>> WeaponsAdmin()
         {
@@ -59,6 +59,8 @@ namespace WebGame.Controllers
         }
 
         [HttpGet("weaponsAuth")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
         [Authorize]
         public async Task<ActionResult<List<GetAllWeaponsViewModel>>> WeaponsAuth()
         {

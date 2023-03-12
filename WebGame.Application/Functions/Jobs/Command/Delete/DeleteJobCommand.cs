@@ -10,6 +10,11 @@ namespace WebGame.Application.Functions.Jobs.Command.Delete
 {
     public class DeleteJobCommand : IRequest
     {
+        public DeleteJobCommand(int id)
+        {
+            JobId = id;
+        }
+
         public int JobId { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace WebGame.Application.Functions.Weapons.Query.GetWeapon
 
         public async Task<GetWeaponViewModel> Handle(GetWeaponRequest request, CancellationToken cancellationToken)
         {
-            var weapon = await _weaponRepository.GetByIdAsync(request.Id);
+            var weapon = await _weaponRepository.GetByIdAsync(request.WeaponId);
             var mappedWeapon = _mapper.Map<GetWeaponViewModel>(weapon);
 
             return mappedWeapon;

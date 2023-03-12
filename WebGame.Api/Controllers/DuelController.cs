@@ -8,15 +8,10 @@ using WebGame.Application.Functions.Duel.Command;
 namespace WebGame.Controllers
 {
     //[Authorize]
+    [ApiController]
     [Route("api/[controller]")]
     public class DuelController : ControllerBase
     {
-        //private readonly UserManager<UserEntity> _userManager;
-
-        //public DuelController(UserManager<UserEntity> userManager)
-        //{
-        //    _userManager = userManager;
-        //}
         private readonly IMediator _mediator;
 
         public DuelController(IMediator mediator)
@@ -25,6 +20,8 @@ namespace WebGame.Controllers
         }
 
         [HttpGet("duel/{enemyId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<DuelPlayerVsEnemyResponse>> DuelEnemy(int enemyId)
         {
             //TODO pobieranie idków

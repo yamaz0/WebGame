@@ -30,10 +30,7 @@ namespace WebGame.Application.UnitTest.Missions.Command.Delete
         {            
             var handler = new DeleteMissionCommandHandler(_mockMissionRepository.Object);
             int missionsCountBefore = (await _mockMissionRepository.Object.GetAllAsync()).Count;
-            var request = new DeleteMissionCommand()
-            {
-                MissionId = 1
-            };
+            var request = new DeleteMissionCommand(1);
 
             var response = await handler.Handle(request, CancellationToken.None);
 
