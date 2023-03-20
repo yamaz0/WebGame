@@ -18,6 +18,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+//builder.Services.AddHttpContextAccessor();
+//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Open", config => config.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
@@ -53,6 +56,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+//app.UseSession();
 
 app.MapControllers();
 

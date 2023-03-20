@@ -16,7 +16,7 @@ namespace WebGame.UI.Blazor.Services.Armors
 
         public async Task<List<ArmorsListBlazorVM>> GetAllArmors()
         {
-            var allArmors = await _client.ArmorsAsync();
+            var allArmors = await _client.ArmorsAllAsync();
             var mappedArmors = _mapper.Map<ICollection<ArmorsListBlazorVM>>(allArmors);
             return mappedArmors.ToList();
         }

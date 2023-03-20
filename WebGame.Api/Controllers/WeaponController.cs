@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,8 @@ namespace WebGame.Controllers
         [HttpGet("weapons")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        //[Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
+        [Authorize]
+        //[AllowAnonymous]
         public async Task<ActionResult<List<GetAllWeaponsViewModel>>> Weapons()
         {
             GetAllWeaponsRequest request = new GetAllWeaponsRequest();

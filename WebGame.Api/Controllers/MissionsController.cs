@@ -30,7 +30,7 @@ namespace WebGame.Controllers
             return Ok(missions);
         }
 
-        [HttpGet("missions")]
+        [HttpGet("missions/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]

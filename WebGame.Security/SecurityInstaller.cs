@@ -33,26 +33,28 @@ namespace WebGame.Security
             //    options.AddPolicy("Player", policy => policy.RequireClaim("Player"));
             //});
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                 .AddJwtBearer(o =>
                 {
                     o.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ClockSkew = TimeSpan.Zero,
-                        IgnoreTrailingSlashWhenValidatingAudience = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jsonWebTokensSettings.Key)),
+                        //IgnoreTrailingSlashWhenValidatingAudience = true,
                         ValidateIssuerSigningKey = true,
-                        RequireExpirationTime = true,
-                        RequireAudience = true,
-                        RequireSignedTokens = true,
-                        ValidateAudience = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jsonWebTokensSettings.Key)),
                         ValidateIssuer = true,
-                        ValidateLifetime = true,
-                        ValidAudience = jsonWebTokensSettings.Audience,
                         ValidIssuer = jsonWebTokensSettings.Issuer,
+                        ValidateAudience = true,
+                        ValidAudience = jsonWebTokensSettings.Audience,
+                        //ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero,
                     };
 
-                    o.SaveToken = true;
+                    o.RequireHttpsMetadata = false;
+                    o.SaveToken = false;
 
                     o.Events = new JwtBearerEvents()
                     {

@@ -35,7 +35,7 @@ namespace WebGame.Controllers
             return Ok(jobs);
         }
 
-        [HttpGet("jobs")]
+        [HttpGet("jobs/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]

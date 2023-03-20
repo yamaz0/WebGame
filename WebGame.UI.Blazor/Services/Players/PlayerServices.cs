@@ -18,7 +18,7 @@ namespace WebGame.UI.Blazor.Services.Players
 
         public async Task<PlayerBlazorVM> GetPlayer()
         {
-            var player = await _client.PlayerAsync(1);
+            var player = await _client.PlayerGETAsync(1);
             PlayerBlazorVM mappedPlayer = _mapper.Map<PlayerBlazorVM>(player);
             return mappedPlayer;
         }
