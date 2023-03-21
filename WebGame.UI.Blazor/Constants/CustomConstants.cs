@@ -8,7 +8,7 @@
         }
         public static class Authorization
         {
-            public const string BEARER = "bearer";
+            public const string BEARER = "Bearer";
         }
     }
 }

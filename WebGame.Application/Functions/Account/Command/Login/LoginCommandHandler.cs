@@ -21,13 +21,9 @@ namespace WebGame.Application.Functions.Account.Command.Login
 
             if (user != null)
             {
-                bool isPasswordCorrect = await _userRepository.CheckPassword(user, request.Password);
-
-                if (isPasswordCorrect)
-                {
-                    var response = await _authorization.SingIn(user);
+                var response = await _authorization.SingIn(user, request.Password);
+                if (response != null)
                     return new LoginCommandResponse(response);
-                }
             }
 
             return new LoginCommandResponse("Wrong username or password!");

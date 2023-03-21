@@ -54,7 +54,7 @@ namespace WebGame.Controllers
         {
             var result = await _mediator.Send(request);
             var userid = result.AuthenticationResponse.UserId;
-            HttpContext.Response.Cookies.Append("UserId", userid);
+            //HttpContext.Response.Cookies.Append("UserId", userid);
             return Ok(result);
         }
 

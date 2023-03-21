@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -35,7 +36,10 @@ builder.Services.InstallDb();
 builder.Services.InstallSecurity(builder.Configuration);
 builder.Services.InstallDuel();
 
-builder.Services.AddIdentity<UserEntity, IdentityRole>().AddEntityFrameworkStores<DbGameContext>();
+builder.Services.AddIdentityCore<UserEntity>()
+    .AddRoles<IdentityRole>()
+    .AddSignInManager<SignInManager<UserEntity>>()
+    .AddEntityFrameworkStores<DbGameContext>();
 //builder.Services.AddAuthentication()
 //    .AddCookie(options =>
 //    {
