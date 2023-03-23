@@ -25,7 +25,6 @@ namespace WebGame.Controllers
         [HttpGet("weapons")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        [Authorize]
         public async Task<ActionResult<List<GetAllWeaponsViewModel>>> Weapons()
         {
             GetAllWeaponsRequest request = new GetAllWeaponsRequest();

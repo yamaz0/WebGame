@@ -7,9 +7,6 @@ using WebGame.Application.Functions.Jobs.Command.Delete;
 using WebGame.Application.Functions.Jobs.Command.Update;
 using WebGame.Application.Functions.Jobs.Query.GetAllJobs;
 using WebGame.Application.Functions.Jobs.Query.GetJob;
-using WebGame.Application.Functions.Jobs.Command.Delete;
-using WebGame.Application.Functions.Jobs.Query.GetAllJobs;
-using WebGame.Application.Functions.Jobs.Query.GetJob;
 using WebGame.Domain.Entities.User;
 using WebGame.Entities.Jobs;
 
@@ -53,7 +50,7 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        //[Authorize("Administrator")]
+        [Authorize("Administrator")]
         public async Task<ActionResult<int>> Create([FromBody] CreateJobCommand createJobCommand)
         {
             var result = await _mediator.Send(createJobCommand);
@@ -69,7 +66,7 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        //[Authorize("Administrator")]
+        [Authorize("Administrator")]
         public async Task<ActionResult> Update([FromBody] UpdateJobCommand updateJobCommand)
         {
             await _mediator.Send(updateJobCommand);
@@ -80,7 +77,7 @@ namespace WebGame.Controllers
         [HttpDelete("jobs/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        //[Authorize("Administrator")]
+        [Authorize("Administrator")]
         public async Task<ActionResult> Delete(int id)
         {
             DeleteJobCommand deleteRequest = new DeleteJobCommand(id);

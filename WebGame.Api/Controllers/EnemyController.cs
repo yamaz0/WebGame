@@ -6,7 +6,6 @@ using WebGame.Application.Functions.Enemies.Query.GetEnemy;
 
 namespace WebGame.Controllers
 {
-    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class EnemyController : ControllerBase

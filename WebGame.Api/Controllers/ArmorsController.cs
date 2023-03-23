@@ -20,7 +20,6 @@ namespace WebGame.Controllers
         [HttpGet("armors")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        //[Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
         public async Task<ActionResult<List<GetAllArmorsViewModel>>> Armors()
         {
             GetAllArmorsRequest request = new GetAllArmorsRequest();
@@ -32,7 +31,6 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        //[Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
         public async Task<ActionResult<GetArmorViewModel>> Armors(int id)
         {
             var request = new GetArmorRequest(id);

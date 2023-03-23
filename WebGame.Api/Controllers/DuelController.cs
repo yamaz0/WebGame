@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebGame.Api.Common;
 using WebGame.Application.Constants;
 using WebGame.Application.Functions.Duel.Command;
 
@@ -26,20 +27,18 @@ namespace WebGame.Controllers
         [Authorize]
         public async Task<ActionResult<DuelPlayerVsEnemyResponse>> DuelEnemy(int enemyId)
         {
-            var playerIdText = User.Claims.Where(c => c.Type == ConstantsAuthorization.Claims.PLAYER_ID)?.FirstOrDefault()?.Value;
-            int playerID;
+            int playerId = Utils.GetPlayerId(User);
 
-            if (playerIdText == null || !Int32.TryParse(playerIdText, out playerID))
-            {
+            if (playerId == -1)
                 return StatusCode(418);
-            }
 
-            DuelPlayerVsEnemyResponse response = await _mediator.Send(new DuelPlayerVsEnemyCommand() { EnemyId = enemyId, PlayerId = playerID });
+            DuelPlayerVsEnemyResponse response = await _mediator.Send(new DuelPlayerVsEnemyCommand() { EnemyId = enemyId, PlayerId = playerId });
 
             if (response == null)
                 return NotFound();
             else
                 return Ok(response);
         }
+
     }
 }
