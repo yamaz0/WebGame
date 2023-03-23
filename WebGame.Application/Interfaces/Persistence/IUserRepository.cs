@@ -24,5 +24,6 @@ namespace WebGame.Application.Interfaces.Persistence
         Task<bool> CheckPassword(UserEntity user, string password);
         Task<List<string>> GetRolesAsync(UserEntity user);
         Task<List<Claim>> GetClaimsAsync(UserEntity user);
+        Task AddClaimToUser(UserEntity entity, Claim claim);
     }
 }
