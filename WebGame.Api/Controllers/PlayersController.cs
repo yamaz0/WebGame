@@ -31,14 +31,14 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         [Authorize]
-        public async Task<ActionResult<GetPlayerViewModel>> GetPlayer()
+        public async Task<ActionResult<GetPlayerAllInfoViewModel>> GetPlayer()
         {
             int playerId = Utils.GetPlayerId(User);
 
             if (playerId == -1)
                 return StatusCode(418);
 
-            GetPlayerViewModel player = await _mediator.Send(new GetPlayerRequest() { PlayerId = playerId });
+            GetPlayerAllInfoViewModel player = await _mediator.Send(new GetPlayerAllInfoRequest() { PlayerId = playerId });
             return Ok(player);
         }
 

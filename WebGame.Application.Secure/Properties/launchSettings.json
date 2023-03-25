@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "WebGame.Application.Security": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:53491;http://localhost:53492"
+    }
+  }
+}

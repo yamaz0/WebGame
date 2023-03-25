@@ -2,10 +2,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using WebGame.UI.Blazor.Interfaces.Armors;
 using WebGame.UI.Blazor.Interfaces.Authorization;
+using WebGame.UI.Blazor.Interfaces.Missions;
 using WebGame.UI.Blazor.Interfaces.Players;
 using WebGame.UI.Blazor.Interfaces.Weapons;
 using WebGame.UI.Blazor.Services.Armors;
 using WebGame.UI.Blazor.Services.Authentication;
+using WebGame.UI.Blazor.Services.Missions;
 using WebGame.UI.Blazor.Services.Players;
 using WebGame.UI.Blazor.Services.Weapons;
 
@@ -18,6 +20,7 @@ namespace WebGame.UI.Blazor
             services.AddScoped<IArmorServices, ArmorServices>();
             services.AddScoped<IWeaponServices, WeaponServices>();
             services.AddScoped<IPlayerServices, PlayerServices>();
+            services.AddScoped<IMissionServices, MissionServices>();
             services.AddScoped<IAddBearerTokenService, AddBearerTokenService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();

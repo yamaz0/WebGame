@@ -37,6 +37,7 @@ namespace WebGame.Application.Automapper
         {
             CreateMap<Player, GetAllPlayersViewModel>();
             CreateMap<Player, GetPlayerViewModel>();
+            CreateMap<Player, GetPlayerAllInfoViewModel>();
             CreateMap<Player, UpdatePlayerCommand>().ReverseMap();
 
             CreateMap<Enemy, GetAllEnemiesViewModel>();
