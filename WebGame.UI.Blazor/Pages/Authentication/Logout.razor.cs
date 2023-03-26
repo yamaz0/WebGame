@@ -12,7 +12,7 @@ namespace WebGame.UI.Blazor.Pages.Authentication
         [Inject]
         private IAuthenticationService AuthenticationService { get; set; }
 
-        protected override async void OnInitialized()
+        protected async override Task OnInitializedAsync()
         {
             await AuthenticationService.Logout();
             NavigationManager.NavigateTo("");
