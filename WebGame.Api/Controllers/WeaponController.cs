@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,6 @@ namespace WebGame.Controllers
         [HttpGet("weapons")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        //[Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
         public async Task<ActionResult<List<GetAllWeaponsViewModel>>> Weapons()
         {
             GetAllWeaponsRequest request = new GetAllWeaponsRequest();
@@ -36,7 +36,6 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        //[Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
         public async Task<ActionResult<List<GetWeaponViewModel>>> Weapons(int id)
         {
             GetWeaponRequest request = new GetWeaponRequest(id);
@@ -47,10 +46,11 @@ namespace WebGame.Controllers
             return Ok(weapon);
         }
 
+        #region testowe
         [HttpGet("weaponsAdmin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        //[Authorize(Roles = ConstantsAuthorization.Roles.ADMINISTRATOR)]
+        [Authorize(Roles = ConstantsAuthorization.Roles.ADMINISTRATOR)]
         public async Task<ActionResult<List<GetAllWeaponsViewModel>>> WeaponsAdmin()
         {
             GetAllWeaponsRequest request = new GetAllWeaponsRequest();
@@ -68,5 +68,16 @@ namespace WebGame.Controllers
             List<GetAllWeaponsViewModel> weapons = await _mediator.Send(request);
             return Ok(weapons);
         }
+        [HttpGet("weaponsPlayer")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        [Authorize(Roles = ConstantsAuthorization.Roles.PLAYER)]
+        public async Task<ActionResult<List<GetAllWeaponsViewModel>>> WeaponsPlayer()
+        {
+            GetAllWeaponsRequest request = new GetAllWeaponsRequest();
+            List<GetAllWeaponsViewModel> weapons = await _mediator.Send(request);
+            return Ok(weapons);
+        }
+        #endregion
     }
 }

@@ -39,6 +39,7 @@ namespace WebGame.Application.Functions.Accounts.Command.Create
             {
                 var player = new Player() { Name = request.Username, UserId = response.Id };
                 await _playerRepository.AddAsync(player);
+                await _userRepository.AddClaimToUser(user, new System.Security.Claims.Claim(Constants.ConstantsAuthorization.Claims.PLAYER_ID, player.Id.ToString()));
             }
             return response;
         }

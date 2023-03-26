@@ -38,21 +38,19 @@ namespace WebGame.Security
                 {
                     o.TokenValidationParameters = new TokenValidationParameters
                     {
-                        ClockSkew = TimeSpan.Zero,
-                        IgnoreTrailingSlashWhenValidatingAudience = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jsonWebTokensSettings.Key)),
+                        //IgnoreTrailingSlashWhenValidatingAudience = true,
                         ValidateIssuerSigningKey = true,
-                        RequireExpirationTime = true,
-                        RequireAudience = true,
-                        RequireSignedTokens = true,
-                        ValidateAudience = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jsonWebTokensSettings.Key)),
                         ValidateIssuer = true,
-                        ValidateLifetime = true,
-                        ValidAudience = jsonWebTokensSettings.Audience,
                         ValidIssuer = jsonWebTokensSettings.Issuer,
+                        ValidateAudience = true,
+                        ValidAudience = jsonWebTokensSettings.Audience,
+                        //ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero,
                     };
 
-                    o.SaveToken = true;
+                    o.RequireHttpsMetadata = false;
+                    o.SaveToken = false;
 
                     o.Events = new JwtBearerEvents()
                     {

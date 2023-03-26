@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -15,6 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,12 +27,9 @@
     <Folder Include="FoldersToCopy\Weapons\" />
     <Folder Include="Interfaces\Enemies\" />
     <Folder Include="Interfaces\Jobs\" />
-    <Folder Include="Interfaces\Missions\" />
     <Folder Include="Services\Enemies\" />
     <Folder Include="Services\Jobs\" />
-    <Folder Include="Services\Missions\" />
     <Folder Include="ViewModels\Enemies\" />
-    <Folder Include="ViewModels\Missions\" />
     <Folder Include="ViewModels\Jobs\" />
   </ItemGroup>
 

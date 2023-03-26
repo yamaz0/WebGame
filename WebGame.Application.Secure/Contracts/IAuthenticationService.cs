@@ -10,7 +10,7 @@ namespace WebGame.Application.Security.Contracts
 {
     public interface IAuthenticationService
     {
-        Task<AuthenticationResponse> SingIn(UserEntity entity);
+        Task<AuthenticationResponse> SingIn(UserEntity entity,string password);
         Task SingOut();
     }
 }

@@ -30,7 +30,7 @@ namespace WebGame.Controllers
             return Ok(missions);
         }
 
-        [HttpGet("missions")]
+        [HttpGet("missions/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
@@ -48,7 +48,7 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        //[Authorize("Administrator")]
+        [Authorize("Administrator")]
         public async Task<ActionResult<int>> Create([FromBody] CreateMissionCommand createMissionCommand)
         {
             var result = await _mediator.Send(createMissionCommand);
@@ -64,7 +64,7 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        //[Authorize("Administrator")]
+        [Authorize("Administrator")]
         public async Task<ActionResult> Update([FromBody] UpdateMissionCommand updateMissionCommand)
         {
             await _mediator.Send(updateMissionCommand);
@@ -75,7 +75,7 @@ namespace WebGame.Controllers
         [HttpDelete("mission/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        //[Authorize("Administrator")]
+        [Authorize("Administrator")]
         public async Task<ActionResult> Delete(int id)
         {
             DeleteMissionCommand deleteRequest = new DeleteMissionCommand(id);

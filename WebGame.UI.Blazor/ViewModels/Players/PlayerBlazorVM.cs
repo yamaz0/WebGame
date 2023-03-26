@@ -2,7 +2,14 @@
 {
     public class PlayerBlazorVM
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
+        public string CreatedBy { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string LastModifiedBy { get; set; }
+
+        public DateTime? LastModifiedDate { get; set; }
         public string Name { get; set; }
 
         #region level
@@ -28,10 +35,6 @@
         //public virtual Armor? Boots { get; set; }
         //public virtual Weapon? Weapon { get; set; }
         //#endregion
-
-        #region User
-        public string UserId { get; set; }
-        #endregion
 
         #region Job
 

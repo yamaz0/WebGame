@@ -18,7 +18,7 @@ namespace WebGame.UI.Blazor.Pages
 
         protected async override Task OnInitializedAsync()
         {
-            Player = await PlayerService.GetPlayer();
+            Player = await PlayerService.GetPlayerView();
         }
     }
 }

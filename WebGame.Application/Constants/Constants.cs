@@ -13,6 +13,11 @@ namespace WebGame.Application.Constants
             public const string PLAYER = "Player";
             public const string ADMINISTRATOR = "Administrator";
         }
+        public static class Claims
+        {
+            public const string PLAYER_ID = "PlayerId";
+            public const string USER_ID = "UserId";
+        }
     }
 
     public static class ConstantsEntity

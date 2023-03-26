@@ -2,17 +2,16 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WebGame.Api.Common;
 using WebGame.Application.Functions.Players.Command.Update;
 using WebGame.Application.Functions.Players.Query.GetPlayer;
 using WebGame.Domain.Entities.User;
 
 namespace WebGame.Controllers
 {
-    //[Authorize]
     [Route("api/[controller]")]
     public class PlayersController : ControllerBase
     {
-        //private readonly UserManager<UserEntity> _userManager;
         private readonly IMediator _mediator;
 
         public PlayersController(IMediator mediator)
@@ -25,14 +24,28 @@ namespace WebGame.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult<GetPlayerViewModel>> GetPlayer(int id)
         {
-            //var userId = _userManager.GetUserId(HttpContext.User);
             GetPlayerViewModel player = await _mediator.Send(new GetPlayerRequest() { PlayerId = id });
+            return Ok(player);
+        }
+        [HttpGet("player")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        [Authorize]
+        public async Task<ActionResult<GetPlayerAllInfoViewModel>> GetPlayer()
+        {
+            int playerId = Utils.GetPlayerId(User);
+
+            if (playerId == -1)
+                return StatusCode(418);
+
+            GetPlayerAllInfoViewModel player = await _mediator.Send(new GetPlayerAllInfoRequest() { PlayerId = playerId });
             return Ok(player);
         }
 
         [HttpPut("player")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
+        [Authorize]
         public async Task<ActionResult<GetPlayerViewModel>> Update([FromBody] UpdatePlayerCommand request)
         {
             await _mediator.Send(request);

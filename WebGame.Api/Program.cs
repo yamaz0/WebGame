@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -18,6 +19,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+//builder.Services.AddHttpContextAccessor();
+//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Open", config => config.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
@@ -32,7 +36,10 @@ builder.Services.InstallDb();
 builder.Services.InstallSecurity(builder.Configuration);
 builder.Services.InstallDuel();
 
-builder.Services.AddIdentity<UserEntity, IdentityRole>().AddEntityFrameworkStores<DbGameContext>();
+builder.Services.AddIdentityCore<UserEntity>()
+    .AddRoles<IdentityRole>()
+    .AddSignInManager<SignInManager<UserEntity>>()
+    .AddEntityFrameworkStores<DbGameContext>();
 //builder.Services.AddAuthentication()
 //    .AddCookie(options =>
 //    {
@@ -53,6 +60,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+//app.UseSession();
 
 app.MapControllers();
 

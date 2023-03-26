@@ -32,9 +32,13 @@ namespace WebGame.Security.Account
             _userRepository = userRepository;
         }
 
-        public async Task<AuthenticationResponse> SingIn(UserEntity user)
+        public async Task<AuthenticationResponse> SingIn(UserEntity user, string password)
         {
-            await _signInManager.SignInAsync(user, true);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, password, true);
+
+            if (!result.Succeeded)
+                return null;
+
             return new AuthenticationResponse()
             {
                 AccessToken = await GenerateBearerToken(user),

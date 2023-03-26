@@ -1,0 +1,37 @@
+﻿@page "/mission"
+<h1>Mission</h1>
+
+
+@if (!ShowAll)
+{
+    if (IsMissionFinished)
+    {
+        <span>Mission finished.</span>
+        <br />
+        <button onclick=@Reward>OK</button>
+    }
+    else
+    {
+        <h3>@Time</h3>
+    }
+}
+else
+{
+    if (Missions == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        foreach (var mission in Missions)
+        {
+            <span>Name: @mission.Name</span>
+            <span>Description: @mission.Description</span>
+            <span>Duration: @mission.Duration</span>
+            <span>Reward: @mission.Reward</span>
+            <br />
+            <button onclick=@(() => StartMission(mission.Id,mission.Duration))>Start</button>
+            <br />
+        }
+    }
+}

@@ -18,46 +18,16 @@ namespace WebGame.Controllers
             _mediator = mediator;
         }
 
-        //[HttpGet]
-        //public IActionResult Login()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public IActionResult Login(LoginModel loginModel)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(loginModel);
-        //    }
-
-        //    var result = _service.Login(loginModel);
-
-        //    if (result.Result.Succeeded == false)
-        //    {
-        //        ModelState.AddModelError(String.Empty, "Invalid user name or password. Try again!");
-        //        return View(loginModel);
-        //    }
-
-        //    return RedirectToAction("Index", "Home");
-        //}
-
-        //[HttpGet]
-        //public IActionResult Register()
-        //{
-        //    return View();
-        //}
-
         [HttpPost("Login")]
         public async Task<ActionResult<LoginCommandResponse>> Login([FromBody] LoginCommand request)
         {
             var result = await _mediator.Send(request);
+            var userid = result.AuthenticationResponse.UserId;
+            //HttpContext.Response.Cookies.Append("UserId", userid);
             return Ok(result);
         }
 
         [HttpPost("Logout")]
-        [Authorize]
         public async Task<ActionResult> Logout()
         {
             var result = await _mediator.Send(new LogoutCommand());
@@ -80,13 +50,5 @@ namespace WebGame.Controllers
 
             return BadRequest(result);
         }
-
-        //[HttpGet]
-        //[Authorize]
-        //public IActionResult Logout()
-        //{
-        //    _service.Logout();
-        //    return RedirectToAction("Index", "Home");
-        //}
     }
 }
