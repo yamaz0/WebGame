@@ -7,6 +7,6 @@ namespace WebGame.UI.Blazor.Interfaces.Missions
     {
         Task<ICollection<MissionBlazorVM>> GetMissions();
         Task RewardPlayer(GetPlayerAllInfoViewModel player);
-        Task SetMissionToPlayer(int id, DateTime endTime);
+        Task<GetPlayerAllInfoViewModel> SetMissionToPlayer(int id, DateTime endTime);
     }
 }

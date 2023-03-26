@@ -30,12 +30,13 @@ namespace WebGame.UI.Blazor.Services.Missions
             return mappedMissions;
         }
 
-        public async Task SetMissionToPlayer(int id, DateTime endTime)
+        public async Task<GetPlayerAllInfoViewModel> SetMissionToPlayer(int id, DateTime endTime)
         {
             var player = await _playerServices.GetPlayer();
             player.MissionId = id;
             player.EndMissionTime = endTime;
             await UpdatePlayer(player);
+            return player;
         }
 
         private async Task UpdatePlayer(GetPlayerAllInfoViewModel player)
