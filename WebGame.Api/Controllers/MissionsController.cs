@@ -65,10 +65,10 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         [Authorize]
-        public async Task<ActionResult<CheckMissionCommandResponse>> CheckMission([FromBody] CheckMissionCommand checkMissionCommand)
+        public async Task<ActionResult<CheckMissionCommandResponse>> CheckMission()
         {
             int playerId = Utils.GetPlayerId(User);
-            checkMissionCommand.PlayerId = playerId;
+            CheckMissionCommand checkMissionCommand = new CheckMissionCommand(playerId);
 
             var result = await _mediator.Send(checkMissionCommand);
 
