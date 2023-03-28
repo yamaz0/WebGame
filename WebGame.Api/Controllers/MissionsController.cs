@@ -6,8 +6,9 @@ using WebGame.Application.Functions.Missions.Command.Delete;
 using WebGame.Application.Functions.Missions.Command.Update;
 using WebGame.Application.Functions.Missions.Query.GetMission;
 using WebGame.Application.Functions.Missions.Query.GetAllMissions;
-using WebGame.Application.Functions.Missions.Command;
 using WebGame.Api.Common;
+using WebGame.Application.Functions.Missions.Command.Check;
+using WebGame.Application.Functions.Missions.Command.StartMission;
 
 namespace WebGame.Controllers
 {
@@ -76,7 +77,24 @@ namespace WebGame.Controllers
                 return Ok(result);
             else
                 return BadRequest(result.Errors);
+        }
 
+        [HttpPost("mission/start")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        [Authorize]
+        public async Task<ActionResult<StartMissionCommandResponse>> MissionReward([FromBody] int missionId)
+        {
+            int playerId = Utils.GetPlayerId(User);
+            StartMissionCommand startMissionCommand = new StartMissionCommand(playerId, missionId);
+
+            var result = await _mediator.Send(startMissionCommand);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result.Errors);
         }
 
         [HttpPut("mission")]
