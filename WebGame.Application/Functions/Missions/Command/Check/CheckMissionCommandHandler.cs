@@ -32,6 +32,7 @@ namespace WebGame.Application.Functions.Missions.Command
 
                     player.Exp += mission.Reward;
                     player.MissionId = NO_MISSION_ID;
+                    await _playerRepository.UpdateAsync(player);
                 }
             }
 
