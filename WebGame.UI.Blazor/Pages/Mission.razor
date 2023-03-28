@@ -8,7 +8,7 @@
     {
         <span>Mission finished.</span>
         <br />
-        <button onclick=@Reward>OK</button>
+        <button onclick=@Refresh>OK</button>
     }
     else
     {
@@ -30,7 +30,7 @@ else
             <span>Duration: @mission.Duration</span>
             <span>Reward: @mission.Reward</span>
             <br />
-            <button onclick=@(() => StartMission(mission.Id,mission.Duration))>Start</button>
+            <button onclick=@(() => StartMission(mission.Id))>Start</button>
             <br />
         }
     }

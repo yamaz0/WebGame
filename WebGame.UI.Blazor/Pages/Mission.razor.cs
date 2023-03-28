@@ -11,7 +11,6 @@ namespace WebGame.UI.Blazor.Pages
     {
         private System.Timers.Timer _timer = null!;
         private int _secondsToRun = 0;
-        private GetPlayerAllInfoViewModel player;
 
         protected string Time { get; set; } = "00:00";
         protected bool ShowAll { get; set; }
@@ -20,8 +19,6 @@ namespace WebGame.UI.Blazor.Pages
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
-        [Inject]
-        public IPlayerServices _playerServices { get; set; }
         [Inject]
         public IMissionServices _missionServices { get; set; }
 
@@ -48,38 +45,46 @@ namespace WebGame.UI.Blazor.Pages
 
         protected async override Task OnInitializedAsync()
         {
-            player = await _playerServices.GetPlayer();
-            if (player.MissionId != 0)
+            await Refresh();
+        }
+
+        private async Task Refresh()
+        {
+            var response = await _missionServices.CheckMission();
+
+            if (response.HasPlayerMission)
             {
-                var missionFinishDate = player.EndMissionTime;
-                IsMissionFinished = missionFinishDate < DateTime.UtcNow;
+                IsMissionFinished = response.IsMissionFinished;
 
                 if (!IsMissionFinished)
                 {
-                    Start((int)(missionFinishDate - DateTime.UtcNow).TotalSeconds);
+                    Start((int)(response.MissionEndTime - DateTime.UtcNow).TotalSeconds);
                 }
             }
             else
             {
                 await FetchMissions();
             }
+
+            StateHasChanged();
         }
 
-        public async void StartMission(int id, int duration)
+        public async void StartMission(int id)
         {
-            DateTime endTime = DateTime.UtcNow.AddMinutes(duration);
-            player = await _missionServices.SetMissionToPlayer(id, endTime);
-            ShowAll = false;
-            IsMissionFinished = false;
-            Start(duration * 60);
-            StateHasChanged();
+            var response = await _missionServices.SetMissionToPlayer(id);
+
+            if (response.Success)
+            {
+                ShowAll = false;
+                IsMissionFinished = false;
+                Start((int)(response.EndTime.Value - DateTime.UtcNow).TotalSeconds);
+            }
         }
 
         protected async Task FetchMissions()
         {
             Missions = await _missionServices.GetMissions();
             ShowAll = true;
-            StateHasChanged();
         }
 
         private async void OnTimedEvent(object? sender, ElapsedEventArgs e)
@@ -94,17 +99,9 @@ namespace WebGame.UI.Blazor.Pages
 
             if (_secondsToRun <= 0)
             {
-                IsMissionFinished = true;
-                StateHasChanged();
+                await Refresh();
                 _timer.Stop();
             }
-        }
-
-        private async Task Reward()
-        {
-            await _missionServices.RewardPlayer(player);
-            await FetchMissions();
-            StateHasChanged();
         }
 
         public void Dispose()
