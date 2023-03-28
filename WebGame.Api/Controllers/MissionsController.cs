@@ -7,8 +7,8 @@ using WebGame.Application.Functions.Missions.Command.Update;
 using WebGame.Application.Functions.Missions.Query.GetMission;
 using WebGame.Application.Functions.Missions.Query.GetAllMissions;
 using WebGame.Api.Common;
-using WebGame.Application.Functions.Missions.Command.Check;
 using WebGame.Application.Functions.Missions.Command.StartMission;
+using WebGame.Application.Functions.Missions.Command;
 
 namespace WebGame.Controllers
 {
