@@ -6,6 +6,8 @@ using WebGame.Application.Functions.Missions.Command.Delete;
 using WebGame.Application.Functions.Missions.Command.Update;
 using WebGame.Application.Functions.Missions.Query.GetMission;
 using WebGame.Application.Functions.Missions.Query.GetAllMissions;
+using WebGame.Application.Functions.Missions.Command;
+using WebGame.Api.Common;
 
 namespace WebGame.Controllers
 {
@@ -54,6 +56,22 @@ namespace WebGame.Controllers
             var result = await _mediator.Send(createMissionCommand);
             if (result.Success)
                 return Ok(result.MissionId);
+            else
+                return BadRequest(result.Errors);
+        }
+
+        [HttpPost("mission/check")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        [Authorize]
+        public async Task<ActionResult<int>> Check([FromBody] CheckMissionCommand checkMissionCommand)
+        {
+            int playerId = Utils.GetPlayerId(User);
+            checkMissionCommand.PlayerId = playerId;
+            var result = await _mediator.Send(checkMissionCommand);
+            if (result.Success)
+                return Ok(result);
             else
                 return BadRequest(result.Errors);
 

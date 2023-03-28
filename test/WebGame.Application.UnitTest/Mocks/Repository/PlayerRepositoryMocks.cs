@@ -67,7 +67,9 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Strenght = 10,
                     Dexterity = 10,
                     Endurance= 10,
-                    UserId = "user1"
+                    UserId = "user1",
+                    MissionId= 1,
+                    EndMissionTime = new DateTime(1999,1,1)
                 },
                 new Player()
                 {
@@ -80,7 +82,24 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Strenght = 10,
                     Dexterity = 10,
                     Endurance= 10,
-                    UserId = "user2"
+                    UserId = "user2",
+                    MissionId= 1,
+                    EndMissionTime = new DateTime(9999,1,1)
+                },
+                new Player()
+                {
+                    Id=3,
+                    Name = "asdasdasdasSASDASD",
+                    Level = 10,
+                    Exp = 1000,
+                    Cash = 100,
+                    SkillPoints = 10,
+                    Strenght = 10,
+                    Dexterity = 10,
+                    Endurance= 10,
+                    UserId = "user2",
+                    MissionId= 0,
+                    EndMissionTime = new DateTime()
                 }
             };
         }
