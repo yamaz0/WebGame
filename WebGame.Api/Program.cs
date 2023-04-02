@@ -12,6 +12,7 @@ using WebGame.Application;
 using WebGame.Domain.Entities.User;
 using WebGame.Duel;
 using WebGame.Security;
+using WebGame.TimeAction;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,7 @@ builder.Services.ConfigureSwagger();
 
 builder.Services.InstallApplication();
 builder.Services.InstallDb();
+builder.Services.InstallTimeAction();
 builder.Services.InstallSecurity(builder.Configuration);
 builder.Services.InstallDuel();
 

@@ -105,7 +105,8 @@ namespace WebGame.Persistence.EF.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
-                    Reward = table.Column<int>(type: "int", nullable: false),
+                    RewardExp = table.Column<int>(type: "int", nullable: false),
+                    RewardCash = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
@@ -125,7 +126,8 @@ namespace WebGame.Persistence.EF.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Duration = table.Column<int>(type: "int", nullable: false),
-                    Reward = table.Column<int>(type: "int", nullable: false),
+                    RewardExp = table.Column<int>(type: "int", nullable: false),
+                    RewardCash = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
@@ -286,11 +288,11 @@ namespace WebGame.Persistence.EF.Migrations
                     BootsId = table.Column<int>(type: "int", nullable: true),
                     WeaponId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    JobId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    EndJobTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MissionId = table.Column<int>(type: "int", nullable: false),
+                    ActionType = table.Column<int>(type: "int", nullable: false),
+                    ActionState = table.Column<int>(type: "int", nullable: false),
+                    ActionId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Stamina = table.Column<int>(type: "int", nullable: false),
-                    EndMissionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
@@ -357,29 +359,29 @@ namespace WebGame.Persistence.EF.Migrations
 
             migrationBuilder.InsertData(
                 table: "Jobs",
-                columns: new[] { "Id", "Description", "Duration", "Name", "Reward" },
+                columns: new[] { "Id", "Description", "Duration", "Name", "RewardCash", "RewardExp" },
                 values: new object[,]
                 {
-                    { 1, "asdasd", 1, "praca1", 1 },
-                    { 2, "hfgghfg", 3, "praca2", 2 }
+                    { 1, "asdasd", 1, "praca1", 0, 1 },
+                    { 2, "hfgghfg", 3, "praca2", 0, 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Missions",
-                columns: new[] { "Id", "Description", "Duration", "Name", "Reward" },
+                columns: new[] { "Id", "Description", "Duration", "Name", "RewardCash", "RewardExp" },
                 values: new object[,]
                 {
-                    { 1, "asdasd", 1, "misja1", 1 },
-                    { 2, "hfgghfg", 2, "misja2", 2 }
+                    { 1, "asdasd", 1, "misja1", 0, 1 },
+                    { 2, "hfgghfg", 2, "misja2", 0, 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Players",
-                columns: new[] { "Id", "ArmorId", "Attack", "BootsId", "Cash", "Defense", "Dexterity", "EndJobTime", "EndMissionTime", "Endurance", "Exp", "HealthPoint", "HelmetId", "LegsId", "Level", "MissionId", "Name", "SkillPoints", "Stamina", "Strenght", "UserId", "WeaponId" },
+                columns: new[] { "Id", "ActionState", "ActionType", "ArmorId", "Attack", "BootsId", "Cash", "Defense", "Dexterity", "EndTime", "Endurance", "Exp", "HealthPoint", "HelmetId", "LegsId", "Level", "Name", "SkillPoints", "Stamina", "Strenght", "UserId", "WeaponId" },
                 values: new object[,]
                 {
-                    { 1, null, 1, null, 100, 0, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 100, null, null, 10, 0, "Graczek", 10, 0, 10, "user1", null },
-                    { 2, null, 1, null, 100, 0, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 100, null, null, 10, 0, "asdasdasdas", 10, 0, 10, "user2", null }
+                    { 1, 0, 0, null, 1, null, 100, 0, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 100, null, null, 10, "Graczek", 10, 0, 10, "user1", null },
+                    { 2, 0, 0, null, 1, null, 100, 0, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 100, null, null, 10, "asdasdasdas", 10, 0, 10, "user2", null }
                 });
 
             migrationBuilder.InsertData(

@@ -7,8 +7,10 @@ using WebGame.Application.Functions.Missions.Command.Update;
 using WebGame.Application.Functions.Missions.Query.GetMission;
 using WebGame.Application.Functions.Missions.Query.GetAllMissions;
 using WebGame.Api.Common;
-using WebGame.Application.Functions.Missions.Command.StartMission;
+using WebGame.Application.Functions.Missions.Command.RewardMission;
 using WebGame.Application.Functions.Missions.Command;
+using WebGame.Application.Response;
+using WebGame.Application.Functions.Missions.Command.StartMission;
 
 namespace WebGame.Controllers
 {
@@ -66,7 +68,7 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         [Authorize]
-        public async Task<ActionResult<CheckMissionCommandResponse>> CheckMission()
+        public async Task<ActionResult<TimeActionResponse>> CheckMission()
         {
             int playerId = Utils.GetPlayerId(User);
             CheckMissionCommand checkMissionCommand = new CheckMissionCommand(playerId);
@@ -84,12 +86,30 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         [Authorize]
-        public async Task<ActionResult<StartMissionCommandResponse>> MissionReward([FromBody] int missionId)
+        public async Task<ActionResult<BasicResponse>> MissionStart([FromBody] int missionId)
         {
             int playerId = Utils.GetPlayerId(User);
             StartMissionCommand startMissionCommand = new StartMissionCommand(playerId, missionId);
 
             var result = await _mediator.Send(startMissionCommand);
+
+            if (result.Success)
+                return Ok(result);
+            else
+                return BadRequest(result.Errors);
+        }
+
+        [HttpPost("mission/reward")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        [Authorize]
+        public async Task<ActionResult<BasicResponse>> MissionReward()
+        {
+            int playerId = Utils.GetPlayerId(User);
+            RewardMissionCommand rewardMissionCommand = new RewardMissionCommand(playerId);
+
+            var result = await _mediator.Send(rewardMissionCommand);
 
             if (result.Success)
                 return Ok(result);

@@ -38,7 +38,7 @@ namespace WebGame.Application.UnitTest.Missions.Command.Update
                 Name = "after",
                 Description = mission.Description,
                 Duration = mission.Duration,
-                Reward = mission.Reward
+                Reward = mission.RewardExp
             }, CancellationToken.None);
 
             var updatedMission = await _mockMissionRepository.Object.GetByIdAsync(ID);

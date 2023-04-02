@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TimeAction\WebGame.TimeAction.csproj" />
     <ProjectReference Include="..\WebGame.Application\WebGame.Application.csproj" />
     <ProjectReference Include="..\WebGame.Persistence.EF\WebGame.Persistence.EF.csproj" />
     <ProjectReference Include="..\WebGame.Security\WebGame.Security.csproj" />

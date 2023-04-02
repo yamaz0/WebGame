@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using WebGame.Application.Response;
 
-namespace WebGame.Application.Functions.Missions.Command
+namespace WebGame.Application.Functions.Missions.Command.RewardMission
 {
-    public class CheckMissionCommand : IRequest<Response.TimeActionResponse>
+    public class RewardMissionCommand : IRequest<BasicResponse>
     {
         public int PlayerId { get; set; }
 
-        public CheckMissionCommand(int playerId)
+        public RewardMissionCommand(int playerId)
         {
             PlayerId = playerId;
         }

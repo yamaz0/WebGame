@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGame.Security", "WebGame
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGame.Application.Security", "WebGame.Application.Secure\WebGame.Application.Security.csproj", "{2B4E30CD-EBDB-4903-85EB-4CBFBE858E75}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGame.TimeAction", "TimeAction\WebGame.TimeAction.csproj", "{3EAC4D31-9141-4B26-8353-33A212884D47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{2B4E30CD-EBDB-4903-85EB-4CBFBE858E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B4E30CD-EBDB-4903-85EB-4CBFBE858E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B4E30CD-EBDB-4903-85EB-4CBFBE858E75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EAC4D31-9141-4B26-8353-33A212884D47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EAC4D31-9141-4B26-8353-33A212884D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EAC4D31-9141-4B26-8353-33A212884D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EAC4D31-9141-4B26-8353-33A212884D47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{FE8659E5-3E99-4363-8906-C0E2163AADF3} = {9627CD8C-C68E-49A3-B497-6D6F0DA18EA1}
 		{015D336C-9588-4C72-9689-6C85DA204BFE} = {9627CD8C-C68E-49A3-B497-6D6F0DA18EA1}
 		{2B4E30CD-EBDB-4903-85EB-4CBFBE858E75} = {563F5B5F-BD50-4380-829E-C141C011C3DD}
+		{3EAC4D31-9141-4B26-8353-33A212884D47} = {9627CD8C-C68E-49A3-B497-6D6F0DA18EA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B819098-866B-4338-9FB5-D13C0B2D04AB}

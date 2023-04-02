@@ -12,7 +12,7 @@ using WebGame;
 namespace WebGame.Persistence.EF.Migrations
 {
     [DbContext(typeof(DbGameContext))]
-    [Migration("20230308223844_init")]
+    [Migration("20230402212056_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace WebGame.Persistence.EF.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.3")
+                .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -182,6 +182,17 @@ namespace WebGame.Persistence.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ActionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("ActionState")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ActionType")
+                        .HasColumnType("int");
+
                     b.Property<int?>("ArmorId")
                         .HasColumnType("int");
 
@@ -217,10 +228,7 @@ namespace WebGame.Persistence.EF.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(10);
 
-                    b.Property<DateTime>("EndJobTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndMissionTime")
+                    b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Endurance")
@@ -241,11 +249,6 @@ namespace WebGame.Persistence.EF.Migrations
                     b.Property<int?>("HelmetId")
                         .HasColumnType("int");
 
-                    b.Property<int>("JobId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
                     b.Property<string>("LastModifiedBy")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
@@ -263,9 +266,6 @@ namespace WebGame.Persistence.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
-
-                    b.Property<int>("MissionId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -309,19 +309,19 @@ namespace WebGame.Persistence.EF.Migrations
                         new
                         {
                             Id = 1,
+                            ActionId = 0,
+                            ActionState = 0,
+                            ActionType = 0,
                             Attack = 1,
                             Cash = 100,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Defense = 0,
                             Dexterity = 10,
-                            EndJobTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndMissionTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Endurance = 10,
                             Exp = 1000,
                             HealthPoint = 100,
-                            JobId = 0,
                             Level = 10,
-                            MissionId = 0,
                             Name = "Graczek",
                             SkillPoints = 10,
                             Stamina = 0,
@@ -331,19 +331,19 @@ namespace WebGame.Persistence.EF.Migrations
                         new
                         {
                             Id = 2,
+                            ActionId = 0,
+                            ActionState = 0,
+                            ActionType = 0,
                             Attack = 1,
                             Cash = 100,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Defense = 0,
                             Dexterity = 10,
-                            EndJobTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndMissionTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Endurance = 10,
                             Exp = 1000,
                             HealthPoint = 100,
-                            JobId = 0,
                             Level = 10,
-                            MissionId = 0,
                             Name = "asdasdasdas",
                             SkillPoints = 10,
                             Stamina = 0,
@@ -706,7 +706,10 @@ namespace WebGame.Persistence.EF.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Reward")
+                    b.Property<int>("RewardCash")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RewardExp")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -721,7 +724,8 @@ namespace WebGame.Persistence.EF.Migrations
                             Description = "asdasd",
                             Duration = 1,
                             Name = "praca1",
-                            Reward = 1
+                            RewardCash = 0,
+                            RewardExp = 1
                         },
                         new
                         {
@@ -730,7 +734,8 @@ namespace WebGame.Persistence.EF.Migrations
                             Description = "hfgghfg",
                             Duration = 3,
                             Name = "praca2",
-                            Reward = 2
+                            RewardCash = 0,
+                            RewardExp = 2
                         });
                 });
 
@@ -774,7 +779,10 @@ namespace WebGame.Persistence.EF.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Reward")
+                    b.Property<int>("RewardCash")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RewardExp")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -789,7 +797,8 @@ namespace WebGame.Persistence.EF.Migrations
                             Description = "asdasd",
                             Duration = 1,
                             Name = "misja1",
-                            Reward = 1
+                            RewardCash = 0,
+                            RewardExp = 1
                         },
                         new
                         {
@@ -798,7 +807,8 @@ namespace WebGame.Persistence.EF.Migrations
                             Description = "hfgghfg",
                             Duration = 2,
                             Name = "misja2",
-                            Reward = 2
+                            RewardCash = 0,
+                            RewardExp = 2
                         });
                 });
 

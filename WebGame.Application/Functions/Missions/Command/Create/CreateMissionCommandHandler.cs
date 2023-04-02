@@ -29,7 +29,7 @@ namespace WebGame.Application.Functions.Missions.Command.Create
                 Name = request.Name,
                 Description = request.Description,
                 Duration = request.Duration,
-                Reward = request.Reward
+                RewardExp = request.Reward
             };
 
             mission = await _missionRepository.AddAsync(mission);

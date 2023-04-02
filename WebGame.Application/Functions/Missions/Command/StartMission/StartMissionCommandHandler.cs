@@ -1,38 +1,36 @@
 ﻿using MediatR;
 using WebGame.Application.Interfaces.Persistence;
+using WebGame.Application.Interfaces.TimeAction;
+using WebGame.Application.Response;
 
 namespace WebGame.Application.Functions.Missions.Command.StartMission
 {
-    public class StartMissionCommandHandler : IRequestHandler<StartMissionCommand, StartMissionCommandResponse>
+    public class StartMissionCommandHandler : IRequestHandler<StartMissionCommand, BasicResponse>
     {
-        private const int NO_MISSION_ID = 0;
-
-        private readonly IPlayerRepository _playerRepository;
         private readonly IMissionRepository _missionRepository;
+        private readonly ITimeActionService _timeActionService;
 
-        public StartMissionCommandHandler(IPlayerRepository playerRepository, IMissionRepository missionRepository)
+        public StartMissionCommandHandler(IMissionRepository missionRepository, ITimeActionService timeActionService)
         {
-            _playerRepository = playerRepository;
             _missionRepository = missionRepository;
+            _timeActionService = timeActionService;
         }
 
-        public async Task<StartMissionCommandResponse> Handle(StartMissionCommand request, CancellationToken cancellationToken)
+        public async Task<BasicResponse> Handle(StartMissionCommand request, CancellationToken cancellationToken)
         {
-            var player = await _playerRepository.GetByIdAsync(request.PlayerId);
-            bool hasPlayerMission = player.MissionId != NO_MISSION_ID;
+            var mission = await _missionRepository.GetByIdAsync(request.MissionId);
 
-            if (!hasPlayerMission)
+            if (mission == null)
+                return new BasicResponse("Mission not found.");
+
+            bool isSuccess = await _timeActionService.SetActionToPlayer(request.PlayerId, Domain.TimeActionEnum.TimeActionType.Mission, mission);
+
+            if (!isSuccess)
             {
-                var mission = await _missionRepository.GetByIdAsync(request.MissionId);
-
-                player.MissionId = request.MissionId;
-                player.EndMissionTime = DateTime.UtcNow.AddMinutes(mission.Duration);
-                await _playerRepository.UpdateAsync(player);
-
-                return new StartMissionCommandResponse(player.EndMissionTime);
+                return new BasicResponse("Cant start mission.");
             }
 
-            return new StartMissionCommandResponse("Player already has a mission!");
+            return new BasicResponse();
         }
     }
 }
