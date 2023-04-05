@@ -13,9 +13,8 @@ namespace WebGame.UI.Blazor.Pages
         private int _secondsToRun = 0;
 
         protected string Time { get; set; } = "00:00";
-        protected bool ShowAll { get; set; }
+        protected TimeActionStateResponse State { get; set; }
         public ICollection<MissionBlazorVM> Missions { get; set; }
-        public bool IsMissionFinished { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -48,22 +47,34 @@ namespace WebGame.UI.Blazor.Pages
             await Refresh();
         }
 
+        private async Task Reward()
+        {
+            await _missionServices.RewardMission();
+            await Refresh();
+        }
+
         private async Task Refresh()
         {
-            var response = await _missionServices.CheckMission();
+            TimeActionResponse response = await _missionServices.CheckMission();
+            State = response.TimeActionStateResponse;
 
-            if (response.HasPlayerMission)
+            switch (State)
             {
-                IsMissionFinished = response.IsMissionFinished;
-
-                if (!IsMissionFinished)
-                {
-                    Start((int)(response.MissionEndTime - DateTime.UtcNow).TotalSeconds);
-                }
-            }
-            else
-            {
-                await FetchMissions();
+                case TimeActionStateResponse.NoAction:
+                    await FetchMissions();
+                    break;
+                case TimeActionStateResponse.OtherAction:
+                    Time = "Player does other action.";
+                    break;
+                case TimeActionStateResponse.InProgress:
+                    Start((int)(response.EndTime - DateTime.UtcNow).TotalSeconds);
+                    break;
+                case TimeActionStateResponse.Finished:
+                    Time = "Mission end.";
+                    break;
+                default:
+                    //error bad enum
+                    break;
             }
 
             StateHasChanged();
@@ -75,16 +86,14 @@ namespace WebGame.UI.Blazor.Pages
 
             if (response.Success)
             {
-                ShowAll = false;
-                IsMissionFinished = false;
-                Start((int)(response.EndTime.Value - DateTime.UtcNow).TotalSeconds);
+                await Refresh();
             }
         }
 
         protected async Task FetchMissions()
         {
-            Missions = await _missionServices.GetMissions();
-            ShowAll = true;
+            if (Missions == null)
+                Missions = await _missionServices.GetMissions();
         }
 
         private async void OnTimedEvent(object? sender, ElapsedEventArgs e)
