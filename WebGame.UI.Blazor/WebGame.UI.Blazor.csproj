@@ -25,11 +25,8 @@
     <Folder Include="FoldersToCopy\Missions\" />
     <Folder Include="FoldersToCopy\Players\" />
     <Folder Include="FoldersToCopy\Weapons\" />
-    <Folder Include="Interfaces\Enemies\" />
     <Folder Include="Interfaces\Jobs\" />
-    <Folder Include="Services\Enemies\" />
     <Folder Include="Services\Jobs\" />
-    <Folder Include="ViewModels\Enemies\" />
     <Folder Include="ViewModels\Jobs\" />
   </ItemGroup>
 

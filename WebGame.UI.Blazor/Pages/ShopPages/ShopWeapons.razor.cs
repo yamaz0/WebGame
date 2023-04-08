@@ -3,7 +3,7 @@ using WebGame.UI.Blazor.Interfaces.Armors;
 using WebGame.UI.Blazor.Interfaces.Weapons;
 using WebGame.UI.Blazor.ViewModels.Weapons;
 
-namespace WebGame.UI.Blazor.Pages
+namespace WebGame.UI.Blazor.Pages.ShopPages
 {
     public partial class ShopWeapons
     {

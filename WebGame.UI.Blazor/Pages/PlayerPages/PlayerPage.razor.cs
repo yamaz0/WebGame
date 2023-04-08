@@ -4,7 +4,7 @@ using WebGame.UI.Blazor.Interfaces.Players;
 using WebGame.UI.Blazor.ViewModels.Armors;
 using WebGame.UI.Blazor.ViewModels.Players;
 
-namespace WebGame.UI.Blazor.Pages
+namespace WebGame.UI.Blazor.Pages.PlayerPages
 {
     public partial class PlayerPage
     {

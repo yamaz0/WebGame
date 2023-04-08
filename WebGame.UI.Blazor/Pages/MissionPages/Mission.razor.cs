@@ -5,7 +5,7 @@ using WebGame.UI.Blazor.Interfaces.Players;
 using WebGame.UI.Blazor.Services;
 using WebGame.UI.Blazor.ViewModels.Missions;
 
-namespace WebGame.UI.Blazor.Pages
+namespace WebGame.UI.Blazor.Pages.MissionPages
 {
     public partial class Mission
     {

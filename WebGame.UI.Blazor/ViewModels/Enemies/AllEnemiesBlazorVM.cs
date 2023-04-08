@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WebGame.Application.Functions.Enemies.Query.GetAllEnemies
+﻿namespace WebGame.UI.Blazor.ViewModels.Enemies
 {
-    public class GetAllEnemiesViewModel
+    public class AllEnemiesBlazorVM
     {
         public int Id { get; set; }
         public string Name { get; set; }
