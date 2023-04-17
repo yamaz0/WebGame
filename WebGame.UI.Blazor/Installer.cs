@@ -29,7 +29,6 @@ namespace WebGame.UI.Blazor
             services.AddScoped<IEnemiesService, EnemiesService>();
             services.AddScoped<IAddBearerTokenService, AddBearerTokenService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddAuthorizationCore();
             return services;

@@ -43,8 +43,7 @@ namespace WebGame.TimeAction
             {
                 player.ActionState = TimeActionState.NoAction;
                 player.ActionId = 0;
-                player.Exp += action.RewardExp;
-                player.Cash += action.RewardCash;
+                player.AddReward(action.RewardExp, action.RewardCash);
                 await _playerRepository.UpdateAsync(player);
 
                 return true;

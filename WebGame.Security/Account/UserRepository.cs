@@ -53,6 +53,11 @@ namespace WebGame.Persistence.EF.Account
         {
             return await _userManager.FindByIdAsync(id);
         }
+        
+        public async Task<UserEntity> GetUserAsync(ClaimsPrincipal principal)
+        {
+            return await _userManager.GetUserAsync(principal);
+        }
 
         public async Task<UserEntity> GetByNameAsync(string name)
         {

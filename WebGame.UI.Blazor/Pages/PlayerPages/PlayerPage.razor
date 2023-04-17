@@ -9,13 +9,38 @@ else
 {
     @*<span>Id:          @Player.Id</span> *@
     <span>Name:        @Player.Name</span>
+    <br />
+    <br />
     <span>Level:       @Player.Level</span>
+    <br />
     <span>Exp:         @Player.Exp</span>
+    <br />
     <span>Cash:        @Player.Cash</span>
+    <br />
+    <br />
     <span>SkillPoints: @Player.SkillPoints</span>
+    <br />
     <span>Strenght:    @Player.Strenght</span>
+    @if (Player.SkillPoints > 0)
+    {
+        <button onclick=@(()=>AddStat(Services.Statistic.Strenght))>+</button>
+    }
+    <br />
     <span>Dexterity:   @Player.Dexterity</span>
+    @if (Player.SkillPoints > 0)
+    {
+        <button onclick=@(()=>AddStat(Services.Statistic.Dexterity))>+</button>
+    }
+    <br />
     <span>Endurance:   @Player.Endurance</span>
+    @if (Player.SkillPoints > 0)
+    {
+        <button onclick=@(()=>AddStat(Services.Statistic.Endurance))>+</button>
+    }
+    <br />
+
+    <br />
     <span>Stamina:     @Player.Stamina</span>
+    <br />
 
 }

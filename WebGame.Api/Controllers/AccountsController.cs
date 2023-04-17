@@ -1,10 +1,10 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebGame.Application.Functions.Account.Command.Login;
-using WebGame.Application.Functions.Account.Command.Logout;
+using WebGame.Application.Functions.Account.Command.RefreshToken;
 using WebGame.Application.Functions.Accounts.Command.Create;
-using WebGame.Application.Functions.Players.Query.GetPlayer;
 
 namespace WebGame.Controllers
 {
@@ -18,6 +18,8 @@ namespace WebGame.Controllers
             _mediator = mediator;
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
         [HttpPost("Login")]
         public async Task<ActionResult<LoginCommandResponse>> Login([FromBody] LoginCommand request)
         {
@@ -27,13 +29,28 @@ namespace WebGame.Controllers
             return Ok(result);
         }
 
-        [HttpPost("Logout")]
-        public async Task<ActionResult> Logout()
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        [HttpPost("RefreshToken")]
+        public async Task<ActionResult<RefreshTokenCommandResponse>> Refresh()
         {
-            var result = await _mediator.Send(new LogoutCommand());
+            var result = await _mediator.Send(new RefreshTokenCommand(User));
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        [HttpPost("Logout")]
+        public async Task<ActionResult> Logout()//do wywalenia
+        {
+            //var result = await _mediator.Send(new LogoutCommand());
+            await HttpContext.SignOutAsync();
             return Ok();
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
         [HttpPost("Register")]
         public async Task<ActionResult<CreateUserCommandResponse>> Register([FromBody] CreateUserCommand request)
         {

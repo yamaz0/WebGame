@@ -7,6 +7,8 @@ namespace WebGame.UI.Blazor.Services.Authentication
 {
     public class AddBearerTokenService : IAddBearerTokenService
     {
+        private const string REFRESH_TOKEN = CustomConstants.LocalStorage.REFRESH_TOKEN;
+        private const string TOKEN = CustomConstants.LocalStorage.TOKEN;
         private readonly ILocalStorageService _localStorage;
 
         public AddBearerTokenService(ILocalStorageService localStorage)
@@ -16,9 +18,16 @@ namespace WebGame.UI.Blazor.Services.Authentication
 
         public async Task AddBearerToken(IClient client)
         {
-            if (await _localStorage.ContainKeyAsync(CustomConstants.LocalStorage.TOKEN))
+            if (await _localStorage.ContainKeyAsync(TOKEN))
                 client.HttpClient.DefaultRequestHeaders.Authorization
-                    = new AuthenticationHeaderValue(CustomConstants.Authorization.BEARER, await _localStorage.GetItemAsync<string>(CustomConstants.LocalStorage.TOKEN));
+                    = new AuthenticationHeaderValue(CustomConstants.Authorization.BEARER, await _localStorage.GetItemAsync<string>(TOKEN));
+        }
+
+        public async Task AddBearerRefreshToken(IClient client)
+        {
+            if (await _localStorage.ContainKeyAsync(REFRESH_TOKEN))
+                client.HttpClient.DefaultRequestHeaders.Authorization
+                    = new AuthenticationHeaderValue(CustomConstants.Authorization.BEARER, await _localStorage.GetItemAsync<string>(REFRESH_TOKEN));
         }
     }
 }

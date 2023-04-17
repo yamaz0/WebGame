@@ -54,21 +54,31 @@ namespace WebGame.Security
 
                     o.Events = new JwtBearerEvents()
                     {
-                        OnAuthenticationFailed = c =>
+                        OnAuthenticationFailed = context =>
                         {
-                            c.NoResult();
-                            c.Response.StatusCode = 500;
-                            c.Response.ContentType = "text/plain";
-                            return c.Response.WriteAsync(c.Exception.ToString());
-                        },
-                        OnChallenge = context =>
-                        {
-                            context.HandleResponse();
+                            context.NoResult();
                             context.Response.StatusCode = 401;
                             context.Response.ContentType = "application/json";
                             var result = JsonConvert.SerializeObject("401 Not authorized");
                             return context.Response.WriteAsync(result);
                         },
+                        //OnChallenge = context =>
+                        //{
+                        //    try
+                        //    {
+
+                        //        context.HandleResponse();
+                        //        context.Response.StatusCode = 401;
+                        //        context.Response.ContentType = "application/json";
+                        //    }
+                        //    catch (Exception e)
+                        //    {
+                        //        Console.WriteLine(e);
+                        //        throw;
+                        //    }
+                        //        var result = JsonConvert.SerializeObject("401 Not authorized");
+                        //    return context.Response.WriteAsync(result);
+                        //},
                         OnForbidden = context =>
                         {
                             context.Response.StatusCode = 403;

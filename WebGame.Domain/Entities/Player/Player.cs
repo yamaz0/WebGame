@@ -56,15 +56,39 @@ namespace WebGame.Domain.Entities.Player
 
         #endregion
 
+        public void AddReward(int exp, int cash)
+        {
+            int expRequirement = Utils.CalculateExpRequirement(Level);
+
+            Exp += exp;
+            Cash += cash;
+
+            while (Exp >= expRequirement)
+            {
+                Exp -= expRequirement;
+                Level++;
+                SkillPoints++;
+                expRequirement = Utils.CalculateExpRequirement(Level);
+            }
+        }
+
         public void AddStrenght()
         {
             Strenght++;
+            SkillPoints--;
             UpdateAttack();
+        }
+
+        public void AddDexterity()
+        {
+            Dexterity++;
+            SkillPoints--;
         }
 
         public void AddEndurance()
         {
             Endurance++;
+            SkillPoints--;
             UpdateHealthPoint();
         }
 

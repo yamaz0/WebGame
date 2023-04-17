@@ -9,3 +9,8 @@ namespace WebGame.Domain.TimeActionEnum
     public enum TimeActionType { NoAction, Work, Mission, GuildExpedition }
     public enum TimeActionState { NoAction, InProgress, Finished }
 }
+
+namespace WebGame.Domain.PlayerStatsEnum
+{
+    public enum Statistic { Strenght, Dexterity, Endurance }
+}

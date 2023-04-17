@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using WebGame.UI.Blazor.Interfaces.Armors;
 using WebGame.UI.Blazor.Interfaces.Players;
+using WebGame.UI.Blazor.Services;
 using WebGame.UI.Blazor.ViewModels.Armors;
 using WebGame.UI.Blazor.ViewModels.Players;
 
@@ -18,7 +19,19 @@ namespace WebGame.UI.Blazor.Pages.PlayerPages
 
         protected async override Task OnInitializedAsync()
         {
+            await RefreshPlayer();
+        }
+
+        private async Task RefreshPlayer()
+        {
             Player = await PlayerService.GetPlayerView();
+            StateHasChanged();
+        }
+
+        public async Task AddStat(Statistic stat)
+        {
+            await PlayerService.AddStat(stat);
+            await RefreshPlayer();
         }
     }
 }
