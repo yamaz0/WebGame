@@ -44,7 +44,7 @@ namespace WebGame.Application.UnitTest.Shop
 
             Player playerAfter = (await _mockPlayerRepository.Object.GetByIdAsync(PLAYER_ID));
             var cashAfter = playerAfter.Cash;
-            var armorAfter = playerAfter.Armor;
+            var armorAfter = playerAfter.Helmet;
 
             cashAfter.ShouldBe(cashBefore - armorValue);
             armorAfter.Id.ShouldBe(armor.Id);
