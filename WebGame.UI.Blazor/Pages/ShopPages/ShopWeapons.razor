@@ -12,6 +12,7 @@ else
             <li>@(weapon.Name)</li>
             <li>@(weapon.Attack)</li>
             <li>@(weapon.Value)</li>
+            <li><button onclick=@(()=>Buy(weapon.Id))>Buy</button></li>
         }
     </ul>
 }

@@ -19,5 +19,9 @@ namespace WebGame.UI.Blazor.Pages.ShopPages
         {
             Weapons = await WeaponService.GetAllWeapons();
         }
+        public async Task Buy(int id)
+        {
+            await WeaponService.BuyWeapon(id);
+        }
     }
 }

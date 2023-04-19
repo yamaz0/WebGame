@@ -13,6 +13,12 @@ namespace WebGame.Application.Functions.Shop.Command.BuyArmor
 {
     public class BuyArmorShopCommand : IRequest<BasicResponse>
     {
+        public BuyArmorShopCommand(int playerId, int armorId)
+        {
+            PlayerId = playerId;
+            ArmorId = armorId;
+        }
+
         public int PlayerId { get; set; }
         public int ArmorId { get; set; }
     }
