@@ -1,4 +1,6 @@
-﻿namespace WebGame.Application.Functions.Players.Query.GetPlayer
+﻿using WebGame.Entities.Items;
+
+namespace WebGame.Application.Functions.Players.Query.GetPlayer
 {
     public class GetPlayerAllInfoViewModel
     {
@@ -33,11 +35,11 @@
         #endregion
 
         #region Armors
-        //public virtual Armor? Helmet { get; set; }
-        //public virtual Armor? Armor { get; set; }
-        //public virtual Armor? Legs { get; set; }
-        //public virtual Armor? Boots { get; set; }
-        //public virtual Weapon? Weapon { get; set; }
+        public virtual Armor? Helmet { get; set; }
+        public virtual Armor? Armor { get; set; }
+        public virtual Armor? Legs { get; set; }
+        public virtual Armor? Boots { get; set; }
+        public virtual Weapon? Weapon { get; set; }
         #endregion
 
         #region User

@@ -10,5 +10,6 @@ namespace WebGame.Application.Interfaces.Persistence
 {
     public interface IPlayerRepository : IAsyncRepository<Player>
     {
+        Task<Player> GetFullByIdAsync(int id);
     }
 }

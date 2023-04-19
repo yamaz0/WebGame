@@ -9,9 +9,9 @@ else
     <ul>
         @foreach (var weapon in Weapons)
         {
-            <li>@(weapon.Name)</li>
-            <li>@(weapon.Attack)</li>
-            <li>@(weapon.Value)</li>
+            <li>Name: @(weapon.Name)</li>
+            <li>Attack: @(weapon.Attack)</li>
+            <li>Value: @(weapon.Value)</li>
             <li><button onclick=@(()=>Buy(weapon.Id))>Buy</button></li>
         }
     </ul>

@@ -38,9 +38,18 @@ else
         <button onclick=@(()=>AddStat(Services.Statistic.Endurance))>+</button>
     }
     <br />
+    <span>Stamina:     @Player.Stamina</span>
 
     <br />
-    <span>Stamina:     @Player.Stamina</span>
+    <span>Helmet:      @Player.Helmet?.Name</span>
     <br />
+    <br />
+    <span>Armor:       @Player.Armor?.Name</span>
+    <br />
+    <span>Legs:        @Player.Legs?.Name</span>
+    <br />
+    <span>Boots:       @Player.Boots?.Name</span>
+    <br />
+    <span>Weapon:      @Player.Weapon?.Name</span>
 
 }
