@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebGame.Domain.TimeActionEnum;
 using WebGame.Entities.Items;
 
 namespace WebGame.Application.Functions.Players.Command.Update
@@ -52,18 +53,18 @@ namespace WebGame.Application.Functions.Players.Command.Update
         public string UserId { get; set; }
         #endregion
 
-        #region Job
+        #region TimeAction
 
-        public int JobId { get; set; }
-        public DateTime EndJobTime { get; set; }
+        public TimeActionType ActionType { get; set; }
+        public TimeActionState ActionState { get; set; }
+        public int ActionId { get; set; }
+        public DateTime EndTime { get; set; }
 
         #endregion
 
         #region Mission
 
-        public int MissionId { get; set; }
         public int Stamina { get; set; }
-        public DateTime EndMissionTime { get; set; }
 
         #endregion
     }

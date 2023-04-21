@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebGame.Application.Response
 {
+
     public class BasicResponse
     {
         public bool Success { get; set; }

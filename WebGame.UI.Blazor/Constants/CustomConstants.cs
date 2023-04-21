@@ -5,6 +5,7 @@
         public static class LocalStorage
         {
             public const string TOKEN = "Token";
+            public const string REFRESH_TOKEN = "RefreshToken";
         }
         public static class Authorization
         {

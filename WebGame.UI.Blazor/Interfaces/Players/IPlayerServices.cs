@@ -5,6 +5,7 @@ namespace WebGame.UI.Blazor.Interfaces.Players
 {
     public interface IPlayerServices
     {
+        Task AddStat(Statistic statistic);
         Task<GetPlayerAllInfoViewModel> GetPlayer();
         Task<PlayerBlazorVM> GetPlayerView();
     }

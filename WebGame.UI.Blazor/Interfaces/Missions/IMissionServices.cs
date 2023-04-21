@@ -5,8 +5,9 @@ namespace WebGame.UI.Blazor.Interfaces.Missions
 {
     public interface IMissionServices
     {
+        Task<TimeActionResponse> CheckMission();
         Task<ICollection<MissionBlazorVM>> GetMissions();
-        Task RewardPlayer(GetPlayerAllInfoViewModel player);
-        Task<GetPlayerAllInfoViewModel> SetMissionToPlayer(int id, DateTime endTime);
+        Task<BasicResponse> RewardMission();
+        Task<BasicResponse> SetMissionToPlayer(int id);
     }
 }

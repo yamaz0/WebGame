@@ -62,7 +62,7 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Name = "praca1",
                     Description = "asdasd",
                     Duration= 1,
-                    Reward= 1
+                    RewardExp= 1
                 },
                 new Job()
                 {
@@ -70,7 +70,7 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Name = "praca2",
                     Description = "hfgghfg",
                     Duration= 3,
-                    Reward= 2
+                    RewardExp= 2
                 }
             };
         }

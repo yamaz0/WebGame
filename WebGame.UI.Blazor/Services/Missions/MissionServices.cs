@@ -30,31 +30,22 @@ namespace WebGame.UI.Blazor.Services.Missions
             return mappedMissions;
         }
 
-        public async Task<GetPlayerAllInfoViewModel> SetMissionToPlayer(int id, DateTime endTime)
+        public async Task<BasicResponse> SetMissionToPlayer(int id)
         {
-            var player = await _playerServices.GetPlayer();
-            player.MissionId = id;
-            player.EndMissionTime = endTime;
-            await UpdatePlayer(player);
-            return player;
-        }
-
-        private async Task UpdatePlayer(GetPlayerAllInfoViewModel player)
-        {
-            var mappedPlayercommand = _mapper.Map<UpdatePlayerCommand>(player);
-
             await _addBearerTokenService.AddBearerToken(_client);
-            await _client.PlayerPUTAsync(mappedPlayercommand);
+            return await _client.StartAsync(id, CancellationToken.None);
         }
 
-        public async Task RewardPlayer(GetPlayerAllInfoViewModel player)
+        public async Task<TimeActionResponse> CheckMission()
         {
-            var mission = await _client.MissionsGETAsync(player.MissionId);
+            await _addBearerTokenService.AddBearerToken(_client);
+            return await _client.CheckAsync();
+        }
 
-            player.Exp += mission.Reward;
-            player.MissionId = 0;
-
-            await UpdatePlayer(player);
+        public async Task<BasicResponse> RewardMission()
+        {
+            await _addBearerTokenService.AddBearerToken(_client);
+            return await _client.RewardAsync();
         }
     }
 }

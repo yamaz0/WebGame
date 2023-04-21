@@ -17,7 +17,7 @@ namespace WebGame.Application.Functions.Players.Query.GetPlayer
 
         public async Task<GetPlayerAllInfoViewModel> Handle(GetPlayerAllInfoRequest request, CancellationToken cancellationToken)
         {
-            var player = await _playerRepository.GetByIdAsync(request.PlayerId);
+            var player = await _playerRepository.GetFullByIdAsync(request.PlayerId);
             var mappedPlayer = _mapper.Map<GetPlayerAllInfoViewModel>(player);
 
             return mappedPlayer;

@@ -66,8 +66,12 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     SkillPoints = 10,
                     Strenght = 10,
                     Dexterity = 10,
-                    Endurance= 10,
-                    UserId = "user1"
+                    Endurance = 10,
+                    UserId = "user1",
+                    ActionId= 1,
+                    ActionState = Domain.TimeActionEnum.TimeActionState.Finished,
+                    ActionType = Domain.TimeActionEnum.TimeActionType.Mission,
+                    EndTime = new DateTime(1999,1,1)
                 },
                 new Player()
                 {
@@ -79,8 +83,46 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     SkillPoints = 10,
                     Strenght = 10,
                     Dexterity = 10,
-                    Endurance= 10,
-                    UserId = "user2"
+                    Endurance = 10,
+                    UserId = "user2",
+                    ActionId = 1,
+                    ActionState = Domain.TimeActionEnum.TimeActionState.InProgress,
+                    ActionType = Domain.TimeActionEnum.TimeActionType.Mission,
+                    EndTime = new DateTime(9999,1,1)
+                },
+                new Player()
+                {
+                    Id=3,
+                    Name = "asdasdasdasSASDASD",
+                    Level = 10,
+                    Exp = 1000,
+                    Cash = 100,
+                    SkillPoints = 10,
+                    Strenght = 10,
+                    Dexterity = 10,
+                    Endurance = 10,
+                    UserId = "user3",
+                    ActionId = 0,
+                    ActionState = Domain.TimeActionEnum.TimeActionState.NoAction,
+                    ActionType = Domain.TimeActionEnum.TimeActionType.Mission,
+                    EndTime = new DateTime()
+                },
+                new Player()
+                {
+                    Id=4,
+                    Name = "asdasdasdasSASDAS242424D",
+                    Level = 10,
+                    Exp = 1000,
+                    Cash = 100,
+                    SkillPoints = 10,
+                    Strenght = 10,
+                    Dexterity = 10,
+                    Endurance = 10,
+                    UserId = "user4",
+                    ActionId = 1,
+                    ActionState = Domain.TimeActionEnum.TimeActionState.InProgress,
+                    ActionType = Domain.TimeActionEnum.TimeActionType.Work,
+                    EndTime = new DateTime(9999,1,1)
                 }
             };
         }

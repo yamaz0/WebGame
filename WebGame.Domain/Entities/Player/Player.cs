@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 using WebGame.Domain.Common;
+using WebGame.Domain.TimeActionEnum;
 using WebGame.Entities.Items;
 
 namespace WebGame.Domain.Entities.Player
@@ -40,30 +41,54 @@ namespace WebGame.Domain.Entities.Player
         public string UserId { get; set; }
         #endregion
 
-        #region Job
+        #region TimeAction
 
-        public int JobId { get; set; }
-        public DateTime EndJobTime { get; set; }
+        public TimeActionType ActionType { get; set; }
+        public TimeActionState ActionState { get; set; }
+        public int ActionId { get; set; }
+        public DateTime EndTime { get; set; }
 
         #endregion
 
         #region Mission
 
-        public int MissionId { get; set; }
         public int Stamina { get; set; }
-        public DateTime EndMissionTime { get; set; }
 
         #endregion
+
+        public void AddReward(int exp, int cash)
+        {
+            int expRequirement = Utils.CalculateExpRequirement(Level);
+
+            Exp += exp;
+            Cash += cash;
+
+            while (Exp >= expRequirement)
+            {
+                Exp -= expRequirement;
+                Level++;
+                SkillPoints++;
+                expRequirement = Utils.CalculateExpRequirement(Level);
+            }
+        }
 
         public void AddStrenght()
         {
             Strenght++;
+            SkillPoints--;
             UpdateAttack();
+        }
+
+        public void AddDexterity()
+        {
+            Dexterity++;
+            SkillPoints--;
         }
 
         public void AddEndurance()
         {
             Endurance++;
+            SkillPoints--;
             UpdateHealthPoint();
         }
 

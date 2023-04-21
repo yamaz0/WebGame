@@ -32,6 +32,13 @@ namespace WebGame.Security.Account
             _userRepository = userRepository;
         }
 
+        public async Task<RefreshTokenResponse> RefreshToken(UserEntity user)
+        {
+            var accessToken = await GenerateBearerToken(user);
+            var refreshToken = await GenerateRefreshToken(user);
+            return new RefreshTokenResponse(accessToken, refreshToken);
+        }
+
         public async Task<AuthenticationResponse> SingIn(UserEntity user, string password)
         {
             var result = await _signInManager.CheckPasswordSignInAsync(user, password, true);
@@ -50,7 +57,16 @@ namespace WebGame.Security.Account
 
         public async Task SingOut()
         {
-            await _signInManager.SignOutAsync();
+            //try
+            //{
+
+            //    await _signInManager.SignOutAsync();
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //    throw;
+            //}
         }
 
         private async Task<string> GenerateBearerToken(UserEntity user)

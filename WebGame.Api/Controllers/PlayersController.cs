@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebGame.Api.Common;
+using WebGame.Application.Functions.Players.Command.AddedStats;
 using WebGame.Application.Functions.Players.Command.Update;
 using WebGame.Application.Functions.Players.Query.GetPlayer;
 using WebGame.Domain.Entities.User;
@@ -29,6 +30,7 @@ namespace WebGame.Controllers
         }
         [HttpGet("player")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesDefaultResponseType]
         [Authorize]
         public async Task<ActionResult<GetPlayerAllInfoViewModel>> GetPlayer()
@@ -48,6 +50,23 @@ namespace WebGame.Controllers
         [Authorize]
         public async Task<ActionResult<GetPlayerViewModel>> Update([FromBody] UpdatePlayerCommand request)
         {
+            await _mediator.Send(request);
+            return NoContent();
+        }
+
+        [HttpPut("addStat")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
+        [Authorize]
+        public async Task<ActionResult<GetPlayerViewModel>> AddStat([FromBody] AddedStatsPlayerCommand request)
+        {
+            int playerId = Utils.GetPlayerId(User);
+
+            if (playerId == -1)
+                return StatusCode(418);
+
+            request.PlayerId = playerId;
+
             await _mediator.Send(request);
             return NoContent();
         }

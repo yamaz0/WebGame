@@ -1,0 +1,20 @@
+﻿@page "/shop/armors"
+<h3>Armors</h3>
+
+@if (Armors == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ul>
+        @foreach (var armor in Armors)
+        {
+            <li>Name: @(armor.Name)</li>
+            <li>Defense: @(armor.Defense)</li>
+            <li>Value: @(armor.Value)</li>
+            <li><button onclick=@(()=>Buy(armor.Id))>Buy</button></li>
+        }
+    </ul>
+}
+<a href="@($"/shop")">Back</a>

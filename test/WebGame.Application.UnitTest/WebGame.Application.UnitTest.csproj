@@ -24,6 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\TimeAction\WebGame.TimeAction.csproj" />
+    <ProjectReference Include="..\..\WebGame.Api\WebGame.Api.csproj" />
     <ProjectReference Include="..\..\WebGame.Application\WebGame.Application.csproj" />
     <ProjectReference Include="..\..\WebGame.Duel\WebGame.Duel.csproj" />
   </ItemGroup>

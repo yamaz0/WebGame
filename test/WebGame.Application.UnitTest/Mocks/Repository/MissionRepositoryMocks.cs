@@ -62,7 +62,7 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Name = "misja1",
                     Description = "asdasd",
                     Duration= 1,
-                    Reward= 1
+                    RewardExp= 1
                 },
                 new Mission()
                 {
@@ -70,7 +70,7 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Name = "misja2",
                     Description = "hfgghfg",
                     Duration= 2,
-                    Reward= 2
+                    RewardExp= 2
                 }
             };
         }

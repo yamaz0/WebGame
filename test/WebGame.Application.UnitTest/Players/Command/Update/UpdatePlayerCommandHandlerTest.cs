@@ -40,9 +40,10 @@ namespace WebGame.Application.UnitTest.Players.Command.Update
                 Dexterity = player.Dexterity,
                 Endurance = player.Endurance,
                 Exp = player.Exp,
-                JobId = player.JobId,
                 Level = player.Level,
-                MissionId = player.MissionId,
+                ActionId = player.ActionId,
+                ActionState = player.ActionState,
+                ActionType = player.ActionType,
                 SkillPoints = player.SkillPoints,
                 Stamina = player.Stamina,
                 Strenght = player.Strenght

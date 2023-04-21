@@ -1,0 +1,38 @@
+﻿@page "/arena"
+<h3>Arena</h3>
+
+@if (Enemies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    if (isDuel)
+    {
+        <span>@duelData.Message</span>
+        <br />
+        <br />
+        foreach (var d in duelData.DuelHistory)
+        {
+            <span>@d</span>
+        }
+        <br />
+        <button onclick=@Back>Back</button>
+        <br />
+    }
+    else
+    {
+        foreach (var enemy in Enemies)
+        {
+            <span>id: @enemy.Id</span>
+            <span>Name: @enemy.Name</span>
+            <span>HealthPoint: @enemy.HealthPoint</span>
+            <span>Attack: @enemy.Attack</span>
+            <span>CashReward: @enemy.CashReward</span>
+            <span>ExpReward: @enemy.ExpReward</span>
+            <br />
+            <button onclick=@(()=>Duel(enemy.Id))>Fight</button>
+            <br />
+        }
+    }
+}

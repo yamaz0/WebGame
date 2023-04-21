@@ -25,5 +25,6 @@ namespace WebGame.Application.Interfaces.Persistence
         Task<List<string>> GetRolesAsync(UserEntity user);
         Task<List<Claim>> GetClaimsAsync(UserEntity user);
         Task AddClaimToUser(UserEntity entity, Claim claim);
+        Task<UserEntity> GetUserAsync(ClaimsPrincipal principal);
     }
 }

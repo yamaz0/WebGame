@@ -27,6 +27,12 @@ namespace WebGame.UI.Blazor.Services.Players
             return mappedPlayer;
         }
 
+        public async Task AddStat(Statistic statistic)
+        {
+            await _addBearerTokenService.AddBearerToken(_client);
+            await _client.AddStatAsync(new AddedStatsPlayerCommand() { Statistic = statistic });
+        }
+
         public async Task<GetPlayerAllInfoViewModel> GetPlayer()
         {
             await _addBearerTokenService.AddBearerToken(_client);

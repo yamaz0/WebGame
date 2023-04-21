@@ -38,7 +38,7 @@ namespace WebGame.Application.UnitTest.Jobs.Command.Update
                 Name = "after",
                 Description = job.Description,
                 Duration = job.Duration,
-                Reward = job.Reward
+                Reward = job.RewardExp
             }, CancellationToken.None);
 
             var updatedJob = await _mockJobRepository.Object.GetByIdAsync(ID);

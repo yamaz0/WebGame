@@ -1,0 +1,55 @@
+﻿@page "/player"
+<h3>PlayerPage</h3>
+
+@if (Player == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @*<span>Id:          @Player.Id</span> *@
+    <span>Name:        @Player.Name</span>
+    <br />
+    <br />
+    <span>Level:       @Player.Level</span>
+    <br />
+    <span>Exp:         @Player.Exp</span>
+    <br />
+    <span>Cash:        @Player.Cash</span>
+    <br />
+    <br />
+    <span>SkillPoints: @Player.SkillPoints</span>
+    <br />
+    <span>Strenght:    @Player.Strenght</span>
+    @if (Player.SkillPoints > 0)
+    {
+        <button onclick=@(()=>AddStat(Services.Statistic.Strenght))>+</button>
+    }
+    <br />
+    <span>Dexterity:   @Player.Dexterity</span>
+    @if (Player.SkillPoints > 0)
+    {
+        <button onclick=@(()=>AddStat(Services.Statistic.Dexterity))>+</button>
+    }
+    <br />
+    <span>Endurance:   @Player.Endurance</span>
+    @if (Player.SkillPoints > 0)
+    {
+        <button onclick=@(()=>AddStat(Services.Statistic.Endurance))>+</button>
+    }
+    <br />
+    <span>Stamina:     @Player.Stamina</span>
+
+    <br />
+    <span>Helmet:      @Player.Helmet?.Name def: @Player.Helmet?.Defense</span>
+    <br />
+    <br />
+    <span>Armor:       @Player.Armor?.Name def: @Player.Armor?.Defense</span>
+    <br />
+    <span>Legs:        @Player.Legs?.Name def: @Player.Legs?.Defense</span>
+    <br />
+    <span>Boots:       @Player.Boots?.Name def: @Player.Boots?.Defense</span>
+    <br />
+    <span>Weapon:      @Player.Weapon?.Name atc: @Player.Weapon?.Attack</span>
+
+}

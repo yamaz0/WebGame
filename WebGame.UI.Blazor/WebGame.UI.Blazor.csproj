@@ -4,6 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>a446938e-ba3a-4fa9-8eed-11d1d4c32c8a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +17,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.1" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
   </ItemGroup>
 
@@ -25,11 +28,8 @@
     <Folder Include="FoldersToCopy\Missions\" />
     <Folder Include="FoldersToCopy\Players\" />
     <Folder Include="FoldersToCopy\Weapons\" />
-    <Folder Include="Interfaces\Enemies\" />
     <Folder Include="Interfaces\Jobs\" />
-    <Folder Include="Services\Enemies\" />
     <Folder Include="Services\Jobs\" />
-    <Folder Include="ViewModels\Enemies\" />
     <Folder Include="ViewModels\Jobs\" />
   </ItemGroup>
 

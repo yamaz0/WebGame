@@ -40,8 +40,7 @@ namespace WebGame.Application.Functions.Duel.Command
                 rewardExp = enemy.ExpReward;
             }
 
-            player.Exp += rewardExp;
-            player.Cash += rewardCash;
+            player.AddReward(rewardExp, rewardCash);
 
             await _playerRepository.UpdateAsync(player);
 

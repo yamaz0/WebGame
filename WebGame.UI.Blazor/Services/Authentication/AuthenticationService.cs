@@ -27,11 +27,34 @@ namespace WebGame.UI.Blazor.Services.Authentication
             var response = await _client.LoginAsync(request);
 
             string accessToken = response.AuthenticationResponse.AccessToken;
+            string refreshToken = response.AuthenticationResponse.RefreshToken;
 
             if (accessToken != string.Empty)
             {
                 await _localStorage.SetItemAsync(CustomConstants.LocalStorage.TOKEN, accessToken);
+                await _localStorage.SetItemAsync(CustomConstants.LocalStorage.REFRESH_TOKEN, refreshToken);
+
                 ((CustomAuthenticationStateProvider)_authenticationStateProvider).SetUserAuthenticated(username);
+                _client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(CustomConstants.Authorization.BEARER, accessToken);
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> RefreshToken()
+        {
+            await _addBearerTokenService.AddBearerRefreshToken(_client);
+            var response = await _client.RefreshTokenAsync();
+
+            string accessToken = response.RefreshTokenResponse.AccessToken;
+            string refreshToken = response.RefreshTokenResponse.RefreshToken;
+
+            if (accessToken != string.Empty)
+            {
+                await _localStorage.SetItemAsync(CustomConstants.LocalStorage.TOKEN, accessToken);
+                await _localStorage.SetItemAsync(CustomConstants.LocalStorage.REFRESH_TOKEN, refreshToken);
+
                 _client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(CustomConstants.Authorization.BEARER, accessToken);
                 return true;
             }
@@ -41,11 +64,11 @@ namespace WebGame.UI.Blazor.Services.Authentication
 
         public async Task Logout()
         {
-            await _addBearerTokenService.AddBearerToken(_client);
             await _localStorage.RemoveItemAsync(CustomConstants.LocalStorage.TOKEN);
+            await _localStorage.RemoveItemAsync(CustomConstants.LocalStorage.REFRESH_TOKEN);
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).SetUserLoggedOut();
             _client.HttpClient.DefaultRequestHeaders.Authorization = null;
-            await _client.LogoutAsync();
+            //await _client.LogoutAsync();
         }
 
         public async Task<bool> Register(string username, string password, string email)

@@ -1,0 +1,39 @@
+﻿@page "/mission"
+<h1>Mission</h1>
+
+@switch (State)
+{
+    case Services.TimeActionStateResponse.NoAction:
+        if (Missions == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            foreach (var mission in Missions)
+            {
+                <span>Name: @mission.Name</span>
+                <span>Description: @mission.Description</span>
+                <span>Duration: @mission.Duration</span>
+                <span>Reward: @mission.Reward</span>
+                <br />
+                <button onclick=@(() => StartMission(mission.Id))>Start</button>
+                <br />
+            }
+        }
+        break;
+    case Services.TimeActionStateResponse.OtherAction:
+        <h3>@Time</h3>
+        break;
+    case Services.TimeActionStateResponse.InProgress:
+        <h3>@Time</h3>
+        break;
+    case Services.TimeActionStateResponse.Finished:
+        <span>Mission finished.</span>
+        <br />
+        <button onclick=@Reward>OK</button>
+        break;
+    default:
+        //error bad enum
+        break;
+}

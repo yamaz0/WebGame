@@ -23,9 +23,16 @@ namespace WebGame.UI.Blazor.Services.Weapons
         {
             await _addBearerTokenService.AddBearerToken(_client);
 
-            var allWeapons = await _client.WeaponsAsync();
+            var allWeapons = await _client.WeaponsAllAsync();
             var mappedWeapons = _mapper.Map<ICollection<WeaponsListBlazorVM>>(allWeapons);
             return mappedWeapons.ToList();
+        }
+
+        public async Task BuyWeapon(int id)
+        {
+            await _addBearerTokenService.AddBearerToken(_client);
+            var response = await _client.WeaponsAsync(id);
+
         }
     }
 }

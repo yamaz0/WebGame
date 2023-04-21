@@ -28,7 +28,7 @@ namespace WebGame.Application.Functions.Jobs.Command.Create
                 Name = request.Name,
                 Description = request.Description,
                 Duration = request.Duration,
-                Reward = request.Reward
+                RewardExp = request.Reward
             };
 
             job = await _jobRepository.AddAsync(job);
