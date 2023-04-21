@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  webgame.ui.blazor:
+    image: ${DOCKER_REGISTRY-}webgameuiblazor
+    build:
+      context: .
+      dockerfile: WebGame.UI.Blazor/Dockerfile
