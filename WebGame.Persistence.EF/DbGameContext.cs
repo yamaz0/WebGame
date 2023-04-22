@@ -26,7 +26,7 @@ namespace WebGame
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Mission> Missions { get; set; }
 
-        public DbGameContext(DbContextOptions options) : base(options) { }
+        public DbGameContext(DbContextOptions options) : base(options) { Database.EnsureCreated(); }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
