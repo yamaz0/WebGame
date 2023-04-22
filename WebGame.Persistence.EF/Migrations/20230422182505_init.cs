@@ -17,17 +17,17 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "Armors",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Defense = table.Column<int>(type: "int", nullable: false),
-                    ItemType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Value = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Defense = table.Column<int>(type: "INTEGER", nullable: false),
+                    ItemType = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "date('now')"),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    LastModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Value = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,10 +38,10 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,21 +52,21 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,19 +77,19 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "Enemies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HealthPoint = table.Column<int>(type: "int", nullable: false),
-                    Defense = table.Column<int>(type: "int", nullable: false),
-                    AttackSpeed = table.Column<int>(type: "int", nullable: false),
-                    Attack = table.Column<int>(type: "int", nullable: false),
-                    ExpReward = table.Column<int>(type: "int", nullable: false),
-                    CashReward = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    HealthPoint = table.Column<int>(type: "INTEGER", nullable: false),
+                    Defense = table.Column<int>(type: "INTEGER", nullable: false),
+                    AttackSpeed = table.Column<int>(type: "INTEGER", nullable: false),
+                    Attack = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExpReward = table.Column<int>(type: "INTEGER", nullable: false),
+                    CashReward = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "date('now')"),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    LastModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -100,17 +100,17 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "Jobs",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Duration = table.Column<int>(type: "int", nullable: false),
-                    RewardExp = table.Column<int>(type: "int", nullable: false),
-                    RewardCash = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Duration = table.Column<int>(type: "INTEGER", nullable: false),
+                    RewardExp = table.Column<int>(type: "INTEGER", nullable: false),
+                    RewardCash = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "date('now')"),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    LastModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -121,17 +121,17 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "Missions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Duration = table.Column<int>(type: "int", nullable: false),
-                    RewardExp = table.Column<int>(type: "int", nullable: false),
-                    RewardCash = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Duration = table.Column<int>(type: "INTEGER", nullable: false),
+                    RewardExp = table.Column<int>(type: "INTEGER", nullable: false),
+                    RewardCash = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "date('now')"),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    LastModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -142,17 +142,17 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "Weapons",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Attack = table.Column<int>(type: "int", nullable: false),
-                    AttackSpeed = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Value = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Attack = table.Column<int>(type: "INTEGER", nullable: false),
+                    AttackSpeed = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "date('now')"),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    LastModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Value = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -163,11 +163,11 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RoleId = table.Column<string>(type: "TEXT", nullable: false),
+                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -184,11 +184,11 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -205,10 +205,10 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
+                    ProviderKey = table.Column<string>(type: "TEXT", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,8 +225,8 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -249,10 +249,10 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -269,34 +269,34 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "Players",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Level = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    Exp = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    Cash = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    SkillPoints = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    Strenght = table.Column<int>(type: "int", nullable: false, defaultValue: 10),
-                    Dexterity = table.Column<int>(type: "int", nullable: false, defaultValue: 10),
-                    Endurance = table.Column<int>(type: "int", nullable: false, defaultValue: 10),
-                    HealthPoint = table.Column<int>(type: "int", nullable: false, defaultValue: 100),
-                    Defense = table.Column<int>(type: "int", nullable: false),
-                    Attack = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    HelmetId = table.Column<int>(type: "int", nullable: true),
-                    ArmorId = table.Column<int>(type: "int", nullable: true),
-                    LegsId = table.Column<int>(type: "int", nullable: true),
-                    BootsId = table.Column<int>(type: "int", nullable: true),
-                    WeaponId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ActionType = table.Column<int>(type: "int", nullable: false),
-                    ActionState = table.Column<int>(type: "int", nullable: false),
-                    ActionId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Stamina = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getutcdate()"),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "saba"),
-                    LastModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Level = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 1),
+                    Exp = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    Cash = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    SkillPoints = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    Strenght = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 10),
+                    Dexterity = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 10),
+                    Endurance = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 10),
+                    HealthPoint = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 100),
+                    Defense = table.Column<int>(type: "INTEGER", nullable: false),
+                    Attack = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 1),
+                    HelmetId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ArmorId = table.Column<int>(type: "INTEGER", nullable: true),
+                    LegsId = table.Column<int>(type: "INTEGER", nullable: true),
+                    BootsId = table.Column<int>(type: "INTEGER", nullable: true),
+                    WeaponId = table.Column<int>(type: "INTEGER", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    ActionType = table.Column<int>(type: "INTEGER", nullable: false),
+                    ActionState = table.Column<int>(type: "INTEGER", nullable: false),
+                    ActionId = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    EndTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Stamina = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "date('now')"),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
+                    LastModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -333,10 +333,10 @@ namespace WebGame.Persistence.EF.Migrations
                 columns: new[] { "Id", "Defense", "Description", "ItemType", "Name", "Value" },
                 values: new object[,]
                 {
-                    { 1, 1, "helmet na start", "HELMET", "helmet", 1 },
-                    { 2, 1, "armor na start", "ARMOR", "armor", 1 },
-                    { 3, 1, "legi na start", "LEGS", "legs", 1 },
-                    { 4, 1, "bootsy na start", "BOOTS", "boots", 1 }
+                    { 1, 1, "helmet na start", 0, "helmet", 1 },
+                    { 2, 1, "armor na start", 1, "armor", 1 },
+                    { 3, 1, "legi na start", 2, "legs", 1 },
+                    { 4, 1, "bootsy na start", 3, "boots", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -344,8 +344,8 @@ namespace WebGame.Persistence.EF.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "adminRoleId", "Administrator", "Administrator", "Administrator" },
-                    { "playerRoleId", "Player", "Player", "Player" }
+                    { "adminRoleId", "Administrator", "Administrator", "ADMINISTRATOR" },
+                    { "playerRoleId", "Player", "Player", "PLAYER" }
                 });
 
             migrationBuilder.InsertData(
@@ -402,8 +402,7 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -429,8 +428,7 @@ namespace WebGame.Persistence.EF.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Players_ArmorId",

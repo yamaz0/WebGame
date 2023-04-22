@@ -27,7 +27,7 @@ namespace WebGame.Persistence.EF.ModelCreating
                 eb.Property(x => x.HealthPoint).HasDefaultValue(ConstantsEntity.Player.DEFAULT_HEALTH_POINTS);
                 eb.Property(x => x.Attack).HasDefaultValue(ConstantsEntity.Player.DEFAULT_ATTACK);
                 eb.Property(x => x.ActionId).HasDefaultValue(0);
-                eb.Property(x => x.CreatedDate).HasDefaultValueSql("getutcdate()");
+                eb.Property(x => x.CreatedDate).HasDefaultValueSql("date('now')");
                 eb.Property(x => x.CreatedBy).HasDefaultValue("saba");
                 eb.Property(x => x.LastModifiedBy).HasDefaultValue("saba");
                 eb.Property(x => x.LastModifiedDate).ValueGeneratedOnAddOrUpdate();

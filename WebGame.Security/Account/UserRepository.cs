@@ -27,7 +27,6 @@ namespace WebGame.Persistence.EF.Account
         public async Task<CreateUserCommandResponse> AddAsync(UserEntity entity, string password)
         {
             var result = await _userManager.CreateAsync(entity, password);
-
             await _userManager.AddToRoleAsync(entity, ConstantsAuthorization.Roles.PLAYER);
             await AddClaimToUser(entity, new Claim(ConstantsAuthorization.Claims.USER_ID, entity.Id));
 

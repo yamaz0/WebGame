@@ -3203,7 +3203,7 @@ namespace WebGame.UI.Blazor.Services
         public int Defense { get; set; }
 
         [Newtonsoft.Json.JsonProperty("itemType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ItemType ItemType { get; set; }
+        public int ItemType { get; set; }
 
     }
 
@@ -3811,7 +3811,6 @@ namespace WebGame.UI.Blazor.Services
     public enum TimeActionStateResponse
     {
         NoAction = 0,
-        _0 = 0,
 
         OtherAction = 1,
 

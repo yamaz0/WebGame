@@ -63,7 +63,6 @@ namespace WebGame
             MissionModelCreating.Configure(builder);
             WeaponModelCreating.Configure(builder);
             ArmorModelCreating.Configure(builder);
-
             FillDummyData(builder);
             base.OnModelCreating(builder);
         }

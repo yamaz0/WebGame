@@ -11,7 +11,7 @@ namespace WebGame
     {
         public static IServiceCollection InstallDb(this IServiceCollection services)
         {
-            services.AddDbContext<DbGameContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+            services.AddDbContext<DbGameContext>(options => options.UseSqlite($"Data Source=game.db"));
 
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<IEnemyRepository, EnemyRepository>();

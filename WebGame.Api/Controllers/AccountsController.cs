@@ -24,7 +24,7 @@ namespace WebGame.Controllers
         public async Task<ActionResult<LoginCommandResponse>> Login([FromBody] LoginCommand request)
         {
             var result = await _mediator.Send(request);
-            var userid = result.AuthenticationResponse.UserId;
+            //var userid = result.AuthenticationResponse.UserId;
             //HttpContext.Response.Cookies.Append("UserId", userid);
             return Ok(result);
         }

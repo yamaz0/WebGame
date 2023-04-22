@@ -15,7 +15,7 @@ namespace WebGame.Persistence.EF.DummyData
                     Description = "helmet na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.HELMET
+                    ItemType = 0
                 },
                 new Armor()
                 {
@@ -24,7 +24,7 @@ namespace WebGame.Persistence.EF.DummyData
                     Description = "armor na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.ARMOR
+                    ItemType = 1
                 },
                 new Armor()
                 {
@@ -33,7 +33,7 @@ namespace WebGame.Persistence.EF.DummyData
                     Description = "legi na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.LEGS
+                    ItemType = 2
                 },
                 new Armor()
                 {
@@ -42,7 +42,7 @@ namespace WebGame.Persistence.EF.DummyData
                     Description = "bootsy na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.BOOTS
+                    ItemType = 3
                 }
             };
         }

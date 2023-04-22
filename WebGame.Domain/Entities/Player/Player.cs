@@ -117,16 +117,16 @@ namespace WebGame.Domain.Entities.Player
         {
             switch (armor.ItemType)
             {
-                case ItemType.HELMET:
+                case 0:
                     Helmet = armor;
                     break;
-                case ItemType.ARMOR:
+                case 1:
                     Armor = armor;
                     break;
-                case ItemType.LEGS:
+                case 2:
                     Legs = armor;
                     break;
-                case ItemType.BOOTS:
+                case 3:
                     Boots = armor;
                     break;
             };

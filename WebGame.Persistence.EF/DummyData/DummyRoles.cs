@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebGame.Application.Constants;
 
 namespace WebGame.Persistence.EF.DummyData
 {
@@ -16,17 +17,17 @@ namespace WebGame.Persistence.EF.DummyData
                 new IdentityRole()
                 {
                     Id="playerRoleId",
-                    Name="Player",
-                    ConcurrencyStamp="Player",
-                    NormalizedName="Player"
+                    Name=ConstantsAuthorization.Roles.PLAYER,
+                    ConcurrencyStamp=ConstantsAuthorization.Roles.PLAYER,
+                    NormalizedName=ConstantsAuthorization.Roles.PLAYER.ToUpper()
 
                 },
                 new IdentityRole()
                 {
                     Id="adminRoleId",
-                    Name="Administrator",
-                    ConcurrencyStamp="Administrator",
-                    NormalizedName="Administrator"
+                    Name=ConstantsAuthorization.Roles.ADMINISTRATOR,
+                    ConcurrencyStamp=ConstantsAuthorization.Roles.ADMINISTRATOR,
+                    NormalizedName=ConstantsAuthorization.Roles.ADMINISTRATOR.ToUpper()
                 }
             };
         }

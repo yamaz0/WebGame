@@ -10,15 +10,15 @@ namespace WebGame.Persistence.EF.ModelCreating
         {
             var converter = new EnumToStringConverter<ItemType>();
 
-            builder.Entity<Armor>()
-                .Property(e => e.ItemType)
-                .HasConversion(converter);
+            //builder.Entity<Armor>()
+                //.Property(e => e.ItemType)
+                //.HasConversion(converter);
 
             builder.Entity<Armor>(eb =>
             {
                 eb.HasKey(x => x.Id);
                 eb.Property(x => x.Name).IsRequired();
-                eb.Property(x => x.CreatedDate).HasDefaultValueSql("getutcdate()");
+                eb.Property(x => x.CreatedDate).HasDefaultValueSql("date('now')");
                 eb.Property(x => x.CreatedBy).HasDefaultValue("saba");
                 eb.Property(x => x.LastModifiedBy).HasDefaultValue("saba");
                 eb.Property(x => x.LastModifiedDate).ValueGeneratedOnAddOrUpdate();
