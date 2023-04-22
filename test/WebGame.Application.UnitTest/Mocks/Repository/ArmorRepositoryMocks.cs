@@ -62,7 +62,7 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Description = "helmet na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.HELMET
+                    ItemType = 0
                 },
                 new Armor()
                 {
@@ -71,7 +71,7 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Description = "armor na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.ARMOR
+                    ItemType = 1
                 },
                 new Armor()
                 {
@@ -80,7 +80,7 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Description = "legi na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.LEGS
+                    ItemType = 2
                 },
                 new Armor()
                 {
@@ -89,7 +89,7 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Description = "bootsy na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.BOOTS
+                    ItemType = 3
                 },
                 new Armor()
                 {
@@ -98,7 +98,7 @@ namespace WebGame.Application.UnitTest.Mocks.Repository
                     Description = "drogi oj drogi armor",
                     Value = 99999,
                     Defense = 1,
-                    ItemType = ItemType.ARMOR
+                    ItemType = 1
                 }
             };
         }
