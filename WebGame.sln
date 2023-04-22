@@ -35,8 +35,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGame.Application.Securit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebGame.TimeAction", "TimeAction\WebGame.TimeAction.csproj", "{3EAC4D31-9141-4B26-8353-33A212884D47}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{0BDBD062-CD16-4331-AC48-FC3EA12668EF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,10 +81,6 @@ Global
 		{3EAC4D31-9141-4B26-8353-33A212884D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EAC4D31-9141-4B26-8353-33A212884D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EAC4D31-9141-4B26-8353-33A212884D47}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0BDBD062-CD16-4331-AC48-FC3EA12668EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BDBD062-CD16-4331-AC48-FC3EA12668EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0BDBD062-CD16-4331-AC48-FC3EA12668EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BDBD062-CD16-4331-AC48-FC3EA12668EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
