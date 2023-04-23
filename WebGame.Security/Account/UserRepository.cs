@@ -28,10 +28,13 @@ namespace WebGame.Persistence.EF.Account
         {
             var result = await _userManager.CreateAsync(entity, password);
 
-            await _userManager.AddToRoleAsync(entity, ConstantsAuthorization.Roles.PLAYER);
-            await AddClaimToUser(entity, new Claim(ConstantsAuthorization.Claims.USER_ID, entity.Id));
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(entity, ConstantsAuthorization.Roles.PLAYER);
+                await AddClaimToUser(entity, new Claim(ConstantsAuthorization.Claims.USER_ID, entity.Id));
+            }
 
-            return new CreateUserCommandResponse(result, entity.Id);
+            return new CreateUserCommandResponse(result, entity?.Id);
         }
 
         public async Task AddClaimToUser(UserEntity entity, Claim claim)
@@ -53,7 +56,7 @@ namespace WebGame.Persistence.EF.Account
         {
             return await _userManager.FindByIdAsync(id);
         }
-        
+
         public async Task<UserEntity> GetUserAsync(ClaimsPrincipal principal)
         {
             return await _userManager.GetUserAsync(principal);

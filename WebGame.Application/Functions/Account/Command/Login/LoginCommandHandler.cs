@@ -17,6 +17,9 @@ namespace WebGame.Application.Functions.Account.Command.Login
 
         public async Task<LoginCommandResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrEmpty(request.UserName))
+                return new LoginCommandResponse("UserName cannot be empty!");
+
             var user = await _userRepository.GetByNameAsync(request.UserName);
 
             if (user != null)

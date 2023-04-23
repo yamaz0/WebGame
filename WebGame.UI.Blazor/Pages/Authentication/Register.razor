@@ -1,0 +1,26 @@
+﻿@page "/Register"
+
+<div class="mt-5 row">
+    <div class="card col-12 col-lg-6 mr-auto ml-auto p-3">
+        <h3 class="card-title">Zarejestruj się</h3>
+        <div class="card-body">
+            <EditForm Model="@RegisterViewModel" OnValidSubmit="HandleValidSubmit">
+                <div class="input-group row mt-2">
+                    <label class="col-12 col-md-4 p-0" for="userName">Username:</label>
+                    <InputText id="userName" class="col-12 col-md-8 Register-field" @bind-Value="RegisterViewModel.UserName"></InputText>
+                </div>
+                <div class="input-group row mt-2">
+                    <label class="col-12 col-md-4 p-0" for="password">Password:</label>
+                    <InputText type="password" id="password" class="col-12 col-md-8 Register-field" @bind-Value="@RegisterViewModel.Password"></InputText>
+                </div>
+                <div class="input-group row mt-2">
+                    <div class="">
+                        <button class="m-4 p-2">Zarejestruj</button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+<span class="label label-error">@Message</span>

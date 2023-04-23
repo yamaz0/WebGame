@@ -407,6 +407,11 @@ namespace WebGame.UI.Blazor.Services
                             return objectResponse_.Object;
                         }
                         else
+                        if (status_ == 400)
+                        {
+                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Bad Request", status_, responseText_, headers_, null);
+                        }
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Error", status_, responseData_, headers_, null);
@@ -629,6 +634,11 @@ namespace WebGame.UI.Blazor.Services
                             return objectResponse_.Object;
                         }
                         else
+                        if (status_ == 400)
+                        {
+                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("Bad Request", status_, responseText_, headers_, null);
+                        }
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Error", status_, responseData_, headers_, null);

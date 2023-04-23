@@ -6,9 +6,9 @@ using WebGame.UI.Blazor.ViewModels.Authentication;
 
 namespace WebGame.UI.Blazor.Pages.Authentication
 {
-    public partial class Login
+    public partial class Register
     {
-        public LoginBlazorVM LoginViewModel { get; set; }
+        public RegisterBlazorVM RegisterViewModel { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -19,20 +19,26 @@ namespace WebGame.UI.Blazor.Pages.Authentication
 
         protected override void OnInitialized()
         {
-            LoginViewModel = new LoginBlazorVM();
+            RegisterViewModel = new RegisterBlazorVM();
         }
 
         protected async void HandleValidSubmit()
         {
-            var response = await AuthenticationService.Login(LoginViewModel.UserName, LoginViewModel.Password);
-            if (response.Success)
+            var response = await AuthenticationService.Register(RegisterViewModel.UserName, RegisterViewModel.Password, RegisterViewModel.Email);
+
+            if (response is null)
             {
-                NavigationManager.NavigateTo("shop");
+                Message = "Something goes wrong. Try again.";
             }
+            else if (response.Success)
+            {
+                NavigationManager.NavigateTo("home");
+            }
+
             ShowErrors(response);
         }
 
-        private void ShowErrors(LoginCommandResponse? response)
+        private void ShowErrors(CreateUserCommandResponse? response)
         {
             StringBuilder sb = new StringBuilder();
 
