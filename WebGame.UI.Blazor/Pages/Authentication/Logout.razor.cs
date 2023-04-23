@@ -15,7 +15,7 @@ namespace WebGame.UI.Blazor.Pages.Authentication
         protected async override Task OnInitializedAsync()
         {
             await AuthenticationService.Logout();
-            NavigationManager.NavigateTo("");
+            NavigationManager.NavigateTo("login");
         }
 
     }

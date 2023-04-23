@@ -11,7 +11,7 @@ namespace WebGame.Persistence.EF.DummyData
                 new Enemy()
                 {
                     Id= 1,
-                    Name = "enem1",
+                    Name = "slaby",
                     Attack = 1,
                     AttackSpeed = 1,
                     CashReward= 1,
@@ -22,13 +22,24 @@ namespace WebGame.Persistence.EF.DummyData
                 new Enemy()
                 {
                     Id=2,
-                    Name = "e2",
+                    Name = "silny",
                     Attack = 555,
                     AttackSpeed = 55,
                     CashReward= 55,
                     ExpReward= 55,
                     HealthPoint= 55,
                     Defense = 55
+                },
+                new Enemy()
+                {
+                    Id=3,
+                    Name = "duzo exp",
+                    Attack = 1,
+                    AttackSpeed = 1,
+                    CashReward= 100,
+                    ExpReward= 100,
+                    HealthPoint= 1,
+                    Defense = 1
                 }
             };
         }

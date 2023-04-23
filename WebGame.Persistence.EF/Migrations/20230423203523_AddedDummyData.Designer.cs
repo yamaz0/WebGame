@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebGame;
 
@@ -11,9 +12,11 @@ using WebGame;
 namespace WebGame.Persistence.EF.Migrations
 {
     [DbContext(typeof(DbGameContext))]
-    partial class DbGameContextModelSnapshot : ModelSnapshot
+    [Migration("20230423203523_AddedDummyData")]
+    partial class AddedDummyData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
