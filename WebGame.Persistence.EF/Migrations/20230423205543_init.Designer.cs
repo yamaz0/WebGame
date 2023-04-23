@@ -11,7 +11,7 @@ using WebGame;
 namespace WebGame.Persistence.EF.Migrations
 {
     [DbContext(typeof(DbGameContext))]
-    [Migration("20230422182505_init")]
+    [Migration("20230423205543_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -468,7 +468,7 @@ namespace WebGame.Persistence.EF.Migrations
                             Defense = 1,
                             ExpReward = 1,
                             HealthPoint = 1,
-                            Name = "enem1"
+                            Name = "slaby"
                         },
                         new
                         {
@@ -480,7 +480,19 @@ namespace WebGame.Persistence.EF.Migrations
                             Defense = 55,
                             ExpReward = 55,
                             HealthPoint = 55,
-                            Name = "e2"
+                            Name = "silny"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Attack = 1,
+                            AttackSpeed = 1,
+                            CashReward = 100,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Defense = 1,
+                            ExpReward = 100,
+                            HealthPoint = 1,
+                            Name = "duzo exp"
                         });
                 });
 
@@ -540,7 +552,7 @@ namespace WebGame.Persistence.EF.Migrations
                             Defense = 1,
                             Description = "helmet na start",
                             ItemType = 0,
-                            Name = "helmet",
+                            Name = "leather helmet",
                             Value = 1
                         },
                         new
@@ -550,7 +562,7 @@ namespace WebGame.Persistence.EF.Migrations
                             Defense = 1,
                             Description = "armor na start",
                             ItemType = 1,
-                            Name = "armor",
+                            Name = "leather armor",
                             Value = 1
                         },
                         new
@@ -560,7 +572,7 @@ namespace WebGame.Persistence.EF.Migrations
                             Defense = 1,
                             Description = "legi na start",
                             ItemType = 2,
-                            Name = "legs",
+                            Name = "leather legs",
                             Value = 1
                         },
                         new
@@ -570,8 +582,48 @@ namespace WebGame.Persistence.EF.Migrations
                             Defense = 1,
                             Description = "bootsy na start",
                             ItemType = 3,
-                            Name = "boots",
+                            Name = "leather boots",
                             Value = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Defense = 100,
+                            Description = "helmet",
+                            ItemType = 0,
+                            Name = "golden helmet",
+                            Value = 100
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Defense = 100,
+                            Description = "armor",
+                            ItemType = 1,
+                            Name = "magic plate armor",
+                            Value = 100
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Defense = 100,
+                            Description = "legi",
+                            ItemType = 2,
+                            Name = "dragon scale legs",
+                            Value = 100
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Defense = 100,
+                            Description = "bootsy",
+                            ItemType = 3,
+                            Name = "golden boots",
+                            Value = 100
                         });
                 });
 
@@ -637,12 +689,12 @@ namespace WebGame.Persistence.EF.Migrations
                         new
                         {
                             Id = 2,
-                            Attack = 2,
-                            AttackSpeed = 2,
+                            Attack = 20,
+                            AttackSpeed = 20,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "mieczyk na potem",
                             Name = "lepszy mieczyk",
-                            Value = 2
+                            Value = 10
                         });
                 });
 
@@ -784,7 +836,7 @@ namespace WebGame.Persistence.EF.Migrations
                             Duration = 2,
                             Name = "misja2",
                             RewardCash = 0,
-                            RewardExp = 2
+                            RewardExp = 20
                         });
                 });
 

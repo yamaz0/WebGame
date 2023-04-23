@@ -333,10 +333,14 @@ namespace WebGame.Persistence.EF.Migrations
                 columns: new[] { "Id", "Defense", "Description", "ItemType", "Name", "Value" },
                 values: new object[,]
                 {
-                    { 1, 1, "helmet na start", 0, "helmet", 1 },
-                    { 2, 1, "armor na start", 1, "armor", 1 },
-                    { 3, 1, "legi na start", 2, "legs", 1 },
-                    { 4, 1, "bootsy na start", 3, "boots", 1 }
+                    { 1, 1, "helmet na start", 0, "leather helmet", 1 },
+                    { 2, 1, "armor na start", 1, "leather armor", 1 },
+                    { 3, 1, "legi na start", 2, "leather legs", 1 },
+                    { 4, 1, "bootsy na start", 3, "leather boots", 1 },
+                    { 5, 100, "helmet", 0, "golden helmet", 100 },
+                    { 6, 100, "armor", 1, "magic plate armor", 100 },
+                    { 7, 100, "legi", 2, "dragon scale legs", 100 },
+                    { 8, 100, "bootsy", 3, "golden boots", 100 }
                 });
 
             migrationBuilder.InsertData(
@@ -353,8 +357,9 @@ namespace WebGame.Persistence.EF.Migrations
                 columns: new[] { "Id", "Attack", "AttackSpeed", "CashReward", "Defense", "ExpReward", "HealthPoint", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, 1, 1, 1, 1, "enem1" },
-                    { 2, 555, 55, 55, 55, 55, 55, "e2" }
+                    { 1, 1, 1, 1, 1, 1, 1, "slaby" },
+                    { 2, 555, 55, 55, 55, 55, 55, "silny" },
+                    { 3, 1, 1, 100, 1, 100, 1, "duzo exp" }
                 });
 
             migrationBuilder.InsertData(
@@ -372,7 +377,7 @@ namespace WebGame.Persistence.EF.Migrations
                 values: new object[,]
                 {
                     { 1, "asdasd", 1, "misja1", 0, 1 },
-                    { 2, "hfgghfg", 2, "misja2", 0, 2 }
+                    { 2, "hfgghfg", 2, "misja2", 0, 20 }
                 });
 
             migrationBuilder.InsertData(
@@ -390,7 +395,7 @@ namespace WebGame.Persistence.EF.Migrations
                 values: new object[,]
                 {
                     { 1, 1, 1, "mieczyk na start", "mieczyk", 1 },
-                    { 2, 2, 2, "mieczyk na potem", "lepszy mieczyk", 2 }
+                    { 2, 20, 20, "mieczyk na potem", "lepszy mieczyk", 10 }
                 });
 
             migrationBuilder.CreateIndex(

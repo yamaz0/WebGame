@@ -15,7 +15,7 @@ namespace WebGame.Persistence.EF.DummyData
                     Description = "helmet na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.HELMET
+                    ItemType = 0
                 },
                 new Armor()
                 {
@@ -24,7 +24,7 @@ namespace WebGame.Persistence.EF.DummyData
                     Description = "armor na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.ARMOR
+                    ItemType = 1
                 },
                 new Armor()
                 {
@@ -33,7 +33,7 @@ namespace WebGame.Persistence.EF.DummyData
                     Description = "legi na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.LEGS
+                    ItemType = 2
                 },
                 new Armor()
                 {
@@ -42,43 +42,43 @@ namespace WebGame.Persistence.EF.DummyData
                     Description = "bootsy na start",
                     Value = 1,
                     Defense = 1,
-                    ItemType = ItemType.BOOTS
+                    ItemType = 3
                 },
                 new Armor()
                 {
                     Id=5,
                     Name = "golden helmet",
-                    Description = "helmet ",
+                    Description = "helmet",
                     Value = 100,
                     Defense = 100,
-                    ItemType = ItemType.HELMET
+                    ItemType = 0
                 },
                 new Armor()
                 {
                     Id=6,
                     Name = "magic plate armor",
-                    Description = "armor ",
+                    Description = "armor",
                     Value = 100,
                     Defense = 100,
-                    ItemType = ItemType.ARMOR
+                    ItemType = 1
                 },
                 new Armor()
                 {
                     Id=7,
                     Name = "dragon scale legs",
-                    Description = "legi ",
+                    Description = "legi",
                     Value = 100,
                     Defense = 100,
-                    ItemType = ItemType.LEGS
+                    ItemType = 2
                 },
                 new Armor()
                 {
                     Id=8,
                     Name = "golden boots",
-                    Description = "bootsy ",
+                    Description = "bootsy",
                     Value = 100,
                     Defense = 100,
-                    ItemType = ItemType.BOOTS
+                    ItemType = 3
                 }
             };
         }
