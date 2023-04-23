@@ -19,13 +19,16 @@ namespace WebGame.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         [HttpPost("Login")]
         public async Task<ActionResult<LoginCommandResponse>> Login([FromBody] LoginCommand request)
         {
             var result = await _mediator.Send(request);
-            //var userid = result.AuthenticationResponse.UserId;
-            //HttpContext.Response.Cookies.Append("UserId", userid);
+
+            if (!result.Success)
+                return BadRequest(result);
+
             return Ok(result);
         }
 
@@ -42,7 +45,7 @@ namespace WebGame.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         [HttpPost("Logout")]
-        public async Task<ActionResult> Logout()//do wywalenia
+        public async Task<ActionResult> Logout()
         {
             //var result = await _mediator.Send(new LogoutCommand());
             await HttpContext.SignOutAsync();
@@ -50,6 +53,7 @@ namespace WebGame.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
         [HttpPost("Register")]
         public async Task<ActionResult<CreateUserCommandResponse>> Register([FromBody] CreateUserCommand request)

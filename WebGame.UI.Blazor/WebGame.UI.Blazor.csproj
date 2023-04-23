@@ -33,4 +33,10 @@
     <Folder Include="ViewModels\Jobs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\.dockerignore" Link=".dockerignore">
+      <DependentUpon>$(DockerDefaultDockerfile)</DependentUpon>
+    </None>
+  </ItemGroup>
+
 </Project>

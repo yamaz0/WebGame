@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using WebGame.UI.Blazor.Constants;
 using WebGame.UI.Blazor.Interfaces.Authorization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebGame.UI.Blazor.Services.Authentication
 {
@@ -21,10 +22,23 @@ namespace WebGame.UI.Blazor.Services.Authentication
             _addBearerTokenService = addBearerTokenService;
         }
 
-        public async Task<bool> Login(string username, string password)
+        public async Task<LoginCommandResponse> Login(string username, string password)
         {
             LoginCommand request = new LoginCommand() { Password = password, UserName = username };
-            var response = await _client.LoginAsync(request);
+            LoginCommandResponse response = null;
+
+            try
+            {
+                response = await _client.LoginAsync(request);
+            }
+            catch (ApiException ex)
+            {
+                List<string> errors = new List<string>() { ex.Response };
+                return new LoginCommandResponse() { Errors = errors, Success = false };
+            }
+
+            if (response is null)
+                return null;
 
             string accessToken = response.AuthenticationResponse.AccessToken;
             string refreshToken = response.AuthenticationResponse.RefreshToken;
@@ -36,10 +50,9 @@ namespace WebGame.UI.Blazor.Services.Authentication
 
                 ((CustomAuthenticationStateProvider)_authenticationStateProvider).SetUserAuthenticated(username);
                 _client.HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(CustomConstants.Authorization.BEARER, accessToken);
-                return true;
             }
 
-            return false;
+            return response;
         }
 
         public async Task<bool> RefreshToken()
@@ -68,20 +81,24 @@ namespace WebGame.UI.Blazor.Services.Authentication
             await _localStorage.RemoveItemAsync(CustomConstants.LocalStorage.REFRESH_TOKEN);
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).SetUserLoggedOut();
             _client.HttpClient.DefaultRequestHeaders.Authorization = null;
-            //await _client.LogoutAsync();
+            await _client.LogoutAsync();
         }
 
-        public async Task<bool> Register(string username, string password, string email)
+        public async Task<CreateUserCommandResponse> Register(string username, string password, string email)
         {
-            CreateUserCommand registrationRequest = new CreateUserCommand() { Email = email, Username = username, Password = password };
-            var response = await _client.RegisterAsync(registrationRequest);
-
-            if (!string.IsNullOrEmpty(response.Id))
+            CreateUserCommand registrationRequest = new CreateUserCommand() { Email = "test@gmail.com", Username = username, Password = password };
+            CreateUserCommandResponse response = null;
+            try
             {
-                return true;
+                response = await _client.RegisterAsync(registrationRequest);
+            }
+            catch (ApiException ex)
+            {
+                List<string> errors = new List<string>() { ex.Response };
+                return new CreateUserCommandResponse() { Errors = errors, Success = false };
             }
 
-            return false;
+            return response;
         }
     }
 }
