@@ -32,7 +32,7 @@ namespace WebGame.UI.Blazor.Pages.Authentication
             }
             else if (response.Success)
             {
-                NavigationManager.NavigateTo("home");
+                NavigationManager.NavigateTo("login");
             }
 
             ShowErrors(response);
