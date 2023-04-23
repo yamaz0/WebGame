@@ -31,7 +31,7 @@ namespace WebGame.Application.UnitTest.Shop
         [Fact]
         public async void Transaction_Should_Succesfull_Complete()
         {
-            var command = new BuyArmorShopCommand() { PlayerId = PLAYER_ID, ArmorId = ARMOR_ID };
+            var command = new BuyArmorShopCommand(PLAYER_ID, ARMOR_ID);
             var handler = new BuyArmorShopCommandHandler(_mockPlayerRepository.Object, _mockArmorRepository.Object);
 
             Player playerBefore = await _mockPlayerRepository.Object.GetByIdAsync(PLAYER_ID);
@@ -56,7 +56,7 @@ namespace WebGame.Application.UnitTest.Shop
         [Fact]
         public async void Transaction_Should_Not_Found_Player_And_Armor()
         {
-            var command = new BuyArmorShopCommand() { };
+            var command = new BuyArmorShopCommand(0, 0) { };
             var handler = new BuyArmorShopCommandHandler(_mockPlayerRepository.Object, _mockArmorRepository.Object);
 
             var response = await handler.Handle(command, CancellationToken.None);
@@ -69,7 +69,7 @@ namespace WebGame.Application.UnitTest.Shop
         [Fact]
         public async void Player_Should_Not_Have_Enough_Money()
         {
-            var command = new BuyArmorShopCommand() { PlayerId = PLAYER_ID, ArmorId = ARMOR_ID_WITH_HIGH_STATS };
+            var command = new BuyArmorShopCommand(PLAYER_ID, ARMOR_ID_WITH_HIGH_STATS);
             var handler = new BuyArmorShopCommandHandler(_mockPlayerRepository.Object, _mockArmorRepository.Object);
 
             var response = await handler.Handle(command, CancellationToken.None);

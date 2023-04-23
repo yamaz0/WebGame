@@ -31,7 +31,7 @@ namespace WebGame.Application.UnitTest.Shop
         [Fact]
         public async void Transaction_Should_Succesfull_Complete()
         {
-            var command = new BuyWeaponShopCommand() { PlayerId = PLAYER_ID, WeaponId = WEAPON_ID };
+            var command = new BuyWeaponShopCommand(PLAYER_ID, WEAPON_ID);
             var handler = new BuyWeaponShopCommandHandler(_mockPlayerRepository.Object, _mockWeaponRepository.Object);
 
             Player playerBefore = await _mockPlayerRepository.Object.GetByIdAsync(PLAYER_ID);
@@ -56,7 +56,7 @@ namespace WebGame.Application.UnitTest.Shop
         [Fact]
         public async void Transaction_Should_Not_Found_Player_And_Weapon()
         {
-            var command = new BuyWeaponShopCommand() { };
+            var command = new BuyWeaponShopCommand(0, 0) { };
             var handler = new BuyWeaponShopCommandHandler(_mockPlayerRepository.Object, _mockWeaponRepository.Object);
 
             var response = await handler.Handle(command, CancellationToken.None);
@@ -69,7 +69,7 @@ namespace WebGame.Application.UnitTest.Shop
         [Fact]
         public async void Player_Should_Not_Have_Enough_Money()
         {
-            var command = new BuyWeaponShopCommand() { PlayerId = PLAYER_ID, WeaponId = WEAPON_ID_WITH_HIGH_STATS };
+            var command = new BuyWeaponShopCommand(PLAYER_ID, WEAPON_ID_WITH_HIGH_STATS);
             var handler = new BuyWeaponShopCommandHandler(_mockPlayerRepository.Object, _mockWeaponRepository.Object);
 
             var response = await handler.Handle(command, CancellationToken.None);

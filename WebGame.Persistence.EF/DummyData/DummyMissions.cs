@@ -22,7 +22,7 @@ namespace WebGame.Persistence.EF.DummyData
                     Name = "misja2",
                     Description = "hfgghfg",
                     Duration= 2,
-                    RewardExp= 2
+                    RewardExp= 20
                 }
             };
         }

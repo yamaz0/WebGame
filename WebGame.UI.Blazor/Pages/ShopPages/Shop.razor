@@ -3,25 +3,6 @@
 @using Microsoft.AspNetCore.Components.Authorization;
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
-<h1>ClaimsPrincipal Data</h1>
-
-<button @onclick="GetClaimsPrincipalData">Get ClaimsPrincipal Data</button>
-
-<p>@authMessage</p>
-
-@if (claims.Count() > 0)
-{
-    <ul>
-        @foreach (var claim in claims)
-        {
-            <li>@claim.Type: @claim.Value</li>
-        }
-    </ul>
-}
-
-<p>@surname</p>
-
-
 <h3>Shop</h3>
 
 

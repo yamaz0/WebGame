@@ -24,6 +24,8 @@ namespace WebGame.UI.Blazor.Pages.Authentication
 
         protected async void HandleValidSubmit()
         {
+            Message = "Loading...";
+
             var response = await AuthenticationService.Register(RegisterViewModel.UserName, RegisterViewModel.Password, RegisterViewModel.Email);
 
             if (response is null)

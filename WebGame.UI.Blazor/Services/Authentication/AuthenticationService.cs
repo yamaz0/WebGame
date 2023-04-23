@@ -81,7 +81,7 @@ namespace WebGame.UI.Blazor.Services.Authentication
             await _localStorage.RemoveItemAsync(CustomConstants.LocalStorage.REFRESH_TOKEN);
             ((CustomAuthenticationStateProvider)_authenticationStateProvider).SetUserLoggedOut();
             _client.HttpClient.DefaultRequestHeaders.Authorization = null;
-            await _client.LogoutAsync();
+            //await _client.LogoutAsync();
         }
 
         public async Task<CreateUserCommandResponse> Register(string username, string password, string email)

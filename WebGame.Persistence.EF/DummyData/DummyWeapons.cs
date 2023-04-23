@@ -27,9 +27,9 @@ namespace WebGame.Persistence.EF.DummyData
                     Id=2,
                     Name = "lepszy mieczyk",
                     Description = "mieczyk na potem",
-                    Value = 2,
-                    Attack = 2,
-                    AttackSpeed = 2
+                    Value = 10,
+                    Attack = 20,
+                    AttackSpeed = 20
                 }
             };
         }
