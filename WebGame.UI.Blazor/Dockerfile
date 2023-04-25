@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY WebGame.UI.Blazor.csproj" .
+COPY WebGame.UI.Blazor.csproj .
 RUN dotnet restore "WebGame.UI.Blazor.csproj"
 COPY . .
 RUN dotnet build WebGame.UI.Blazor.csproj -c Release -o /app/build
