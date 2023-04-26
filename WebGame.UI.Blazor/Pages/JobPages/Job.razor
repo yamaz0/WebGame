@@ -1,0 +1,30 @@
+﻿@page "/job"
+
+<h1>Job</h1>
+
+@switch (State)
+{
+    case Services.TimeActionStateResponse.NoAction:
+    <p>@CalcTime</p>
+            <div class="rz-p-12 rz-text-align-center">
+            <RadzenSlider @bind-Value=@sliderValue TValue="int" Step="10" Min="10" Max="480" Change="CalcTimeHandler" />
+            </div>
+
+            <button onclick=@StartJob>Start</button>
+            <br />
+        break;
+    case Services.TimeActionStateResponse.OtherAction:
+        <h3>@Time</h3>
+        break;
+    case Services.TimeActionStateResponse.InProgress:
+        <h3>@Time</h3>
+        break;
+    case Services.TimeActionStateResponse.Finished:
+        <span>Job finished.</span>
+        <br />
+        <button onclick=@Reward>OK</button>
+        break;
+    default:
+        //error bad enum
+        break;
+}
