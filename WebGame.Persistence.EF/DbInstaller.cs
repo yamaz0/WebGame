@@ -15,7 +15,6 @@ namespace WebGame
 
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<IEnemyRepository, EnemyRepository>();
-            services.AddScoped<IJobRepository, JobRepository>();
             services.AddScoped<IMissionRepository, MissionRepository>();
             services.AddScoped<IArmorRepository, ArmorRepository>();
             services.AddScoped<IWeaponRepository, WeaponRepository>();

@@ -30,4 +30,9 @@
     <ProjectReference Include="..\..\WebGame.Duel\WebGame.Duel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Jobs\Command\" />
+    <Folder Include="Jobs\Query\" />
+  </ItemGroup>
+
 </Project>

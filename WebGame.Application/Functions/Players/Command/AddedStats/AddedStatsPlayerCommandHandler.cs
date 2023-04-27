@@ -19,20 +19,22 @@ namespace WebGame.Application.Functions.Players.Command.AddedStats
         public async Task<Unit> Handle(AddedStatsPlayerCommand request, CancellationToken cancellationToken)
         {
             var player = await _playerRepository.GetByIdAsync(request.PlayerId);
-
-            switch (request.Statistic)
+            if (player.SkillPoints < 0)
             {
-                case Domain.PlayerStatsEnum.Statistic.Strenght:
-                    player.AddStrenght();
-                    break;
-                case Domain.PlayerStatsEnum.Statistic.Dexterity:
-                    player.AddDexterity();
-                    break;
-                case Domain.PlayerStatsEnum.Statistic.Endurance:
-                    player.AddEndurance();
-                    break;
-                default:
-                    break;
+                switch (request.Statistic)
+                {
+                    case Domain.PlayerStatsEnum.Statistic.Strenght:
+                        player.AddStrenght();
+                        break;
+                    case Domain.PlayerStatsEnum.Statistic.Dexterity:
+                        player.AddDexterity();
+                        break;
+                    case Domain.PlayerStatsEnum.Statistic.Endurance:
+                        player.AddEndurance();
+                        break;
+                    default:
+                        break;
+                }
             }
 
             await _playerRepository.UpdateAsync(player);

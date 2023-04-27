@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="Constants\Entities\" />
     <Folder Include="Functions\Account\Query\" />
+    <Folder Include="Functions\Jobs\Query\" />
     <Folder Include="Functions\Users\Command\Delete\" />
     <Folder Include="Functions\Users\Command\Update\" />
     <Folder Include="Functions\Users\Query\" />

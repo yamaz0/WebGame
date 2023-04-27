@@ -10,7 +10,6 @@ using WebGame.Domain.Entities.User;
 using WebGame.Entities;
 using WebGame.Entities.Enemies;
 using WebGame.Entities.Items;
-using WebGame.Entities.Jobs;
 using WebGame.Entities.Missions;
 using WebGame.Persistence.EF.DummyData;
 using WebGame.Persistence.EF.ModelCreating;
@@ -23,7 +22,6 @@ namespace WebGame
         public DbSet<Enemy> Enemies { get; set; }
         public DbSet<Armor> Armors { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
-        public DbSet<Job> Jobs { get; set; }
         public DbSet<Mission> Missions { get; set; }
 
         public DbGameContext(DbContextOptions options) : base(options) { Database.EnsureCreated(); }
@@ -59,14 +57,12 @@ namespace WebGame
 
             PlayerModelCreating.Configure(builder);
             EnemyModelCreating.Configure(builder);
-            JobModelCreating.Configure(builder);
             MissionModelCreating.Configure(builder);
             WeaponModelCreating.Configure(builder);
             ArmorModelCreating.Configure(builder);
             FillDummyData(builder);
             base.OnModelCreating(builder);
         }
-
 
         private void FillDummyData(ModelBuilder builder)
         {
@@ -89,10 +85,6 @@ namespace WebGame
             foreach (var item in DummyPlayer.Get())
             {
                 builder.Entity<Player>().HasData(item);
-            }
-            foreach (var item in DummyJobs.Get())
-            {
-                builder.Entity<Job>().HasData(item);
             }
             foreach (var item in DummyMissions.Get())
             {

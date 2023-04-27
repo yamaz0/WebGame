@@ -21,14 +21,19 @@ namespace WebGame.TimeAction
 
         public async Task<bool> SetActionToPlayer(int id, TimeActionType actionType, ITimeAction action)
         {
+            return await SetActionToPlayer(id, actionType, action.Id, action.Duration);
+        }
+
+        public async Task<bool> SetActionToPlayer(int id, TimeActionType actionType, int actionId, int duration)
+        {
             Player player = await GetPlayer(id);
 
             if (player is not null && player.ActionState == TimeActionState.NoAction)
             {
-                player.ActionId = action.Id;
+                player.ActionId = actionId;
                 player.ActionType = actionType;
                 player.ActionState = TimeActionState.InProgress;
-                player.EndTime = DateTime.UtcNow.AddMinutes(action.Duration);
+                player.EndTime = DateTime.UtcNow.AddMinutes(duration);
                 await _playerRepository.UpdateAsync(player);
 
                 return true;
@@ -39,11 +44,16 @@ namespace WebGame.TimeAction
 
         public async Task<bool> RewardPlayer(Player player, ITimeAction action, TimeActionType actionType)
         {
+            return await RewardPlayer(player, actionType, action.RewardExp, action.RewardCash);
+        }
+
+        public async Task<bool> RewardPlayer(Player player, TimeActionType actionType, int rewardExp, int rewardCash)
+        {
             if (player.ActionState == TimeActionState.Finished && player.ActionType == actionType)
             {
                 player.ActionState = TimeActionState.NoAction;
                 player.ActionId = 0;
-                player.AddReward(action.RewardExp, action.RewardCash);
+                player.AddReward(rewardExp, rewardCash);
                 await _playerRepository.UpdateAsync(player);
 
                 return true;

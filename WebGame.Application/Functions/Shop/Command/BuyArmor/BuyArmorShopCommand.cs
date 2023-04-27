@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebGame.Application.Constants;
-using WebGame.Application.Functions.Jobs.Command.Create;
 using WebGame.Application.Interfaces.Persistence.Common;
 using WebGame.Application.Response;
 
