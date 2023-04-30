@@ -33,9 +33,9 @@ namespace WebGame.TimeAction
                 player.ActionId = actionId;
                 player.ActionType = actionType;
                 player.ActionState = TimeActionState.InProgress;
+                player.Duration = duration;
                 player.EndTime = DateTime.UtcNow.AddMinutes(duration);
                 await _playerRepository.UpdateAsync(player);
-
                 return true;
             }
 
@@ -54,6 +54,22 @@ namespace WebGame.TimeAction
                 player.ActionState = TimeActionState.NoAction;
                 player.ActionId = 0;
                 player.AddReward(rewardExp, rewardCash);
+                await _playerRepository.UpdateAsync(player);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> RewardPlayerWork(Player player)
+        {
+            if (player.ActionState == TimeActionState.Finished && player.ActionType == TimeActionType.Work)
+            {
+                player.ActionState = TimeActionState.NoAction;
+                player.ActionId = 0;
+                int calcRewardCash = player.Duration * 2;
+                player.AddReward(0, calcRewardCash);
                 await _playerRepository.UpdateAsync(player);
 
                 return true;

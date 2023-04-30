@@ -21,7 +21,7 @@ namespace WebGame.Application.Functions.Jobs.Command.RewardJob
         {
             var player = await _playerRepository.GetByIdAsync(request.PlayerId);
 
-            bool isSuccess = await _timeActionService.RewardPlayer(player, TimeActionType.Work, 0, 0);//TODO obliczenie rewardu na podstawie przechowanego duration czy cos
+            bool isSuccess = await _timeActionService.RewardPlayerWork(player);
 
             if (!isSuccess)
             {

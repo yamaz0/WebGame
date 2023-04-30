@@ -213,6 +213,9 @@ namespace WebGame.Persistence.EF.Migrations
                         .HasColumnType("INTEGER")
                         .HasDefaultValue(10);
 
+                    b.Property<int>("Duration")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("TEXT");
 
@@ -302,6 +305,7 @@ namespace WebGame.Persistence.EF.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Defense = 0,
                             Dexterity = 10,
+                            Duration = 0,
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Endurance = 10,
                             Exp = 1000,
@@ -324,6 +328,7 @@ namespace WebGame.Persistence.EF.Migrations
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Defense = 0,
                             Dexterity = 10,
+                            Duration = 0,
                             EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Endurance = 10,
                             Exp = 1000,
@@ -692,77 +697,6 @@ namespace WebGame.Persistence.EF.Migrations
                             Description = "mieczyk na potem",
                             Name = "lepszy mieczyk",
                             Value = 10
-                        });
-                });
-
-            modelBuilder.Entity("WebGame.Entities.Jobs.Job", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValue("saba");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValueSql("date('now')");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("LastModifiedBy")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValue("saba");
-
-                    b.Property<DateTime?>("LastModifiedDate")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("RewardCash")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("RewardExp")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Jobs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "asdasd",
-                            Duration = 1,
-                            Name = "praca1",
-                            RewardCash = 0,
-                            RewardExp = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "hfgghfg",
-                            Duration = 3,
-                            Name = "praca2",
-                            RewardCash = 0,
-                            RewardExp = 2
                         });
                 });
 

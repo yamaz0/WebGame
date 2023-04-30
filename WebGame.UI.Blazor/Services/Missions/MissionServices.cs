@@ -33,19 +33,19 @@ namespace WebGame.UI.Blazor.Services.Missions
         public async Task<BasicResponse> SetMissionToPlayer(int id)
         {
             await _addBearerTokenService.AddBearerToken(_client);
-            return await _client.StartAsync(id, CancellationToken.None);
+            return await _client.Start2Async(id, CancellationToken.None);
         }
 
         public async Task<TimeActionResponse> CheckMission()
         {
             await _addBearerTokenService.AddBearerToken(_client);
-            return await _client.CheckAsync();
+            return await _client.Check2Async();
         }
 
         public async Task<BasicResponse> RewardMission()
         {
             await _addBearerTokenService.AddBearerToken(_client);
-            return await _client.RewardAsync();
+            return await _client.Reward2Async();
         }
     }
 }

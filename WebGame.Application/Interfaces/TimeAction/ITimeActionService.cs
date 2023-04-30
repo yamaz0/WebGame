@@ -15,6 +15,7 @@ namespace WebGame.Application.Interfaces.TimeAction
         Task<TimeActionResponse> Check(int id, TimeActionType actionType);
         Task<bool> RewardPlayer(Player player, ITimeAction action, TimeActionType actionType);
         Task<bool> RewardPlayer(Player player, TimeActionType actionType, int rewardExp, int rewardCash);
+        Task<bool> RewardPlayerWork(Player player);
         Task<bool> SetActionToPlayer(int id, TimeActionType actionType, ITimeAction action);
         Task<bool> SetActionToPlayer(int id, TimeActionType actionType, int actionId, int duration);
     }

@@ -97,27 +97,6 @@ namespace WebGame.Persistence.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Jobs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: false),
-                    Duration = table.Column<int>(type: "INTEGER", nullable: false),
-                    RewardExp = table.Column<int>(type: "INTEGER", nullable: false),
-                    RewardCash = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreatedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
-                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "date('now')"),
-                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
-                    LastModifiedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Jobs", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Missions",
                 columns: table => new
                 {
@@ -291,6 +270,7 @@ namespace WebGame.Persistence.EF.Migrations
                     ActionType = table.Column<int>(type: "INTEGER", nullable: false),
                     ActionState = table.Column<int>(type: "INTEGER", nullable: false),
                     ActionId = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 0),
+                    Duration = table.Column<int>(type: "INTEGER", nullable: false),
                     EndTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Stamina = table.Column<int>(type: "INTEGER", nullable: false),
                     CreatedBy = table.Column<string>(type: "TEXT", nullable: false, defaultValue: "saba"),
@@ -363,15 +343,6 @@ namespace WebGame.Persistence.EF.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Jobs",
-                columns: new[] { "Id", "Description", "Duration", "Name", "RewardCash", "RewardExp" },
-                values: new object[,]
-                {
-                    { 1, "asdasd", 1, "praca1", 0, 1 },
-                    { 2, "hfgghfg", 3, "praca2", 0, 2 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Missions",
                 columns: new[] { "Id", "Description", "Duration", "Name", "RewardCash", "RewardExp" },
                 values: new object[,]
@@ -382,11 +353,11 @@ namespace WebGame.Persistence.EF.Migrations
 
             migrationBuilder.InsertData(
                 table: "Players",
-                columns: new[] { "Id", "ActionState", "ActionType", "ArmorId", "Attack", "BootsId", "Cash", "Defense", "Dexterity", "EndTime", "Endurance", "Exp", "HealthPoint", "HelmetId", "LegsId", "Level", "Name", "SkillPoints", "Stamina", "Strenght", "UserId", "WeaponId" },
+                columns: new[] { "Id", "ActionState", "ActionType", "ArmorId", "Attack", "BootsId", "Cash", "Defense", "Dexterity", "Duration", "EndTime", "Endurance", "Exp", "HealthPoint", "HelmetId", "LegsId", "Level", "Name", "SkillPoints", "Stamina", "Strenght", "UserId", "WeaponId" },
                 values: new object[,]
                 {
-                    { 1, 0, 0, null, 1, null, 100, 0, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 100, null, null, 10, "Graczek", 10, 0, 10, "user1", null },
-                    { 2, 0, 0, null, 1, null, 100, 0, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 100, null, null, 10, "asdasdasdas", 10, 0, 10, "user2", null }
+                    { 1, 0, 0, null, 1, null, 100, 0, 10, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 100, null, null, 10, "Graczek", 10, 0, 10, "user1", null },
+                    { 2, 0, 0, null, 1, null, 100, 0, 10, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 10, 1000, 100, null, null, 10, "asdasdasdas", 10, 0, 10, "user2", null }
                 });
 
             migrationBuilder.InsertData(
@@ -481,9 +452,6 @@ namespace WebGame.Persistence.EF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Enemies");
-
-            migrationBuilder.DropTable(
-                name: "Jobs");
 
             migrationBuilder.DropTable(
                 name: "Missions");

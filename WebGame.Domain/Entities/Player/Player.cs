@@ -46,6 +46,7 @@ namespace WebGame.Domain.Entities.Player
         public TimeActionType ActionType { get; set; }
         public TimeActionState ActionState { get; set; }
         public int ActionId { get; set; }
+        public int Duration { get; set; }
         public DateTime EndTime { get; set; }
 
         #endregion
