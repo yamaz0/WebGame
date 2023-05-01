@@ -24,7 +24,7 @@ namespace WebGame
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Mission> Missions { get; set; }
 
-        public DbGameContext(DbContextOptions options) : base(options) { Database.EnsureCreated(); }
+        public DbGameContext(DbContextOptions options) : base(options) { /*Database.EnsureCreated();*/ }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

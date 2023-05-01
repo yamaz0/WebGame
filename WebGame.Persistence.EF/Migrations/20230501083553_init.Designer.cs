@@ -11,7 +11,7 @@ using WebGame;
 namespace WebGame.Persistence.EF.Migrations
 {
     [DbContext(typeof(DbGameContext))]
-    [Migration("20230430200952_init")]
+    [Migration("20230501083553_init")]
     partial class init
     {
         /// <inheritdoc />
