@@ -391,7 +391,7 @@ namespace WebGame.UI.Blazor.Services
                         else
                         if (status_ == 400)
                         {
-                            string responseText_ = ( response_.Content == null ) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            string responseText_ = (response_.Content == null) ? string.Empty : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("Bad Request", status_, responseText_, headers_, null);
                         }
                         else
@@ -407,6 +407,8 @@ namespace WebGame.UI.Blazor.Services
                     }
                 }
             }
+            catch (Exception e) 
+            { throw e; }
             finally
             {
                 if (disposeClient_)

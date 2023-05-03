@@ -32,10 +32,10 @@ namespace WebGame.UI.Blazor
             services.AddScoped<IEnemiesService, EnemiesService>();
             services.AddScoped<IAddBearerTokenService, AddBearerTokenService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            RadzenStuff(services);
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddAuthorizationCore();
 
-            RadzenStuff(services);
 
             return services;
         }
