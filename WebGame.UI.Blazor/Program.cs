@@ -7,8 +7,8 @@ using WebGame.UI.Blazor.CustomDelegatingHandler;
 using WebGame.UI.Blazor.Services;
 using static System.Net.WebRequestMethods;
 
-const string url = "https://dasdsdas-szulcpatryk1c.b4a.run";
-//const string url= "https://localhost:5001";
+//const string url = "https://dasdsdas-szulcpatryk1c.b4a.run";
+const string url= "https://localhost:5000";
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

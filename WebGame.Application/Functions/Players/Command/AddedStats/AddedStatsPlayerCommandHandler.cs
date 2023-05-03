@@ -19,7 +19,7 @@ namespace WebGame.Application.Functions.Players.Command.AddedStats
         public async Task<Unit> Handle(AddedStatsPlayerCommand request, CancellationToken cancellationToken)
         {
             var player = await _playerRepository.GetByIdAsync(request.PlayerId);
-            if (player.SkillPoints < 0)
+            if (player.SkillPoints > 0)
             {
                 switch (request.Statistic)
                 {
