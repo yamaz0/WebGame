@@ -33,5 +33,5 @@ namespace WebGame.Persistence.EF.ModelCreating
                 eb.Property(x => x.LastModifiedDate).ValueGeneratedOnAddOrUpdate();
             });
         }
-    }
+    }    
 }

@@ -11,8 +11,8 @@ using WebGame;
 namespace WebGame.Persistence.EF.Migrations
 {
     [DbContext(typeof(DbGameContext))]
-    [Migration("20230501083553_init")]
-    partial class init
+    [Migration("20230522213508_post")]
+    partial class post
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -343,6 +343,53 @@ namespace WebGame.Persistence.EF.Migrations
                             Strenght = 10,
                             UserId = "user2"
                         });
+                });
+
+            modelBuilder.Entity("WebGame.Domain.Entities.Post.Conversation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Conversations");
+                });
+
+            modelBuilder.Entity("WebGame.Domain.Entities.Post.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ConservationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("FromID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ToID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConservationId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("WebGame.Domain.Entities.User.UserEntity", b =>
@@ -856,6 +903,22 @@ namespace WebGame.Persistence.EF.Migrations
                     b.Navigation("Legs");
 
                     b.Navigation("Weapon");
+                });
+
+            modelBuilder.Entity("WebGame.Domain.Entities.Post.Message", b =>
+                {
+                    b.HasOne("WebGame.Domain.Entities.Post.Conversation", "Conservation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conservation");
+                });
+
+            modelBuilder.Entity("WebGame.Domain.Entities.Post.Conversation", b =>
+                {
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

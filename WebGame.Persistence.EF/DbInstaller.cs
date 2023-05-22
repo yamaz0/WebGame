@@ -18,7 +18,8 @@ namespace WebGame
             services.AddScoped<IMissionRepository, MissionRepository>();
             services.AddScoped<IArmorRepository, ArmorRepository>();
             services.AddScoped<IWeaponRepository, WeaponRepository>();
-
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IConversationRepository, ConversationRepository>();
 
             return services;
         }

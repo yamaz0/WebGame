@@ -10,6 +10,7 @@ using WebGame.Application.Automapper;
 using WebGame.Application.Functions.Players.Command.Create;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.UnitTest.Mocks.Repository;
+using WebGame.Persistence.EF.Repository;
 
 namespace WebGame.Application.UnitTest.Players.Command.Create
 {

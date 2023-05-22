@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using WebGame.Application.Interfaces.Persistence;
 using WebGame.Application.Response;
 using WebGame.Domain.Entities.Player;
+using WebGame.Domain.Entities.Post;
 using WebGame.Domain.Entities.User;
 
 namespace WebGame.Application.Functions.Accounts.Command.Create

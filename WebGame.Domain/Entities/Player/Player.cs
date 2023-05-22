@@ -57,6 +57,11 @@ namespace WebGame.Domain.Entities.Player
 
         #endregion
 
+        #region Chat
+
+        #endregion
+
+        #region Methods
         public void AddReward(int exp, int cash)
         {
             int expRequirement = Utils.CalculateExpRequirement(Level);
@@ -139,5 +144,6 @@ namespace WebGame.Domain.Entities.Player
             Weapon = weapon;
             UpdateAttack();
         }
+        #endregion
     }
 }

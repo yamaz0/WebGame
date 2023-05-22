@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.Reflection.Emit;
 using WebGame.Application.Constants;
 using WebGame.Domain.Common;
+using WebGame.Domain.Entities.Post;
 using WebGame.Domain.Entities.Player;
 using WebGame.Domain.Entities.User;
 using WebGame.Entities;
@@ -23,6 +24,8 @@ namespace WebGame
         public DbSet<Armor> Armors { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Mission> Missions { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         public DbGameContext(DbContextOptions options) : base(options) { Database.EnsureCreated(); }
 
@@ -55,6 +58,7 @@ namespace WebGame
         {
             builder.ApplyConfigurationsFromAssembly(typeof(DbGameContext).Assembly);
 
+            ChatMessageModelCreating.Configure(builder);
             PlayerModelCreating.Configure(builder);
             EnemyModelCreating.Configure(builder);
             MissionModelCreating.Configure(builder);
