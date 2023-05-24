@@ -1,0 +1,27 @@
+﻿@page "/post"
+<h3>Post</h3>
+
+@if (@Conversations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>FromPlayer</th>
+        </tr>
+        @foreach (var c in @Conversations)
+        {
+            <tr>
+                <td>
+                    <span>@c.Title</span>
+                </td>
+                <td>
+                    <span>Placeholder</span>
+                </td>
+            </tr>
+        }
+    </table>
+}

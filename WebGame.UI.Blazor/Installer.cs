@@ -8,6 +8,7 @@ using WebGame.UI.Blazor.Interfaces.Enemies;
 using WebGame.UI.Blazor.Interfaces.Jobs;
 using WebGame.UI.Blazor.Interfaces.Missions;
 using WebGame.UI.Blazor.Interfaces.Players;
+using WebGame.UI.Blazor.Interfaces.Post;
 using WebGame.UI.Blazor.Interfaces.Weapons;
 using WebGame.UI.Blazor.Services.Arena;
 using WebGame.UI.Blazor.Services.Armors;
@@ -15,6 +16,7 @@ using WebGame.UI.Blazor.Services.Authentication;
 using WebGame.UI.Blazor.Services.Enemies;
 using WebGame.UI.Blazor.Services.Missions;
 using WebGame.UI.Blazor.Services.Players;
+using WebGame.UI.Blazor.Services.Post;
 using WebGame.UI.Blazor.Services.Weapons;
 
 namespace WebGame.UI.Blazor
@@ -30,6 +32,7 @@ namespace WebGame.UI.Blazor
             services.AddScoped<IJobServices, JobServices>();
             services.AddScoped<IArenaEnemyService, ArenaEnemyService>();
             services.AddScoped<IEnemiesService, EnemiesService>();
+            services.AddScoped<IPostService, PostService>();
             services.AddScoped<IAddBearerTokenService, AddBearerTokenService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             RadzenStuff(services);

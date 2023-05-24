@@ -85,12 +85,12 @@ namespace WebGame.UI.Blazor.Services
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetPagedConversationRequestResponse> ConversationAsync(GetPagedConversationRequest body);
+        System.Threading.Tasks.Task<GetPagedConversationRequestResponse> ConversationAsync(int page);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<GetPagedConversationRequestResponse> ConversationAsync(GetPagedConversationRequest body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<GetPagedConversationRequestResponse> ConversationAsync(int page, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -940,18 +940,22 @@ namespace WebGame.UI.Blazor.Services
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<GetPagedConversationRequestResponse> ConversationAsync(GetPagedConversationRequest body)
+        public virtual System.Threading.Tasks.Task<GetPagedConversationRequestResponse> ConversationAsync(int page)
         {
-            return ConversationAsync(body, System.Threading.CancellationToken.None);
+            return ConversationAsync(page, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<GetPagedConversationRequestResponse> ConversationAsync(GetPagedConversationRequest body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<GetPagedConversationRequestResponse> ConversationAsync(int page, System.Threading.CancellationToken cancellationToken)
         {
+            if (page == null)
+                throw new System.ArgumentNullException("page");
+
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("api/Chat/conversation");
+            urlBuilder_.Append("api/Chat/conversation/{page}");
+            urlBuilder_.Replace("{page}", System.Uri.EscapeDataString(ConvertToString(page, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -959,10 +963,6 @@ namespace WebGame.UI.Blazor.Services
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
-                    var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
@@ -3744,20 +3744,6 @@ namespace WebGame.UI.Blazor.Services
 
         [Newtonsoft.Json.JsonProperty("reward", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Reward { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class GetPagedConversationRequest
-    {
-        [Newtonsoft.Json.JsonProperty("playerId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int PlayerId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("page", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Page { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("pageSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int PageSize { get; set; }
 
     }
 

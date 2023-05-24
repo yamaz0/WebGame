@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebGame.Api.Common;
 using WebGame.Application.Functions.Posts;
@@ -7,26 +8,27 @@ using WebGame.Application.Functions.Posts.Conversation.GetConversations;
 using WebGame.Application.Functions.Posts.Message.AddMessage;
 using WebGame.Application.Functions.Posts.Message.GetMessages;
 using WebGame.Application.Response;
+using WebGame.Domain.Entities.Post;
 
 namespace WebGame.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ChatController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IConfiguration _config;
 
-        public ChatController(IMediator mediator, IConfiguration config)
+        public ChatController(IMediator mediator)
         {
             _mediator = mediator;
-            _config = config;
         }
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesDefaultResponseType]
-        [HttpPost("addc")]
-        public async Task<ActionResult<BasicResponse>> AddPost([FromBody] AddConversationCommand request)
+        [HttpPost("addconversation")]
+        public async Task<ActionResult<BasicResponse>> AddConversation([FromBody] AddConversationCommand request)
         {
             var playerId = Utils.GetPlayerId(User);
             request.PlayerId = playerId;
@@ -40,12 +42,14 @@ namespace WebGame.Api.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesDefaultResponseType]
-        [HttpGet("c")]
-        public async Task<ActionResult<BasicResponse>> GetPW()
+        [HttpGet("conversation/{page}")]
+        public async Task<ActionResult<GetPagedConversationRequestResponse>> GetConversation(int page)
         {
             var playerId = Utils.GetPlayerId(User);
-            GetPagedConversationRequest request = new GetPagedConversationRequest(1, 5, _config.GetValue<int>("Test:PlayerId"));
+            var request = new GetPagedConversationRequest(page,5,playerId);
+            //request.PlayerId = playerId;
             var result = await _mediator.Send(request);
 
             if (!result.Success)
@@ -55,8 +59,9 @@ namespace WebGame.Api.Controllers
         }
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesDefaultResponseType]
-        [HttpPost("addm")]
+        [HttpPost("addmessage")]
         public async Task<ActionResult<BasicResponse>> AddMessage([FromBody] AddMessageCommand request)
         {
             var playerId = Utils.GetPlayerId(User);
@@ -71,12 +76,11 @@ namespace WebGame.Api.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesDefaultResponseType]
-        [HttpGet("m")]
-        public async Task<ActionResult<BasicResponse>> GetMessage()
+        [HttpGet("message")]
+        public async Task<ActionResult<BasicResponse>> GetMessage([FromBody] GetPagedMessagesRequest request)
         {
-            var playerId = Utils.GetPlayerId(User);
-            GetPagedMessagesRequest request = new GetPagedMessagesRequest(1, 5, _config.GetValue<int>("Test:ConvId"));
             var result = await _mediator.Send(request);
 
             if (!result.Success)
@@ -84,6 +88,5 @@ namespace WebGame.Api.Controllers
 
             return Ok(result);
         }
-
     }
 }

@@ -4,6 +4,7 @@ using WebGame.UI.Blazor.ViewModels.Armors;
 using WebGame.UI.Blazor.ViewModels.Enemies;
 using WebGame.UI.Blazor.ViewModels.Missions;
 using WebGame.UI.Blazor.ViewModels.Players;
+using WebGame.UI.Blazor.ViewModels.Post;
 using WebGame.UI.Blazor.ViewModels.Weapons;
 
 namespace WebGame.UI.Blazor.Map
@@ -22,6 +23,8 @@ namespace WebGame.UI.Blazor.Map
             CreateMap<GetAllMissionsViewModel, MissionBlazorVM>().ReverseMap();
 
             CreateMap<GetPlayerAllInfoViewModel, PlayerBlazorVM>().ReverseMap();
+            CreateMap<GetPagedMessagesRequest, MessagesBlazorVM>().ReverseMap();
+            CreateMap<Conversation, ConversationsBlazorVM>().ReverseMap();
         }
     }
 }

@@ -23,12 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="FoldersToCopy\Armors\" />
-    <Folder Include="FoldersToCopy\Enemies\" />
-    <Folder Include="FoldersToCopy\Jobs\" />
-    <Folder Include="FoldersToCopy\Missions\" />
-    <Folder Include="FoldersToCopy\Players\" />
-    <Folder Include="FoldersToCopy\Weapons\" />
     <Folder Include="ViewModels\Jobs\" />
   </ItemGroup>
 
