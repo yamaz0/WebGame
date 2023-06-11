@@ -38,7 +38,7 @@ namespace WebGame.Application.Functions.Posts.Conversation.AddConversation
         {
             //TODO zrobic klase do wiadomosci i zrobic post.createConservation i post.sendMessage jako tworzenie pierwszej wiadomosci w rozmowie
             var conversation = new Domain.Entities.Post.Conversation();
-            conversation.Init(request.Title, request.PlayerId);
+            conversation.Init(request.Title, request.PlayerId, request.ToID);
 
             conversation = await _conversationRepository.AddAsync(conversation);
             return new AddConversationCommandResponse(conversation.Id);

@@ -7,6 +7,12 @@
             public const string TOKEN = "Token";
             public const string REFRESH_TOKEN = "RefreshToken";
         }
+
+        public static class Claims
+        {
+            public const string PLAYERID = "PlayerId";
+        }
+
         public static class Authorization
         {
             public const string BEARER = "Bearer";

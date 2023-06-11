@@ -28,11 +28,12 @@
     <ProjectReference Include="..\..\WebGame.Api\WebGame.Api.csproj" />
     <ProjectReference Include="..\..\WebGame.Application\WebGame.Application.csproj" />
     <ProjectReference Include="..\..\WebGame.Duel\WebGame.Duel.csproj" />
+    <ProjectReference Include="..\..\WebGame.UI.Blazor\WebGame.UI.Blazor.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Jobs\Command\" />
-    <Folder Include="Jobs\Query\" />
+    <Folder Include="Custom\Command\" />
+    <Folder Include="Custom\Query\" />
   </ItemGroup>
 
 </Project>

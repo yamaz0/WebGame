@@ -1,2 +1,29 @@
-﻿<h3>Conversation</h3>
+﻿@page "/conversation/{Id:int}"
 
+<h3>Conversation</h3>
+
+@if (@Title != null)
+{
+    <span>Title: @Title</span>
+}
+@if (@Messages == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <span>Title: @Title</span>
+
+    @foreach (var message in @Messages)
+    {
+        if (message.FromID == PlayerId)
+        {
+            
+        }
+    }
+
+    <br />
+    <br />
+    <a onclick=null>Answer</a>
+    <a onclick=null>Delete</a>
+}

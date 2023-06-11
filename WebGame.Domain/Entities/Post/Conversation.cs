@@ -3,14 +3,16 @@
     public class Conversation
     {
         public int Id { get; set; }
-        public int PlayerId { get; set; }
+        public int FromId { get; set; }
+        public int ToId { get; set; }
         public string Title { get; set; }
         public List<Message> Messages { get; set; }
 
-        public void Init(string title, int playerId)
+        public void Init(string title, int fromPlayerId, int toPlayerId)
         {
             Title = title;
-            PlayerId = playerId;
+            FromId = fromPlayerId;
+            ToId = toPlayerId;
         }
     }
 }

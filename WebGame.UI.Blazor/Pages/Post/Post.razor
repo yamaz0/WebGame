@@ -12,11 +12,11 @@ else
             <th>Title</th>
             <th>FromPlayer</th>
         </tr>
-        @foreach (var c in @Conversations)
+        @foreach (var conversation in @Conversations)
         {
             <tr>
                 <td>
-                    <span>@c.Title</span>
+                    <a onclick=@(()=>ShowMessages(conversation.Id))>@conversation.Title</a>
                 </td>
                 <td>
                     <span>Placeholder</span>

@@ -19,5 +19,9 @@ namespace WebGame.UI.Blazor.Pages.Post
             //get paged conversations
             Conversations = await PostService.GetPagedConversations();
         }
+        private void ShowMessages(int id)
+        {
+            NavigationManager.NavigateTo($"conversation/{id}");
+        }
     }
 }

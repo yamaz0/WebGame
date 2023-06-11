@@ -18,13 +18,13 @@ namespace WebGame.Persistence.EF.Repository
 
         public async Task<Conversation> GetConversationByIdAsync(int id, int playerId)
         {
-            return await _context.Conversations.Where(c => c.PlayerId == playerId && c.Id == id).FirstOrDefaultAsync();
+            return await _context.Conversations.Where(c => c.FromId == playerId && c.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<List<Conversation>> GetPagedConversationsAsync(int playerId, int page, int pageSize)
         {
             int skipElementsNumber = (page - 1) * pageSize;
-            return await _context.Conversations.Where(c => c.PlayerId == playerId).Skip(skipElementsNumber).Take(pageSize).AsNoTracking().ToListAsync();
+            return await _context.Conversations.Where(c => c.FromId == playerId).Skip(skipElementsNumber).Take(pageSize).AsNoTracking().ToListAsync();
         }
     }
 }
