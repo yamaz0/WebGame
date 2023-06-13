@@ -23,7 +23,7 @@ namespace WebGame.UI.Blazor.Map
             CreateMap<GetAllMissionsViewModel, MissionBlazorVM>().ReverseMap();
 
             CreateMap<GetPlayerAllInfoViewModel, PlayerBlazorVM>().ReverseMap();
-            CreateMap<GetPagedMessagesRequest, MessagesBlazorVM>().ReverseMap();
+            CreateMap<Message, MessagesBlazorVM>().ReverseMap();
             CreateMap<Conversation, ConversationsBlazorVM>().ReverseMap();
         }
     }

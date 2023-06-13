@@ -17,7 +17,7 @@ namespace WebGame.UI.Blazor.Pages.Post
         protected async override Task OnInitializedAsync()
         {
             //get paged conversations
-            Conversations = await PostService.GetPagedConversations();
+            Conversations = await PostService.GetPagedConversations(1,5);
         }
         private void ShowMessages(int id)
         {

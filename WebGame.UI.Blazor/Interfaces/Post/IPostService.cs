@@ -6,8 +6,8 @@ namespace WebGame.UI.Blazor.Interfaces.Post
 {
     public interface IPostService
     {
-        Task<ICollection<ConversationsBlazorVM>> GetPagedConversations();
-        Task<ICollection<MessagesBlazorVM>> GetPagedMessages();
+        Task<ICollection<ConversationsBlazorVM>> GetPagedConversations(int page, int pageSize);
+        Task<ICollection<MessagesBlazorVM>> GetPagedMessages(int page, int pageSize, int id);
         Task AddConversation(ConversationDTO conversation);
         Task AddMessage(MessageDTO message);
     }

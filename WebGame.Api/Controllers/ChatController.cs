@@ -45,10 +45,10 @@ namespace WebGame.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesDefaultResponseType]
         [HttpGet("conversation/{page}")]
-        public async Task<ActionResult<GetPagedConversationRequestResponse>> GetConversation(int page)
+        public async Task<ActionResult<GetPagedConversationRequestResponse>> GetConversations(int page)
         {
             var playerId = Utils.GetPlayerId(User);
-            var request = new GetPagedConversationRequest(page,5,playerId);
+            var request = new GetPagedConversationRequest(page, 5, playerId);
             //request.PlayerId = playerId;
             var result = await _mediator.Send(request);
 
@@ -78,10 +78,10 @@ namespace WebGame.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesDefaultResponseType]
-        [HttpGet("message")]
-        public async Task<ActionResult<BasicResponse>> GetMessage([FromBody] GetPagedMessagesRequest request)
+        [HttpGet("message/{id}")]
+        public async Task<ActionResult<GetPostMessagesRequestResponse>> GetMessages(int id)
         {
-            var result = await _mediator.Send(request);
+            var result = await _mediator.Send(new GetPagedMessagesRequest(1, 5, id));
 
             if (!result.Success)
                 return BadRequest(result);

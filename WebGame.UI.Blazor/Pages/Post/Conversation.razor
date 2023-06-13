@@ -2,10 +2,6 @@
 
 <h3>Conversation</h3>
 
-@if (@Title != null)
-{
-    <span>Title: @Title</span>
-}
 @if (@Messages == null)
 {
     <p><em>Loading...</em></p>
@@ -14,12 +10,19 @@ else
 {
     <span>Title: @Title</span>
 
+    <br />
+
     @foreach (var message in @Messages)
     {
         if (message.FromID == PlayerId)
         {
-            
+            <span style="color:red">@message.Text</span>
         }
+        else
+        {
+            <span style="color:blue">@message.Text</span>
+        }
+        <br />
     }
 
     <br />

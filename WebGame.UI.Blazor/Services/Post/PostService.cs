@@ -31,7 +31,7 @@ namespace WebGame.UI.Blazor.Services.Post
             throw new NotImplementedException();
         }
 
-        public async Task<ICollection<ConversationsBlazorVM>> GetPagedConversations()
+        public async Task<ICollection<ConversationsBlazorVM>> GetPagedConversations(int page, int pageSize)
         {
             await _addBearerTokenService.AddBearerToken(_client);
             var conversations = await _client.ConversationAsync(1);
@@ -39,9 +39,12 @@ namespace WebGame.UI.Blazor.Services.Post
             return mappedConversations;
         }
 
-        public Task<ICollection<MessagesBlazorVM>> GetPagedMessages()
+        public async Task<ICollection<MessagesBlazorVM>> GetPagedMessages(int page, int pageSize, int id)
         {
-            throw new NotImplementedException();
+            await _addBearerTokenService.AddBearerToken(_client);
+            var messages = await _client.MessageAsync(id);
+            var mappedMessages = _mapper.Map<ICollection<MessagesBlazorVM>>(messages.Messages);
+            return mappedMessages;
         }
     }
 }

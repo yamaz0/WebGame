@@ -19,16 +19,16 @@ namespace WebGame.UI.Blazor.Pages.Post
         public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Parameter]
         public int Id { get; set; }
-        [Parameter]
-        public string Title { get; set; }
+        public string Title { get; set; } = "Tytul tymczasowy";
 
         public int PlayerId { get; set; } = -1;
-        public List<MessagesBlazorVM> Messages { get; set; }
+        public ICollection<MessagesBlazorVM> Messages { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
             await TrySetPlayerId();
             //get title,id,messages by id from previus page
+            Messages = await PostService.GetPagedMessages(1, 5,Id);//domyslne wartosci potem ustawic globalnie
         }
 
         private async Task TrySetPlayerId()
@@ -37,15 +37,17 @@ namespace WebGame.UI.Blazor.Pages.Post
 
             foreach (var claim in authState.User.Claims)
             {
-                bool canParse = int.TryParse(claim.Value, out int parsedPlayerId);
 
-                if (claim.Type == Constants.CustomConstants.Claims.PLAYERID && canParse)
+                if (claim.Type == CustomConstants.Claims.PLAYERID)
                 {
-                    PlayerId = parsedPlayerId;
-                }
-                else
-                {
-                    throw new Exception("playerId not found");
+                    bool canParse = int.TryParse(claim.Value, out int parsedPlayerId);
+
+                    if (canParse)
+                        PlayerId = parsedPlayerId;
+                    else
+                    {
+                        throw new Exception("playerId not found");
+                    }
                 }
             }
         }
