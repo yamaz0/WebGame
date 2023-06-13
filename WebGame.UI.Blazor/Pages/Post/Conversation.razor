@@ -8,6 +8,11 @@
 }
 else
 {
+    
+    <button @onclick=Answer>Answer</button>
+    <button @onclick=Delete>Delete</button>
+
+    <br />
     <span>Title: @Title</span>
 
     <br />
@@ -25,8 +30,11 @@ else
         <br />
     }
 
-    <br />
-    <br />
-    <a onclick=null>Answer</a>
-    <a onclick=null>Delete</a>
+    @if (showAnserTextArea)
+    {
+        <br />
+        <input type="text" @bind=MessageText />
+        <br />
+        <button @onclick=SendAnswer>Send</button>
+    }
 }

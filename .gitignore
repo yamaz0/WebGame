@@ -475,3 +475,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+WebGame.UI.Blazor/Program.cs
+test/WebGame.Application.UnitTest/Custom/CustomTest.cs

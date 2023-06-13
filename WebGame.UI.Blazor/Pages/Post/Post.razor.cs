@@ -17,11 +17,20 @@ namespace WebGame.UI.Blazor.Pages.Post
         protected async override Task OnInitializedAsync()
         {
             //get paged conversations
-            Conversations = await PostService.GetPagedConversations(1,5);
+            Conversations = await PostService.GetPagedConversations(1, 5);
         }
-        private void ShowMessages(int id)
+        private void ShowMessages(ConversationsBlazorVM c)
         {
-            NavigationManager.NavigateTo($"conversation/{id}");
+            var q = NavigationManager.GetUriWithQueryParameters("conversation",
+                new Dictionary<string, object?>()
+                {
+                    {nameof(c.Id),c.Id},
+                    {nameof(c.FromId),c.FromId},
+                    {nameof(c.ToId),c.ToId},
+                    {nameof(c.Title),c.Title}
+                });
+
+            NavigationManager.NavigateTo(q);
         }
     }
 }
