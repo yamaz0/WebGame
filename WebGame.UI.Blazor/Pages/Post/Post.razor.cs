@@ -24,10 +24,10 @@ namespace WebGame.UI.Blazor.Pages.Post
             var q = NavigationManager.GetUriWithQueryParameters("conversation",
                 new Dictionary<string, object?>()
                 {
-                    {nameof(c.Id),c.Id},
-                    {nameof(c.FromId),c.FromId},
-                    {nameof(c.ToId),c.ToId},
-                    {nameof(c.Title),c.Title}
+                    {nameof(Conversation.Id),c.Id},
+                    {nameof(Conversation.FromId),c.FromId},
+                    {nameof(Conversation.ToId),c.ToId},
+                    {nameof(Conversation.Title),c.Title}
                 });
 
             NavigationManager.NavigateTo(q);

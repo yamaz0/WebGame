@@ -45,6 +45,11 @@ namespace WebGame.UI.Blazor.Pages.Post
             showAnserTextArea = false;
             await TrySetPlayerId();
             //get title,id,messages by id from previus page
+            await FetchMessages();
+        }
+
+        private async Task FetchMessages()
+        {
             Messages = await PostService.GetPagedMessages(1, 5, Id);//domyslne wartosci potem ustawic globalnie
         }
 
@@ -86,6 +91,8 @@ namespace WebGame.UI.Blazor.Pages.Post
             }
 
             showAnserTextArea = false;
+            await FetchMessages();
+            StateHasChanged();
             //refresh czy cos
         }
 

@@ -26,9 +26,10 @@ namespace WebGame.UI.Blazor.Services.Post
             throw new NotImplementedException();
         }
 
-        public Task AddMessage(MessageDTO message)
+        public async Task AddMessage(MessageDTO message)
         {
-            throw new NotImplementedException();
+            await _addBearerTokenService.AddBearerToken(_client);
+            await _client.AddmessageAsync(new AddMessageCommand() { ConversationID = message.ConservationId, Message = message.Text, ToID = message.ToID });
         }
 
         public async Task<ICollection<ConversationsBlazorVM>> GetPagedConversations(int page, int pageSize)
