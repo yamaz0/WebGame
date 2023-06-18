@@ -4,7 +4,7 @@
 
 @switch (State)
 {
-    case Services.TimeActionStateResponse.NoAction:
+    case Services.TimeActionStateResponse._0:
     <p>@CalcTime</p>
             <div class="rz-p-12 rz-text-align-center">
             <RadzenSlider @bind-Value=@sliderValue TValue="int" Step="10" Min="10" Max="480" Change="CalcTimeHandler" />
@@ -13,13 +13,13 @@
             <button onclick=@StartJob>Start</button>
             <br />
         break;
-    case Services.TimeActionStateResponse.OtherAction:
+    case Services.TimeActionStateResponse._1:
         <h3>@Time</h3>
         break;
-    case Services.TimeActionStateResponse.InProgress:
+    case Services.TimeActionStateResponse._2:
         <h3>@Time</h3>
         break;
-    case Services.TimeActionStateResponse.Finished:
+    case Services.TimeActionStateResponse._3:
         <span>Job finished.</span>
         <br />
         <button onclick=@Reward>OK</button>

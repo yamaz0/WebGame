@@ -18,13 +18,33 @@ namespace WebGame.Persistence.EF.Repository
 
         public async Task<Conversation> GetConversationByIdAsync(int id, int playerId)
         {
-            return await _context.Conversations.Where(c => c.FromId == playerId && c.Id == id).FirstOrDefaultAsync();
+            return await _context.Conversations.Where(c => (c.FromId == playerId || c.ToId == playerId) && c.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<List<Conversation>> GetPagedConversationsAsync(int playerId, int page, int pageSize)
         {
             int skipElementsNumber = (page - 1) * pageSize;
-            return await _context.Conversations.Where(c => c.FromId == playerId).Skip(skipElementsNumber).Take(pageSize).AsNoTracking().ToListAsync();
+            return await _context.Conversations.Where(c => c.FromId == playerId || c.ToId == playerId).Skip(skipElementsNumber).Take(pageSize).AsNoTracking().ToListAsync();
+        }
+
+        public async Task RemoveConversationsAsync(List<int> ids)
+        {
+            var conversations = await _context.Conversations.Where(c => ids.Contains(c.Id)).ToListAsync();
+
+            foreach (var c in conversations)
+            {
+                await RemoveAsync(c);
+            }
+        }
+
+        public async Task RemoveAllConversationsAsync(int playerId)
+        {
+            var conversations = await _context.Conversations.Where(c => c.FromId == playerId || c.ToId == playerId).ToListAsync();
+
+            foreach (var c in conversations)
+            {
+                await RemoveAsync(c);
+            }
         }
     }
 }

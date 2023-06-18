@@ -64,16 +64,16 @@ namespace WebGame.UI.Blazor.Pages.JobPages
 
             switch (State)
             {
-                case TimeActionStateResponse.NoAction:
+                case TimeActionStateResponse._0:
                     SliderInit();
                     break;
-                case TimeActionStateResponse.OtherAction:
+                case TimeActionStateResponse._1:
                     Time = "Player does other action.";
                     break;
-                case TimeActionStateResponse.InProgress:
+                case TimeActionStateResponse._2:
                     Start((int)(response.EndTime - DateTime.UtcNow).TotalSeconds);
                     break;
-                case TimeActionStateResponse.Finished:
+                case TimeActionStateResponse._3:
                     Time = "Job end.";
                     break;
                 default:

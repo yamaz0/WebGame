@@ -3,7 +3,7 @@
 
 @switch (State)
 {
-    case Services.TimeActionStateResponse.NoAction:
+    case Services.TimeActionStateResponse._0:
         if (Missions == null)
         {
             <p><em>Loading...</em></p>
@@ -22,13 +22,13 @@
             }
         }
         break;
-    case Services.TimeActionStateResponse.OtherAction:
+    case Services.TimeActionStateResponse._1:
         <h3>@Time</h3>
         break;
-    case Services.TimeActionStateResponse.InProgress:
+    case Services.TimeActionStateResponse._2:
         <h3>@Time</h3>
         break;
-    case Services.TimeActionStateResponse.Finished:
+    case Services.TimeActionStateResponse._3:
         <span>Mission finished.</span>
         <br />
         <button onclick=@Reward>OK</button>

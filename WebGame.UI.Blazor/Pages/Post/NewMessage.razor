@@ -1,0 +1,9 @@
+﻿@page "/newMessage"
+@inject IJSRuntime JS
+<h3>NewMessage</h3>
+
+    <input type="text" @bind=Title/>
+    <input type="number" @bind=ToPlayerId/>
+    <input type="text" @bind=MessageText />
+    <br />
+    <button @onclick=Send>Send</button>

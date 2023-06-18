@@ -28,11 +28,57 @@ namespace WebGame.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesDefaultResponseType]
         [HttpPost("addconversation")]
-        public async Task<ActionResult<BasicResponse>> AddConversation([FromBody] AddConversationCommand request)
+        public async Task<ActionResult<AddConversationCommandResponse>> AddConversation([FromBody] AddConversationCommand request)
         {
             var playerId = Utils.GetPlayerId(User);
             request.PlayerId = playerId;
             var result = await _mediator.Send(request);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesDefaultResponseType]
+        [HttpDelete("deleteconversation/{id}")]
+        public async Task<ActionResult<RemoveConversationRequestResponse>> DeleteConversation(int id)
+        {
+            var result = await _mediator.Send(new RemoveConversationRequest(id));
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesDefaultResponseType]
+        [HttpDelete("deleteconversations")]
+        public async Task<ActionResult<RemoveConversationRequestResponse>> DeleteConversations([FromBody] RemoveConversationsRequest request)
+        {
+            var result = await _mediator.Send(request);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesDefaultResponseType]
+        [HttpDelete("deleteallplayerconversations")]
+        public async Task<ActionResult<RemoveConversationRequestResponse>> DeleteAllPlayerConversation()
+        {
+            var playerId = Utils.GetPlayerId(User);
+            var result = await _mediator.Send(new RemoveAllConversationRequest(playerId));
 
             if (!result.Success)
                 return BadRequest(result);

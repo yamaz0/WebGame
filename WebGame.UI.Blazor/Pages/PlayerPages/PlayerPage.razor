@@ -23,19 +23,19 @@ else
     <span>Strenght:    @Player.Strenght</span>
     @if (Player.SkillPoints > 0)
     {
-        <button onclick=@(()=>AddStat(Services.Statistic.Strenght))>+</button>
+        <button onclick=@(()=>AddStat(Services.Statistic._0))>+</button>
     }
     <br />
     <span>Dexterity:   @Player.Dexterity</span>
     @if (Player.SkillPoints > 0)
     {
-        <button onclick=@(()=>AddStat(Services.Statistic.Dexterity))>+</button>
+        <button onclick=@(()=>AddStat(Services.Statistic._1))>+</button>
     }
     <br />
     <span>Endurance:   @Player.Endurance</span>
     @if (Player.SkillPoints > 0)
     {
-        <button onclick=@(()=>AddStat(Services.Statistic.Endurance))>+</button>
+        <button onclick=@(()=>AddStat(Services.Statistic._2))>+</button>
     }
     <br />
     <span>Stamina:     @Player.Stamina</span>

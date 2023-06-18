@@ -21,15 +21,35 @@ namespace WebGame.UI.Blazor.Services.Post
             _addBearerTokenService = addBearerTokenService;
         }
 
-        public Task AddConversation(ConversationDTO conversation)
+        public async Task<AddConversationCommandResponse> AddConversation(ConversationDTO conversation)
         {
-            throw new NotImplementedException();
+            await _addBearerTokenService.AddBearerToken(_client);
+            return await _client.AddconversationAsync(new AddConversationCommand() { Message = conversation.Text, Title = conversation.Title, ToID = conversation.PlayerId });
+
         }
 
         public async Task AddMessage(MessageDTO message)
         {
             await _addBearerTokenService.AddBearerToken(_client);
             await _client.AddmessageAsync(new AddMessageCommand() { ConversationID = message.ConservationId, Message = message.Text, ToID = message.ToID });
+        }
+
+        public async Task RemoveConservation(int id)
+        {
+            await _addBearerTokenService.AddBearerToken(_client);
+            await _client.DeleteconversationAsync(id);
+        }
+
+        public async Task RemoveAllConservation()
+        {
+            await _addBearerTokenService.AddBearerToken(_client);
+            await _client.DeleteallplayerconversationsAsync();
+        }
+
+        public async Task RemoveConservations(List<int> ids)
+        {
+            await _addBearerTokenService.AddBearerToken(_client);
+            await _client.DeleteconversationsAsync(new RemoveConversationsRequest() { ConversationsIds = ids });
         }
 
         public async Task<ICollection<ConversationsBlazorVM>> GetPagedConversations(int page, int pageSize)

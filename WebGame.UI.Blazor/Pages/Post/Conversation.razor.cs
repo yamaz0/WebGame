@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.JSInterop;
 using System.Text;
 using WebGame.UI.Blazor.Constants;
 using WebGame.UI.Blazor.Interfaces.Post;
@@ -43,7 +44,7 @@ namespace WebGame.UI.Blazor.Pages.Post
             //        { nameof(c.ToId),c.ToId},
             //        { nameof(c.Title),c.Title}
             showAnserTextArea = false;
-            await TrySetPlayerId();
+            PlayerId = await Utils.Utils.GetPlayerId((CustomAuthenticationStateProvider)AuthenticationStateProvider);
             //get title,id,messages by id from previus page
             await FetchMessages();
         }
@@ -51,27 +52,6 @@ namespace WebGame.UI.Blazor.Pages.Post
         private async Task FetchMessages()
         {
             Messages = await PostService.GetPagedMessages(1, 5, Id);//domyslne wartosci potem ustawic globalnie
-        }
-
-        private async Task TrySetPlayerId()
-        {
-            var authState = await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).GetAuthenticationStateAsync();
-
-            foreach (var claim in authState.User.Claims)
-            {
-
-                if (claim.Type == CustomConstants.Claims.PLAYERID)
-                {
-                    bool canParse = int.TryParse(claim.Value, out int parsedPlayerId);
-
-                    if (canParse)
-                        PlayerId = parsedPlayerId;
-                    else
-                    {
-                        throw new Exception("playerId not found");
-                    }
-                }
-            }
         }
 
         public void Answer()
@@ -96,9 +76,15 @@ namespace WebGame.UI.Blazor.Pages.Post
             //refresh czy cos
         }
 
-        public void Delete()
+        public async void Delete()
         {
+            bool confirmed = await JS.InvokeAsync<bool>("confirm", "Are you sure?");
 
+            if (confirmed)
+            {
+                await PostService.RemoveConservation(Id);
+                StateHasChanged();
+            }
         }
     }
 }
