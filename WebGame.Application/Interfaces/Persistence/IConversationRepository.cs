@@ -8,7 +8,8 @@ namespace WebGame.Application.Interfaces.Persistence
     {
         Task<List<Conversation>> GetPagedConversationsAsync(int playerId, int page, int pageSize);
         Task<Conversation> GetConversationByIdAsync(int id, int playerId);
-        Task RemoveConversationsAsync(List<int> ids);
+        Task RemoveConversationsAsync(int playerId, List<int> ids);
         Task RemoveAllConversationsAsync(int playerId);
+        Task RemoveConversationAsync(int playerId, int id);
     }
 }

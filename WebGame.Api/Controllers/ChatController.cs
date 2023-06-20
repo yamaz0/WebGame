@@ -47,7 +47,8 @@ namespace WebGame.Api.Controllers
         [HttpDelete("deleteconversation/{id}")]
         public async Task<ActionResult<RemoveConversationRequestResponse>> DeleteConversation(int id)
         {
-            var result = await _mediator.Send(new RemoveConversationRequest(id));
+            var playerId = Utils.GetPlayerId(User);
+            var result = await _mediator.Send(new RemoveConversationRequest(id, playerId));
 
             if (!result.Success)
                 return BadRequest(result);
@@ -62,6 +63,8 @@ namespace WebGame.Api.Controllers
         [HttpDelete("deleteconversations")]
         public async Task<ActionResult<RemoveConversationRequestResponse>> DeleteConversations([FromBody] RemoveConversationsRequest request)
         {
+            var playerId = Utils.GetPlayerId(User);
+            request.PlayerId = playerId;
             var result = await _mediator.Send(request);
 
             if (!result.Success)

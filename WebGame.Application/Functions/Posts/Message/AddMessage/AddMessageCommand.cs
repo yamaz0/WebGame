@@ -29,10 +29,12 @@ namespace WebGame.Application.Functions.Posts.Message.AddMessage
     public class AddMessageCommandHandler : IRequestHandler<AddMessageCommand, BasicResponse>
     {
         private readonly IMessageRepository _messageRepository;
+        private readonly IConversationRepository _conversationRepository;
 
-        public AddMessageCommandHandler(IMessageRepository messageRepository)
+        public AddMessageCommandHandler(IMessageRepository messageRepository, IConversationRepository conversationRepository)
         {
             _messageRepository = messageRepository;
+            _conversationRepository = conversationRepository;
         }
 
         public async Task<BasicResponse> Handle(AddMessageCommand request, CancellationToken cancellationToken)
@@ -41,6 +43,10 @@ namespace WebGame.Application.Functions.Posts.Message.AddMessage
             message.SetMessage(request.Message, request.PlayerId, request.ToID, request.ConversationID);
 
             await _messageRepository.AddAsync(message);
+            var c = await _conversationRepository.GetByIdAsync(request.ConversationID);
+            c.LastModificationDate = message.CreatedDate;
+            await _conversationRepository.UpdateAsync(c);
+
             return new BasicResponse();
         }
     }

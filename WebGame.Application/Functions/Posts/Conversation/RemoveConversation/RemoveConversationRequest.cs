@@ -12,10 +12,12 @@ namespace WebGame.Application.Functions.Posts.Conversation.GetConversations
     public class RemoveConversationRequest : IRequest<RemoveConversationRequestResponse>
     {
         public int ConversationId { get; set; }
+        public int PlayerId { get; set; }
 
-        public RemoveConversationRequest(int conversationId)
+        public RemoveConversationRequest(int conversationId, int playerId)
         {
             ConversationId = conversationId;
+            PlayerId = playerId;
         }
     }
 
@@ -30,14 +32,7 @@ namespace WebGame.Application.Functions.Posts.Conversation.GetConversations
 
         public async Task<RemoveConversationRequestResponse> Handle(RemoveConversationRequest request, CancellationToken cancellationToken)
         {
-            var conversation = await _conversationRepository.GetByIdAsync(request.ConversationId);
-
-            if (conversation == null)
-            {
-                return new RemoveConversationRequestResponse("Conversation not found");
-            }
-
-            await _conversationRepository.RemoveAsync(conversation);
+            await _conversationRepository.RemoveConversationAsync(request.PlayerId, request.ConversationId);
             return new RemoveConversationRequestResponse();
         }
     }

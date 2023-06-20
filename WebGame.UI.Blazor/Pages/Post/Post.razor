@@ -12,7 +12,7 @@ else
     <table>
         <tr>
             <th>Title</th>
-            <th>FromPlayer</th>
+            <th>LastDate</th>
         </tr>
         @foreach (var conversation in @Conversations)
         {
@@ -21,7 +21,7 @@ else
                     <button onclick=@(()=>ShowMessages(conversation))>@conversation.Title</button>
                 </td>
                 <td>
-                    <span>Placeholder</span>
+                    <span>@conversation.LastModificationDate.ToString()</span>
                 </td>
             </tr>
         }
